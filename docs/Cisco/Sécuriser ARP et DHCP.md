@@ -1,6 +1,6 @@
 # Sécuriser - ARP et DHCP :
 
-# 0 Le laboratoire :
+## 0 Le laboratoire :
 Voici le laboratoire que j'utilise pour tester la sécurité des protocoles DHCP et ARP :
 ![img](../images/ARP-DHCP/networkPlan.png)
 
@@ -33,7 +33,7 @@ subnet 192.168.10.0 netmask 255.255.255.0 {
 
 ---
 
-# 1 Sécuriser le protocole DHCP :
+## 1 Sécuriser le protocole DHCP :
 Ressource :
  * https://formip.com/dhcp-snooping/
  * https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84
@@ -106,7 +106,7 @@ Cette limitation permet de "voler" au maximum 3 baux par le pirate (DHCP Starvat
 
 ---
 
-## 1.2 Vérification du DHCP snooping :
+### 1.2 Vérification du DHCP snooping :
 Commandes pour vérifier le DHCP snooping :
 `````text
 SW-1# show ip dhcp snooping
@@ -143,8 +143,8 @@ Une adresse MAC est déja utilisé sur chaque port il en reste donc deux de disp
 
 ---
 
-## 1.3 Tentative d'attaque :
-### 1.3.1 DHCP Starvation :
+### 1.3 Tentative d'attaque :
+#### 1.3.1 DHCP Starvation :
 Pour rappel le port security est actif est configurer pour autoriser 3 adresse MAC différentes sur chaque port du switch.
 Utilisation de yersinia, depuis la VM KALI :
 ````bash
@@ -171,7 +171,7 @@ SW-1(config-if)# shutdown
 SW-1(config-if)# no shutdown
 ````
 
-### 1.3.2 DHCP Spoofing :
+#### 1.3.2 DHCP Spoofing :
 Pour rappel seul le port vers le serveur DHCP (GigabitEthernet 3/1) est trust pour les trames DHCP Offer.
 Utilisation de ethercap, depuis la VM KALI :
 ````bash
@@ -212,7 +212,7 @@ Mais sans la modification du switch pour trust le port de la KALI, les clients n
 
 ---
 
-# 2 Sécuriser le protocole ARP :  
+## 2 Sécuriser le protocole ARP :  
 Ressource :
  * https://formip.com/dai/
 
@@ -223,7 +223,7 @@ show ip dhcp snooping binding
 
 Au sein des switchs Cisco il existe la fonctionalité Dynamic ARP Inspection (DAI). Pour valider qu'un hôte à l'IP qu'il prétend avoir, le switch vérifie son association @MAC et @IP dans la table du DHCP snooping.
 
-## 2.1 Mise en place du DAI :
+### 2.1 Mise en place du DAI :
 Pour mettre en place DAI :
 ````text
 Switch(config)# ip arp inspection vlan 1
@@ -239,7 +239,7 @@ Switch(config)# interface GigabitEthernet 3/1
 Switch(config-if)# ip arp inspection trust
 ````
 
-## 2.2 Tentative d'attaque :
+### 2.2 Tentative d'attaque :
 Depuis KALI je vais tenter d'empoisoner la table ARP de PC-1 pour me faire passer pour PC-2, la table ARP de PC-1 est actuellement vide.
 
 Pour rappel :
@@ -268,7 +268,7 @@ Le switch a détecter que KALI envoie des réponses ARP falsifiés car cette ass
  * Le port n'a pas été définis en trust donc cette association n'est pas pris en compte par le switch,
 
 
-# 3 Conclusion :
+## 3 Conclusion :
 Pour conclure sur la sécurité des protocoles :
  * Attaque DHCP Starvation -> Port Security,
  * Attaque DHCP Spoofing -> DHCP Snooping,
