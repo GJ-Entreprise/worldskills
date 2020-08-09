@@ -43,7 +43,7 @@ Cisco à mis en place la fonction DHCP snooping, cette fonctionalité bloque tou
 
 ---
 
-## 1.1 Mise en place du DHCP snooping :
+### 1.1 Mise en place du DHCP snooping :
 Mise en place du DHCP snooping :
 ````text
 1. SW-1(config)# ip dhcp snooping
