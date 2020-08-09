@@ -73,9 +73,9 @@
     <li class="toctree-l2"><a class="reference internal" href="#0-le-laboratoire">0 Le laboratoire :</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#1-securiser-le-protocole-dhcp">1 Sécuriser le protocole DHCP :</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#11-mise-en-place-du-dhcp-snooping">1.1 Mise en place du DHCP snooping :</a>
         <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#11-mise-en-place-du-dhcp-snooping">1.1 Mise en place du DHCP snooping :</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#12-verification-du-dhcp-snooping">1.2 Vérification du DHCP snooping :</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#13-tentative-dattaque">1.3 Tentative d'attaque :</a>
@@ -172,7 +172,7 @@ subnet 192.168.10.0 netmask 255.255.255.0 {
  * Une distribution de DHCP Offer avec l'@IP de passerelle l'IP du rogue DHCP, (DHCP Spoofing)</p>
 <p>Cisco à mis en place la fonction DHCP snooping, cette fonctionalité bloque toutes les trames DHCP Offer si elles ne proviennent pas d'un port trust sur le switch. </p>
 <hr />
-<h2 id="11-mise-en-place-du-dhcp-snooping">1.1 Mise en place du DHCP snooping :</h2>
+<h3 id="11-mise-en-place-du-dhcp-snooping">1.1 Mise en place du DHCP snooping :</h3>
 <p>Mise en place du DHCP snooping :</p>
 <pre><code class="text">1. SW-1(config)# ip dhcp snooping
 2. SW-1(config)# ip dhcp snooping vlan 1
