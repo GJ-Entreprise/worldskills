@@ -1,8 +1,4 @@
-# WorldSkills :
-
-Auteur | Compétence | Sujet 
----|---|---
-Guillaume PETIT | Cisco | Sécuriser les protocoles CDP et LLDP |
+# Sécuriser - CDP et LLDP :
 
 # 0 Le laboratoire :
 Voici le laboratoire que j'utilise pour tester la sécurité des protocoles CDP et LLDP :
