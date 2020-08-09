@@ -75,12 +75,16 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../CentOs/creation_compte_utilisateurs/">Création de compte utilisateur</a>
                     </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../CentOs/regle_parfeu/">Mise en place de règles firewall</a>
+                    </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Cisco</span></p>
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="../Cisco/S%C3%A9curiser%20%20CDP%20et%20LLDP/">Sécuriser - CDP et LLDP :</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../Cisco/S%C3%A9curiser%20ARP%20et%20DHCP/">Sécuriser - ARP et DHCP :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Cisco/S%C3%A9curiser%20les%20mots%20de%20passe/">Sécuriser - Les mots de passe sur Cisco :</a>
                     </li>
                 </ul>
       </div>
@@ -125,8 +129,13 @@
 <h3 id="requirements">Requirements</h3>
 <ul>
 <li>Clé publique sur votre compte github (éviter d'entrer le password à chaque commit)</li>
-<li>Pyhton</li>
-<li>pip</li>
+<li>Python 3</li>
+<li>pip3</li>
+</ul>
+<pre><code>sudo apt-get install python3 pip3
+</code></pre>
+
+<ul>
 <li>Package mkdocs</li>
 </ul>
 <pre><code>pip install mkdocs
@@ -147,7 +156,7 @@ git push
 </code></pre>
 
 <ul>
-<li>Attantion il existe 2 branches : <strong>master</strong> et <strong>gh-deploy</strong>. Cette deuxième est utilisé par Github pages comme source pour le site web.</li>
+<li>Attention il existe 2 branches : <strong>master</strong> et <strong>gh-deploy</strong>. Cette deuxième est utilisé par Github pages comme source pour le site web. Ne rien pousser sur cette branche =&gt; <strong>travail perdu au prochain deploiement !</strong></li>
 </ul>
 <h2 id="deployer-la-documentation-sur-le-site">Déployer la documentation sur le site.</h2>
 <ul>

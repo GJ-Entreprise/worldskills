@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Création de compte utilisateur - Worldskills - GJ enterprise</title>
+  <title>Sécuriser - Les mots de passe sur Cisco : - Worldskills - GJ enterprise</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Cr\u00e9ation de compte utilisateur";
-    var mkdocs_page_input_path = "CentOs/creation_compte_utilisateurs.md";
+    var mkdocs_page_name = "S\u00e9curiser - Les mots de passe sur Cisco :";
+    var mkdocs_page_input_path = "Cisco/S\u00e9curiser les mots de passe.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -56,25 +56,31 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">CentOs</span></p>
-                <ul class="current">
-                    <li class="toctree-l1"><a class="reference internal" href="../Installer_apache_httpd/">Installation d'un serveur Aapche HTTPD</a>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/Installer_apache_httpd/">Installation d'un serveur Aapche HTTPD</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../apache_TLS_SSL/">Apache / TLS / SSL</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/apache_TLS_SSL/">Apache / TLS / SSL</a>
                     </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Création de compte utilisateur</a>
-    <ul class="current">
-    </ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/creation_compte_utilisateurs/">Création de compte utilisateur</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../regle_parfeu/">Mise en place de règles firewall</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/regle_parfeu/">Mise en place de règles firewall</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Cisco</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../Cisco/S%C3%A9curiser%20%20CDP%20et%20LLDP/">Sécuriser - CDP et LLDP :</a>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../S%C3%A9curiser%20%20CDP%20et%20LLDP/">Sécuriser - CDP et LLDP :</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../Cisco/S%C3%A9curiser%20ARP%20et%20DHCP/">Sécuriser - ARP et DHCP :</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../S%C3%A9curiser%20ARP%20et%20DHCP/">Sécuriser - ARP et DHCP :</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../Cisco/S%C3%A9curiser%20les%20mots%20de%20passe/">Sécuriser - Les mots de passe sur Cisco :</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Sécuriser - Les mots de passe sur Cisco :</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#0-le-laboratoire">0 Le laboratoire :</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1-acces-out-band">1 Accès out-band :</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-acces-in-band">2 Accès in-band :</a>
+    </li>
+    </ul>
                     </li>
                 </ul>
       </div>
@@ -98,11 +104,11 @@
     
       
         
-          <li>CentOs &raquo;</li>
+          <li>Cisco &raquo;</li>
         
       
     
-    <li>Création de compte utilisateur</li>
+    <li>Sécuriser - Les mots de passe sur Cisco :</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -113,7 +119,33 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="creation-de-compte-utilisateur">Création de compte utilisateur</h1>
+                <h1 id="securiser-les-mots-de-passe-sur-cisco">Sécuriser - Les mots de passe sur Cisco :</h1>
+<p>Ressource :
+ * https://cisco.goffinet.org/ccna/gestion-securisee-peripheriques/chiffrement-des-mots-de-passes-locaux-cisco-ios/</p>
+<h2 id="0-le-laboratoire">0 Le laboratoire :</h2>
+<p>Voici le laboratoire que j'utilise pour ce sujet :
+<img alt="img" src="../../images/Password-Cisco/network.png" /></p>
+<p>Il est possible de distinguer deux accès aux équipements Cisco :
+ * out-band ; accès par la console (qui ne nécessite pas de configuration réseau ; ex câble console etc.),
+ * in-band ; accès par un service réseau (nécessite une configuration IP ; ex SSH etc.),</p>
+<h2 id="1-acces-out-band">1 Accès out-band :</h2>
+<p>Pour définir un mot de passe pour l'accès à la console de manière sécurisé j'utilise l'algorithme scrypt.</p>
+<p>Par exemple avec le mot de passe <strong>test</strong> :</p>
+<pre><code class="text">SW-1(config)# enable algorithm-type scrypt secret test
+</code></pre>
+
+<p>Le mot de passe est définis en type 9 tandis que le sha-256 est définis en type 8. Donc le scrypt apporte un gain de sécurité.</p>
+<p>Lorsque l'on regarde la configartion :</p>
+<pre><code class="text">SW-1# sh run
+</code></pre>
+
+<p><img alt="img" src="../../images/Password-Cisco/enable_password.png" /></p>
+<p>Nous pouvons constater que le mot de passe est de type 9 et chiffré.</p>
+<h2 id="2-acces-in-band">2 Accès in-band :</h2>
+<p>Pour avoir un accès in-band il est necessaire d'avoir une configuration IP.</p>
+<p>Par exemple avec le mot de passe <strong>test</strong> :</p>
+<pre><code class="text">SW-1(config)# login local
+</code></pre>
               
             </div>
           </div>
@@ -121,10 +153,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../regle_parfeu/" class="btn btn-neutral float-right" title="Mise en place de règles firewall">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../apache_TLS_SSL/" class="btn btn-neutral" title="Apache / TLS / SSL"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../S%C3%A9curiser%20ARP%20et%20DHCP/" class="btn btn-neutral" title="Sécuriser - ARP et DHCP :"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -150,10 +180,8 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../apache_TLS_SSL/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../S%C3%A9curiser%20ARP%20et%20DHCP/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../regle_parfeu/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
