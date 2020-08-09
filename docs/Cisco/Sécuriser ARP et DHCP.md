@@ -1,8 +1,4 @@
-# WorldSkills :
-
-Auteur | Compétence | Sujet 
----|---|---
-Guillaume PETIT | Cisco | Sécuriser les protocoles DHCP et ARP |
+# Sécuriser - ARP et DHCP :
 
 # 0 Le laboratoire :
 Voici le laboratoire que j'utilise pour tester la sécurité des protocoles DHCP et ARP :
