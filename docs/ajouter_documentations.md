@@ -7,8 +7,12 @@
 
 ### Requirements
 * Clé publique sur votre compte github (éviter d'entrer le password à chaque commit)
-* Pyhton
-* pip
+* Python 3
+* pip3
+```
+sudo apt-get install python3 pip3
+```
+
 * Package mkdocs
 ```
 pip install mkdocs
@@ -26,7 +30,7 @@ git commit -m "ajout doc"
 git push
 ```
 
-* Attantion il existe 2 branches : __master__ et __gh-deploy__. Cette deuxième est utilisé par Github pages comme source pour le site web.
+* Attention il existe 2 branches : __master__ et __gh-deploy__. Cette deuxième est utilisé par Github pages comme source pour le site web. Ne rien pousser sur cette branche => __travail perdu au prochain deploiement !__
 
 ## Déployer la documentation sur le site.
 * Sur la même branche __master__, executer la commande : 
