@@ -67,7 +67,7 @@ SW-1(config)# username admin privilege 15 algorithm-type scrypt secret test
 L'option **privilege 15** spécifie que cet utilisateur à les droits administrateur sur le switch.
 
 Lorsque l'on regarde la configuration, on peut voir les deux mots de passe chiffrés :
-![img](../images/Password-Cisco/enable_password.png)
+![img](../images/Password-Cisco/password.png)
 
 Les deux mots de passe sont de type 9 en scrypt.
 
