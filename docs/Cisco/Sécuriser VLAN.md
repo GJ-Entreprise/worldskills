@@ -1,52 +1,41 @@
 # Sécuriser - Les VLAN :
 
 Ressource :
- * https://www.orange-business.com/fr/blogs/securite/bonnes-pratiques/la-verite-sur-lattaque-vlan-hopping#:~:text=DTP%20%3A%20pour%20certains%20auteurs%2C%20il,VLAN%20connus%20du%20switch%20attaqué.
+ * https://cybersecurity.att.com/blogs/security-essentials/vlan-hopping-and-mitigation
+ * https://www.notsosecure.com/exploiting-vlan-double-tagging/
+ * https://networklessons.com/cisco/ccnp-switch/vlan-hopping
 
-Cette documentation illustre les méthodes pour mitiguer les attaques âr rebonds de VLAN.
+Cette documentation illustre les méthodes pour mitiguer les attaques de rebonds des VLAN.
 
 Il existe deux méthodes pour réaliser cette attaque :
  * Double tag,
  * Protocole DTP,
 
-## 0 Le laboratoire :
+## 1 Le double tag :
+### 1.1 Le laboratoire :
 Voici le laboratoire que j'utilise pour ce lab :
 ![img](../images/VLAN-secure/network.png)
 
-Ce lab est composer de trois VLAN :
+Ce lab est composer d'un VLAN :
  - VLAN 10 ; 192.168.10.0/24
- - VLAN 20 ; 192.168.20.0/24
- - VLAN 30 ; 192.168.30.0/24
 
+Le PC-1 se rouve dans le vlan 10 et l'attaquant dajns le VLAN 1 (par défaut).
 Une liason **trunk** est entre le SW-1 et le SW-2.
 
 Script de configuration de SW-1 :
 ````text
 ####### VLAN
+	vlan 1
+		no shutdown
+	exit
 	vlan 10
 		name vlan_1
-		no shutdown
-	exit
-	vlan 20
-		name vlan_2
-		no shutdown
-	exit
-	vlan 30
-		name vlan_3
 		no shutdown
 	exit
 
 ####### INTERFACE VLAN
 	interface vlan 10
-		ip address 192.168.10.10/24 255.255.255.0
-		no shutdown
-	exit
-	interface vlan 20
-		ip address 192.168.20.10/24 255.255.255.0
-		no shutdown
-	exit
-	interface vlan 30
-		ip address 192.168.30.10/24 255.255.255.0
+		ip address 192.168.10.10 255.255.255.0
 		no shutdown
 	exit
 
@@ -56,25 +45,11 @@ Script de configuration de SW-1 :
 		switchport access vlan 10
 		no shutdown
 	exit
-	interface GigabitEthernet0/1
-		switchport mode access
-		switchport access vlan 10
-		no shutdown
-	exit
-	interface GigabitEthernet2/0
-		switchport mode access
-		switchport access vlan 20
-		no shutdown
-	exit
-	interface GigabitEthernet2/1
-		switchport mode access
-		switchport access vlan 20
-		no shutdown
-	exit
 	interface GigabitEthernet3/0
 		switchport trunk encapsulation dot1q
 		switchport mode trunk
 		switchport trunk allowed vlan all
+		switchport trunk native vlan 1
 		no shutdown
 	exit
 
@@ -84,45 +59,32 @@ do wr
 
 Script de configuration de SW-2 :
 ````text
-
 ####### VLAN
+	vlan 1
+		no shutdown
+	exit
 	vlan 10
 		name vlan_1
-		no shutdown
-	exit
-	vlan 20
-		name vlan_2
-		no shutdown
-	exit
-	vlan 30
-		name vlan_3
 		no shutdown
 	exit
 
 ####### INTERFACE VLAN
 	interface vlan 10
-		ip address 192.168.10.20/24 255.255.255.0
-		no shutdown
-	exit
-	interface vlan 20
-		ip address 192.168.20.20/24 255.255.255.0
-		no shutdown
-	exit
-	interface vlan 30
-		ip address 192.168.30.20/24 255.255.255.0
+		ip address 192.168.10.20 255.255.255.0
 		no shutdown
 	exit
 
 ####### INTERFACE
+	interface GigabitEthernet0/0
+		switchport mode access
+		switchport access vlan 1
+		no shutdown
+	exit
 	interface GigabitEthernet3/0
 		switchport trunk encapsulation dot1q
 		switchport mode trunk
 		switchport trunk allowed vlan all
-		no shutdown
-	exit
-	interface GigabitEthernet3/1
-		switchport mode access
-		switchport access vlan 30
+		switchport trunk native vlan 1
 		no shutdown
 	exit
 
@@ -132,8 +94,7 @@ do wr
 
 ---
 
-## 1 Le double tag :
-### 1.1 Explications :
+### 1.2 Explications :
 Cette attaque est possible uniquement quand une liason trunk est configuré entre deux switch.
 Pour rappel la norme dot1q ajoute un champ dans les trames ethernet, ce champ specifie le numéros du vlan qui est associé à la trame.
 L'objectif de cette action est de diffusé uniquement la trame au vlan associé.
@@ -152,35 +113,138 @@ L'attaquant envoie une trame avec deux balise 802.1Q :
  - la balise interne correspond au vlan natif,
  - la balise externe correspond au vlan que l'attaquant souhaite contacter,
 
-Le switch reçoit cette trame et il :
+Le switch reçoit cette trame et il effectue les actions suivantes :
 1. Supprime la première entête 802.1Q (vlan natif),
 2. Il relais la trame à l'ID de vlan de la seconde entête,
+
+Définition VLAN natif :
+`Certaines trames véhiculées sur un trunk ne sont pas marquées d’un tag dot1q. Dés lors il faut pouvoir les placer quelque part. C’est là qu’intervient le vlan natif.
+Le vlan natif, est le vlan dans lequel sont véhiculées les trames non taguées dot1q. Donc si un switch reçoit sur une interface trunk une trame ethernet standard, il la placera dans ce vlan natif, en quelque sorte, un vlan par défaut (de marquage).
+Sur les équipements Cisco, certains protocoles comme CDP ou DTP sont véhiculés dans des trames non taguées et donc dans le vlan natif.`
 
 Le vlan natif, il est utilisé lorsqu'un port configuré en trunk reçoit une trame non taguée.
 Lorsqu'un port trunk reçoit une trame non taguée il l'envoie dans le vlan natif.
 
+Par défaut le vlan natif est le vlan 1 sur les witchs Cisco.
+L'attaque de double tag est unidirectionnel l'attaquant peux envoyer des trames mais il n'obtiendra pas de réponse.
+Ce qui permet par exemple de réaliser un DoS.
+
 ---
 
-### 1.2 Attaque :
+### 1.3 Attaque :
+A l'aide de scapy l'attaquant envoie ce paquet :
+````python
+scapy
+sendp(Ether(dst='ff:ff:ff:ff:ff:ff', src='0E:5C:49:19:32:BF')/Dot1Q(vlan=1)/Dot1Q(vlan=20)/IP(dst='255.255.255.255', src='192.168.10.1')/ICMP(), iface='eth0')
+````
 
 ---
 
-### 1.3 Mitigation :
+### 1.4 Mitigation :
+
+Pour mitiger l'attaque double tagged il faut changer la valeur du vlan natif celui doit correspondre à deux critères :
+ - Dédié un vlan uniquement à cet usage,
+ - Le VLAN natif doit être identique entre les liasons trunk,
+
+Mitigations sur SW-1 :
+````text
+SW-1(config)# vlan 99
+SW-1(config-vlan)# name natif
+SW-1(config-vlan)# no shutdown
+SW-1(config-vlan)# exit
+
+SW-1(config)# interface GigabitEthernet 3/0
+SW-1(config-if)# switchport trunk native vlan 99
+SW-1(config-if)# exit
+````
+
+Mitigations sur SW-2 :
+````text
+SW-2(config)# vlan 99
+SW-2(config-vlan)# name natif
+SW-2(config-vlan)# no shutdown
+SW-2(config-vlan)# exit
+
+SW-2(config)# interface GigabitEthernet 3/0
+SW-2(config-if)# switchport trunk native vlan 99
+SW-2(config-if)# exit
+````
 
 ---
 
 ## 2 Le protocole DTP :
+### 2.1 Le laboratoire :
+Voici le laboratoire que j'utilise pour ce lab :
+![img](../images/VLAN-secure/network-2.png)
+
+Voici le script de configuration du switch SW-1 :
+````text
+	interface GigabitEthernet0/0
+		switchport mode dynamic auto
+	exit
+
+hostname SW-1
+do wr
+````
 
 ---
 
-### 2.1 Explications :
+### 2.2 Explications :
+Le protocole DTP (Dynamic Trunk Protocol) est un protocole propriétaire Cisco qui permet de négocier les liason trunk avec d'autres équipement Cisco.
+Par défaut il est activé et il permet à un attaquant de monter une liason trunk entreson PC et le switch.
+Ce qui à pour conséquence qu'il peut détourner tous les vlan configurés sur le switch.
+
+Il existe plusieurs mode DTP :
+![img](../images/VLAN-secure/dtp_mode-1.png)
+
+Et ces mode mènent à plusieurs résultats :
+![img](../images/VLAN-secure/dtp_mode-2.png)
 
 ---
 
-### 2.2 Attaque :
+### 2.3 Attaque :
+Aparavant, je m'assure qu'aucun port et à monter une liason trunk :
+````text
+SW-1# show interface trunk
+````
+
+Aucun retour donc aucune interfac n'a été monté en trunk.
+Ensuite avec yersinia :
+````bash
+yersinia -G
+````
+
+Je me rend dans DTP -> Launc attack -> Enabling trunking -> OK
+
+Je retourne sur le switch :
+````text
+SW-1# show interface trunk
+````
+
+![img](../images/VLAN-secure/mount-trunk.png)
+
+L'interface de l'attaquant est monté en trunk.
 
 ---
 
-### 2.3 Mitigation :
+### 2.4 Mitigation :
+Il faut désactiver le protocle DTP vers tous les postes clients :
+````text
+SW-1(config)# interface <toutes-les-interfaces-vers-les-clients>
+SW-1(config-if)# switchport mode access
+SW-1(config-if)# switchport nonegotiate
+````
+Je recommande de priviligé de désactiver DTP sur les ports de cascades et de monter manuellement les liasons trunk.
+
+---
+
+## 4 Conclusion :
+Nous avons vu deux attaques sur les vlan :
+ - double tagging
+ - switch spoof
+
+Pour mitiguer ces deux attaques :
+ - Changer la valeur du vlan natif et ne pas laisser de ports de clients dans un vlan qui n'est pas définis en access sur un vlan précis,
+ - Désactiver le protocole DTP sur tous les ports 
 
 ---
