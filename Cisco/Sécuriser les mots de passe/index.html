@@ -79,6 +79,12 @@
     <li class="toctree-l2"><a class="reference internal" href="#1-acces-out-band">1 Accès out-band :</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#2-acces-in-band">2 Accès in-band :</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21-activer-ssh">2.1 Activer SSH :</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22-creer-un-administrateur">2.2 Créer un administrateur :</a>
+    </li>
+        </ul>
     </li>
     </ul>
                     </li>
@@ -143,9 +149,44 @@
 <p>Nous pouvons constater que le mot de passe est de type 9 et chiffré.</p>
 <h2 id="2-acces-in-band">2 Accès in-band :</h2>
 <p>Pour avoir un accès in-band il est necessaire d'avoir une configuration IP.</p>
-<p>Par exemple avec le mot de passe <strong>test</strong> :</p>
-<pre><code class="text">SW-1(config)# login local
+<h3 id="21-activer-ssh">2.1 Activer SSH :</h3>
+<p>Prérequis :</p>
+<pre><code class="text">SW-1(config)# ip domain-name test.com
+SW-1(config)# crypto key generate rsa modulus 4096
 </code></pre>
+
+<ol>
+<li>Définir un nom de domaine pour la paire de clée,</li>
+<li>Générer la paire de clée,</li>
+</ol>
+<p>Activer SSH :</p>
+<pre><code class="text">SW-1(config)# ip ssh version 2
+SW-1(config)# line vty 0 15
+SW-1(config-line)# login local
+SW-1(config-line)# transport input ssh
+SW-1(config-line)# exit
+</code></pre>
+
+<ol>
+<li>Activer le protocole SSH,</li>
+<li>Séléctionner les terminaux virtuels 0 à 15,</li>
+<li>Spécifier une authentification locale,</li>
+<li>Spécifier que l'on utilise SSH sur ces terminaux,</li>
+</ol>
+<h3 id="22-creer-un-administrateur">2.2 Créer un administrateur :</h3>
+<p>Création d'un administrateur <strong>admin</strong> avec le mot de passe <strong>test</strong> :</p>
+<pre><code class="text">SW-1(config)# username admin privilege 15 algorithm-type scrypt secret test
+</code></pre>
+
+<p>L'option <strong>privilege 15</strong> spécifie que cet utilisateur à les droits administrateur sur le switch.</p>
+<p>Lorsque l'on regarde la configuration, on peut voir les deux mots de passe chiffrés :
+<img alt="img" src="../../images/Password-Cisco/enable_password.png" /></p>
+<p>Les deux mots de passe sont de type 9 en scrypt.</p>
+<p>Enfin on active la fonction qui permet de chiffrer des mots de passe :</p>
+<pre><code class="text">SW-1(config)# service password-encryption
+</code></pre>
+
+<p>Cette fonction chiffre tous les mots de passe en clair dans la configuration et les potentiels mots de passe ajoutés dans le future.</p>
               
             </div>
           </div>
