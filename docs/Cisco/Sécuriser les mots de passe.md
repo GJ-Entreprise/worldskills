@@ -33,7 +33,47 @@ Nous pouvons constater que le mot de passe est de type 9 et chiffré.
 ## 2 Accès in-band :
 Pour avoir un accès in-band il est necessaire d'avoir une configuration IP.
 
-Par exemple avec le mot de passe **test** :
+### 2.1 Activer SSH :
+
+Prérequis :
 ````text
-SW-1(config)# login local
+SW-1(config)# ip domain-name test.com
+SW-1(config)# crypto key generate rsa modulus 4096
 ````
+
+1. Définir un nom de domaine pour la paire de clée,
+2. Générer la paire de clée,
+
+Activer SSH :
+````text
+SW-1(config)# ip ssh version 2
+SW-1(config)# line vty 0 15
+SW-1(config-line)# login local
+SW-1(config-line)# transport input ssh
+SW-1(config-line)# exit
+````
+
+1. Activer le protocole SSH,
+2. Séléctionner les terminaux virtuels 0 à 15,
+3. Spécifier une authentification locale,
+4. Spécifier que l'on utilise SSH sur ces terminaux,
+
+### 2.2 Créer un administrateur :
+Création d'un administrateur **admin** avec le mot de passe **test** :
+````text
+SW-1(config)# username admin privilege 15 algorithm-type scrypt secret test
+````
+
+L'option **privilege 15** spécifie que cet utilisateur à les droits administrateur sur le switch.
+
+Lorsque l'on regarde la configuration, on peut voir les deux mots de passe chiffrés :
+![img](../images/Password-Cisco/enable_password.png)
+
+Les deux mots de passe sont de type 9 en scrypt.
+
+Enfin on active la fonction qui permet de chiffrer des mots de passe :
+````text
+SW-1(config)# service password-encryption
+````
+
+Cette fonction chiffre tous les mots de passe en clair dans la configuration et les potentiels mots de passe ajoutés dans le future.
