@@ -74,8 +74,6 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#0-le-laboratoire">0 Le laboratoire :</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a>
-    </li>
     <li class="toctree-l2"><a class="reference internal" href="#1-securiser-le-protocole-dhcp">1 Sécuriser le protocole DHCP :</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#11-mise-en-place-du-dhcp-snooping">1.1 Mise en place du DHCP snooping :</a>
@@ -149,24 +147,14 @@
 <h2 id="0-le-laboratoire">0 Le laboratoire :</h2>
 <p>Voici le laboratoire que j'utilise pour tester la sécurité des protocoles DHCP et ARP :
 <img alt="img" src="../../images/Cisco/ARP-DHCP/networkPlan.png" /></p>
-<h2 id="installation">Installation</h2>
+<p>Adressage IP et MAC :</p>
 <ul>
-<li>Mettre à jour les paquets PC-1</li>
-<li>PC-2</li>
-<li>DHCP</li>
-<li>KALI</li>
-<li>SW-1</li>
+<li>PC-1, DHCP, 00:50:79:66:68:00 </li>
+<li>PC-2, DHCP, 00:50:79:66:68:01</li>
+<li>DHCP, 192.168.10.31/24, 00:0C:29:07:DB:B1</li>
+<li>KALI, DHCP, 00:0C:29:05:A1:31</li>
+<li>SW-1, 192.168.10.1/24, </li>
 </ul>
-<pre><code>sudo yum update
-</code></pre>
-
-<p>Adressage IP et MAC :
-* PC-1 ; DHCP ; 00:50:79:66:68:00 
-* PC-2 ; DHCP ; 00:50:79:66:68:01
-* DHCP ; 192.168.10.31/24 ; 00:0C:29:07:DB:B1
-* DHCP ; 192.168.10.31/24 ; 00:0C:29:07:DB:B1
-* KALI ; DHCP ; 00:0C:29:05:A1:31
-* SW-1 ; 192.168.10.1/24 ; //</p>
 <p>Tous les hôtes sont dans le vlan 1.</p>
 <p>Configuration du serveur DHCP :</p>
 <pre><code class="text">option domain-name &quot;example.org&quot;;
