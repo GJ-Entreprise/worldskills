@@ -4,6 +4,12 @@
 Voici le laboratoire que j'utilise pour tester la sécurité des protocoles DHCP et ARP :
 ![img](../images/Cisco/ARP-DHCP/networkPlan.png)
 
+## Installation
+
+* Mettre à jour les paquets
+```
+sudo yum update
+```
 
 Adressage IP et MAC :
 * PC-1 ; DHCP ; 00:50:79:66:68:00 
