@@ -10,7 +10,7 @@ Ressource :
 ## 0 Le laboratoire :
 Voici le laboratoire que j'utilise pour ce sujet :
 
-<div align="center">![img](../images/Cisco/Password-Cisco/network.png)</div>
+![img](../images/Cisco/Password-Cisco/network.png)
 <div align="center">***Illustration 1 :*** *Plan réseau du laboratoire.*</div>
 
 Il est possible de distinguer deux types d'accès aux équipements Cisco :
