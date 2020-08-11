@@ -123,6 +123,7 @@ Le switch reçoit cette trame et il effectue les actions suivantes :
 * 2 Il relais la trame à l'ID de vlan de la seconde entête,
 
 Définition VLAN natif :
+
 ***Certaines trames véhiculées sur un trunk ne sont pas marquées d’un tag dot1q.
 Dés lors il faut pouvoir les placer quelque part. C’est là qu’intervient le vlan natif.
 Le vlan natif, est le vlan dans lequel sont véhiculées les trames non taguées dot1q.
