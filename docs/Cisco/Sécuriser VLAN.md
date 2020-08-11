@@ -187,12 +187,12 @@ Voici le laboratoire que j'utilise pour ce lab :
 
 Voici le script de configuration du switch SW-1 :
 ````text
-	interface GigabitEthernet0/0
-		switchport mode dynamic auto
-	exit
+SW-2(config)# interface GigabitEthernet0/0
+SW-2(config-if)# switchport mode dynamic auto
+SW-2(config-if)# exit
 
-hostname SW-1
-do wr
+SW-2(config)# hostname SW-1
+SW-2(config)# do wr
 ````
 
 ---
