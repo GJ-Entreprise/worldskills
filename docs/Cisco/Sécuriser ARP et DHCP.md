@@ -125,10 +125,11 @@ SW-1# show ip dhcp snooping binding
 <div align="center">***Illustration 3 :*** *Vérification des baux DHCP.*</div>
 
 Dans cette capture il est possible de voir que le DHCP à distribué trois baux DHCP, on y retrouve :
- * @MAC du client,
- * @IP distribué par le DHCP,
- * Lease time du bail DHCP,
- * Interface du client,
+
+* @MAC du client,
+* @IP distribué par le DHCP,
+* Lease time du bail DHCP,
+* Interface du client,
 
 Il est possible de clear ce cache :
 `````text
