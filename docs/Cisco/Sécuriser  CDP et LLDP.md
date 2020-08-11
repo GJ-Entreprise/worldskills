@@ -9,10 +9,8 @@ Ressource :
 ## 0 Le laboratoire :
 Voici le laboratoire que j'utilise pour tester la sécurité des protocoles CDP et LLDP :
 
-
-
+![img](../images/Cisco/CDP-LLDP/networkPlan.png)
 <div align="center">
-	<img src="../images/Cisco/CDP-LLDP/networkPlan.png">
 	<i><b>Illustration 1 :</b> Plan réseau du laboratoire.</i>
 </div>
 
@@ -57,7 +55,9 @@ Depuis la VM KALI, utilisation de  Wireshark avec le filtre **cdp** :
 
 ![img](../images/Cisco/CDP-LLDP/cdp.png)
 
-<div align="center">***Illustration 1 :*** *Trame CDP de SW-1.*</div>
+<div align="center">
+	<i><b>Illustration 2 :</b> Trame CDP de SW-1.</i>
+</div>
 
 Sous Kali-Linux, il est aussi possible d'utiliser ces logiciels pour récupérer les informations CDP :
 
@@ -108,7 +108,9 @@ Depuis la VM KALI, utilisation de  Wireshark avec le filtre **lldp** :
 
 ![img](../images/Cisco/CDP-LLDP/lldp.png)
 
-<div align="center">***Illustration 3 :*** *Trame LLDP de SW-1.*</div>
+<div align="center">
+	<i><b>Illustration 3 :</b> Trame LLDP de SW-1.</i>
+</div>
 
 Sous Kali-Linux, il est aussi possible d'utiliser ces logiciels pour récupérer les informations LLDP :
 
