@@ -49,10 +49,8 @@ SW-1(config)# no cdp enable
 
 ### 1.3 Voir les voisins CDP depuis Kali :
 Depuis la VM KALI, utilisation de  Wireshark avec le filtre **cdp** :
-
 ![img](../images/Cisco/CDP-LLDP/cdp.png)
-
-<div align="center">***Illustration 2 :*** *Trame CDP de SW-1.*</div>
+<div align="center">***Illustration 1 :*** *Trame CDP de SW-1.*</div>
 
 Sous Kali-Linux, il est aussi possible d'utiliser ces logiciels pour récupérer les informations CDP :
 
@@ -100,9 +98,7 @@ SW-1(config)# no lldp transmit
 
 ### 1.3 Voir les voisins LLDP depuis Kali :
 Depuis la VM KALI, utilisation de  Wireshark avec le filtre **lldp** :
-
 ![img](../images/Cisco/CDP-LLDP/lldp.png)
-
 <div align="center">***Illustration 3 :*** *Trame LLDP de SW-1.*</div>
 
 Sous Kali-Linux, il est aussi possible d'utiliser ces logiciels pour récupérer les informations LLDP :
