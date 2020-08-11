@@ -6,7 +6,11 @@ Voici le laboratoire que j'utilise pour tester la sécurité des protocoles DHCP
 
 ## Installation
 
-* Mettre à jour les paquets
+* Mettre à jour les paquets PC-1
+* PC-2
+* DHCP
+* KALI
+* SW-1
 ```
 sudo yum update
 ```
