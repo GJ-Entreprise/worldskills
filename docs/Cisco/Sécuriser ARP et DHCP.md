@@ -1,5 +1,11 @@
 # Sécuriser - ARP et DHCP :
 
+Ressources :
+
+* DHCP, [https://formip.com/dhcp-snooping/](https://formip.com/dhcp-snooping/)
+* DHCP, [https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84](https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84)
+* ARP, [https://formip.com/dai/](https://formip.com/dai/)
+
 ## 0 Le laboratoire :
 Voici le laboratoire que j'utilise pour tester la sécurité des protocoles DHCP et ARP :
 ![img](../images/Cisco/ARP-DHCP/networkPlan.png)
@@ -33,11 +39,6 @@ subnet 192.168.10.0 netmask 255.255.255.0 {
 ---
 
 ## 1 Sécuriser le protocole DHCP :
-Ressources :
-
-* [https://formip.com/dhcp-snooping/](https://formip.com/dhcp-snooping/)
-* [https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84](https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84)
-
 Attaque sur le protocole DHCP :
 
 * Une réservation totale des baux DHCP du vrai serveur DHCP (DHCP Starvation),
@@ -224,11 +225,6 @@ Mais sans la modification du switch pour trust le port de la KALI, les clients n
 ---
 
 ## 2 Sécuriser le protocole ARP :  
-Ressource :
-
-* [https://formip.com/dai/](https://formip.com/dai/)
-
-
 Pour sécuriser le protocole ARP, il est possible de s'appuyer sur la fonctionalité DHCP snooping. En effet cette fonctionalité construit une table (que l'on peux consulter avec la commande : 
 ````text
 show ip dhcp snooping binding

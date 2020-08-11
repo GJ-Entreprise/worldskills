@@ -3,10 +3,12 @@
 ## 0 Le laboratoire :
 Voici le laboratoire que j'utilise pour tester la sécurité des protocoles CDP et LLDP :
 ![img](../images/Cisco/CDP-LLDP/networkPlan.png)
+<div align="center">***Illustration 1 :*** *Plan réseau du laboratoire.*</div>
 
 Adressage MAC :
- * KALI ; 00:0C:29:05:A1:31
- * SW-1 ; 0C:44:BE:18:8F:00
+
+* KALI, 00:0C:29:05:A1:31
+* SW-1, 0C:44:BE:18:8F:00
 
 ## 1 Le protocole CDP :
 ### 1.1 Activer CDP :
