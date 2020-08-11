@@ -3,9 +3,7 @@
 ## 0 Le laboratoire :
 Voici le laboratoire que j'utilise pour tester la sécurité des protocoles DHCP et ARP :
 ![img](../images/Cisco/ARP-DHCP/networkPlan.png)
-
-[center]***Illustration 1 :*** *Plan réseau du laboratoire.*[/center]
-
+<div align="center">***Illustration 1 :*** *Plan réseau du laboratoire.*</div>
 
 Adressage IP et MAC :
 
