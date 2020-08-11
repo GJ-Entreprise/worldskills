@@ -88,6 +88,8 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-mot-de-passe">3 Mot de passe :</a>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -131,15 +133,16 @@
 <p>Ressource :</p>
 <ul>
 <li><a href="https://cisco.goffinet.org/ccna/gestion-securisee-peripheriques/chiffrement-des-mots-de-passes-locaux-cisco-ios/">https://cisco.goffinet.org/ccna/gestion-securisee-peripheriques/chiffrement-des-mots-de-passes-locaux-cisco-ios/</a></li>
+<li><a href="https://fr.wikipedia.org/wiki/Scrypt">https://fr.wikipedia.org/wiki/Scrypt</a></li>
 </ul>
 <hr />
 <h2 id="0-le-laboratoire">0 Le laboratoire :</h2>
 <p>Voici le laboratoire que j'utilise pour ce sujet :</p>
 <p><img alt="img" src="../../images/Cisco/Password-Cisco/network.png" />
 <div align="center"><strong><em>Illustration 1 :</em></strong> <em>Plan réseau du laboratoire.</em></div></p>
-<p>Il est possible de distinguer deux accès aux équipements Cisco :</p>
+<p>Il est possible de distinguer deux types d'accès aux équipements Cisco :</p>
 <ul>
-<li>out-band ; accès par la console (qui ne nécessite pas de configuration réseau ; ex câble console etc.),</li>
+<li>out-band ; accès par la console (ne nécessite pas de configuration réseau ; ex câble console etc.),</li>
 <li>in-band ; accès par un service réseau (nécessite une configuration IP ; ex SSH etc.),</li>
 </ul>
 <hr />
@@ -156,7 +159,7 @@
 
 <p><img alt="img" src="../../images/Cisco/Password-Cisco/enable_password.png" />
 <div align="center"><strong><em>Illustration 2 :</em></strong> <em>Mot de passe enable chiffré.</em></div></p>
-<p>Nous pouvons constater que le mot de passe est de type 9 et chiffré.</p>
+<p>Nous pouvons constater que le mot de passe <strong>test</strong> est chiffré et de type 9.</p>
 <hr />
 <h2 id="2-acces-in-band">2 Accès in-band :</h2>
 <p>Pour avoir un accès in-band il est necessaire d'avoir une configuration IP.</p>
@@ -191,16 +194,19 @@ SW-1(config-line)# exit
 <pre><code class="text">SW-1(config)# username admin privilege 15 algorithm-type scrypt secret test
 </code></pre>
 
-<p>L'option <strong>privilege 15</strong> spécifie que cet utilisateur à les droits administrateur sur le switch.</p>
+<p>Détail des options :
+ * privilege 15, spécifie que cet utilisateur à les droits administrateur sur le switch,
+ * algorithme-type, permet de spécifier quel sea l'algorithme de chiffrement utilisé pour chiffrer le mot de passe dans la configuration,</p>
 <p>Lorsque l'on regarde la configuration, on peut voir les deux mots de passe chiffrés :
 <img alt="img" src="../../images/Cisco/Password-Cisco/password.png" />
 <div align="center"><strong><em>Illustration 3 :</em></strong> <em>Mots de passe chiffrés.</em></div></p>
 <p>Les deux mots de passe sont de type 9 en scrypt.</p>
-<p>Enfin on active la fonction qui permet de chiffrer des mots de passe :</p>
+<hr />
+<h2 id="3-mot-de-passe">3 Mot de passe :</h2>
+<p>Au sein d'IOS, il existe une fonction qui chiffre les mots de passe qui sont déja spécifier dans la configuartion et les mots de passe qui seront spécifiés dans le futur. Cette fonction s'appele <strong>password-encryption</strong>.</p>
+<p>Pour activer cette fonction :</p>
 <pre><code class="text">SW-1(config)# service password-encryption
 </code></pre>
-
-<p>Cette fonction chiffre tous les mots de passe en clair dans la configuration et les potentiels mots de passe ajoutés dans le future.</p>
               
             </div>
           </div>
