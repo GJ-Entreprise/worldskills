@@ -10,7 +10,7 @@ Ressource :
 ## 0 Le laboratoire :
 Voici le laboratoire que j'utilise pour ce sujet :
 
-![img](../images/Cisco/Password-Cisco/network.png)
+<div align="center">![img](../images/Cisco/Password-Cisco/network.png)</div>
 <div align="center">***Illustration 1 :*** *Plan réseau du laboratoire.*</div>
 
 Il est possible de distinguer deux types d'accès aux équipements Cisco :
@@ -96,5 +96,7 @@ Les deux mots de passe sont de type 9 en scrypt.
 ## 3 Mot de passe :
 Au sein d'IOS, il existe une fonction qui chiffre les mots de passe qui sont déjà spécifié dans la configuration et les mots de passe qui seront spécifiés dans le futur. Cette fonction s'appele **password-encryption**.
 
-Pour activer cette fonction :````text
-SW-1(config)# service password-encryption````
+Pour activer cette fonction :
+````text
+SW-1(config)# service password-encryption
+````
