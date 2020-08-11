@@ -128,14 +128,21 @@
             <div class="section">
               
                 <h1 id="securiser-les-mots-de-passe-sur-cisco">Sécuriser - Les mots de passe sur Cisco :</h1>
-<p>Ressource :
- * https://cisco.goffinet.org/ccna/gestion-securisee-peripheriques/chiffrement-des-mots-de-passes-locaux-cisco-ios/</p>
+<p>Ressource :</p>
+<ul>
+<li><a href="https://cisco.goffinet.org/ccna/gestion-securisee-peripheriques/chiffrement-des-mots-de-passes-locaux-cisco-ios/">https://cisco.goffinet.org/ccna/gestion-securisee-peripheriques/chiffrement-des-mots-de-passes-locaux-cisco-ios/</a></li>
+</ul>
+<hr />
 <h2 id="0-le-laboratoire">0 Le laboratoire :</h2>
-<p>Voici le laboratoire que j'utilise pour ce sujet :
-<img alt="img" src="../../images/Cisco/Password-Cisco/network.png" /></p>
-<p>Il est possible de distinguer deux accès aux équipements Cisco :
- * out-band ; accès par la console (qui ne nécessite pas de configuration réseau ; ex câble console etc.),
- * in-band ; accès par un service réseau (nécessite une configuration IP ; ex SSH etc.),</p>
+<p>Voici le laboratoire que j'utilise pour ce sujet :</p>
+<p><img alt="img" src="../../images/Cisco/Password-Cisco/network.png" />
+<div align="center"><strong><em>Illustration 1 :</em></strong> <em>Plan réseau du laboratoire.</em></div></p>
+<p>Il est possible de distinguer deux accès aux équipements Cisco :</p>
+<ul>
+<li>out-band ; accès par la console (qui ne nécessite pas de configuration réseau ; ex câble console etc.),</li>
+<li>in-band ; accès par un service réseau (nécessite une configuration IP ; ex SSH etc.),</li>
+</ul>
+<hr />
 <h2 id="1-acces-out-band">1 Accès out-band :</h2>
 <p>Pour définir un mot de passe pour l'accès à la console de manière sécurisé j'utilise l'algorithme scrypt.</p>
 <p>Par exemple avec le mot de passe <strong>test</strong> :</p>
@@ -147,20 +154,23 @@
 <pre><code class="text">SW-1# sh run
 </code></pre>
 
-<p><img alt="img" src="../../images/Cisco/Password-Cisco/enable_password.png" /></p>
+<p><img alt="img" src="../../images/Cisco/Password-Cisco/enable_password.png" />
+<div align="center"><strong><em>Illustration 2 :</em></strong> <em>Mot de passe enable chiffré.</em></div></p>
 <p>Nous pouvons constater que le mot de passe est de type 9 et chiffré.</p>
+<hr />
 <h2 id="2-acces-in-band">2 Accès in-band :</h2>
 <p>Pour avoir un accès in-band il est necessaire d'avoir une configuration IP.</p>
+<hr />
 <h3 id="21-activer-ssh">2.1 Activer SSH :</h3>
 <p>Prérequis :</p>
 <pre><code class="text">SW-1(config)# ip domain-name test.com
 SW-1(config)# crypto key generate rsa modulus 4096
 </code></pre>
 
-<ol>
-<li>Définir un nom de domaine pour la paire de clée,</li>
-<li>Générer la paire de clée,</li>
-</ol>
+<ul>
+<li>1 Définir un nom de domaine pour la paire de clée,</li>
+<li>2 Générer la paire de clée,</li>
+</ul>
 <p>Activer SSH :</p>
 <pre><code class="text">SW-1(config)# ip ssh version 2
 SW-1(config)# line vty 0 15
@@ -169,12 +179,13 @@ SW-1(config-line)# transport input ssh
 SW-1(config-line)# exit
 </code></pre>
 
-<ol>
-<li>Activer le protocole SSH,</li>
-<li>Séléctionner les terminaux virtuels 0 à 15,</li>
-<li>Spécifier une authentification locale,</li>
-<li>Spécifier que l'on utilise SSH sur ces terminaux,</li>
-</ol>
+<ul>
+<li>1 Activer le protocole SSH,</li>
+<li>2 Séléctionner les terminaux virtuels 0 à 15,</li>
+<li>3 Spécifier une authentification locale,</li>
+<li>4 Spécifier que l'on utilise SSH sur ces terminaux,</li>
+</ul>
+<hr />
 <h3 id="22-creer-un-administrateur">2.2 Créer un administrateur :</h3>
 <p>Création d'un administrateur <strong>admin</strong> avec le mot de passe <strong>test</strong> :</p>
 <pre><code class="text">SW-1(config)# username admin privilege 15 algorithm-type scrypt secret test
@@ -182,7 +193,8 @@ SW-1(config-line)# exit
 
 <p>L'option <strong>privilege 15</strong> spécifie que cet utilisateur à les droits administrateur sur le switch.</p>
 <p>Lorsque l'on regarde la configuration, on peut voir les deux mots de passe chiffrés :
-<img alt="img" src="../../images/Cisco/Password-Cisco/password.png" /></p>
+<img alt="img" src="../../images/Cisco/Password-Cisco/password.png" />
+<div align="center"><strong><em>Illustration 3 :</em></strong> <em>Mots de passe chiffrés.</em></div></p>
 <p>Les deux mots de passe sont de type 9 en scrypt.</p>
 <p>Enfin on active la fonction qui permet de chiffrer des mots de passe :</p>
 <pre><code class="text">SW-1(config)# service password-encryption
