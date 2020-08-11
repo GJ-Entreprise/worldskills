@@ -142,6 +142,11 @@
             <div class="section">
               
                 <h1 id="securiser-cdp-et-lldp">Sécuriser - CDP et LLDP :</h1>
+<p>Ressource :</p>
+<ul>
+<li><a href="https://cisco.goffinet.org/ccna/gestion-infrastructure/cdp-et-lldp/">https://cisco.goffinet.org/ccna/gestion-infrastructure/cdp-et-lldp/</a></li>
+</ul>
+<hr />
 <h2 id="0-le-laboratoire">0 Le laboratoire :</h2>
 <p>Voici le laboratoire que j'utilise pour tester la sécurité des protocoles CDP et LLDP :
 <img alt="img" src="../../images/Cisco/CDP-LLDP/networkPlan.png" />
@@ -151,6 +156,7 @@
 <li>KALI, 00:0C:29:05:A1:31</li>
 <li>SW-1, 0C:44:BE:18:8F:00</li>
 </ul>
+<hr />
 <h2 id="1-le-protocole-cdp">1 Le protocole CDP :</h2>
 <h3 id="11-activer-cdp">1.1 Activer CDP :</h3>
 <p>Par CDP est actif sur tous les ports d'un equipements Cisco, mais il est possible de l'activer comme ceci :</p>
@@ -172,14 +178,23 @@ SW-1(config)# cdp enable
 SW-1(config)# no cdp enable
 </code></pre>
 
+<hr />
 <h3 id="13-voir-les-voisins-cdp-depuis-kali">1.3 Voir les voisins CDP depuis Kali :</h3>
-<p>Depuis la VM KALI, utilisation de  Wireshark avec le filtre <strong>cdp</strong> :
-<img alt="img" src="../../images/Cisco/CDP-LLDP/cdp.png" /></p>
+<p>Depuis la VM KALI, utilisation de  Wireshark avec le filtre <strong>cdp*<em> :
+<img alt="img" src="../../images/Cisco/CDP-LLDP/cdp.png" />
+<div align="center"></em></strong>Illustration 2 :*<em><em> </em>Trame CDP de SW-1.</em></div></p>
+<p>Sous Kali-Linux, il est aussi possible d'utiliser ces logiciels pour récupérer les informations CDP :</p>
+<ul>
+<li>Cdpsnarf,</li>
+<li>Yersinia,</li>
+</ul>
+<hr />
 <h3 id="14-voir-les-voisins-cdp-depuis-cisco">1.4 Voir les voisins CDP depuis Cisco :</h3>
 <p>Sur un switch Cisco pour voir les voisins :</p>
 <pre><code class="text">SW-1# show cdp neighbors detail
 </code></pre>
 
+<hr />
 <h2 id="2-le-protocole-lldp">2 Le protocole LLDP :</h2>
 <h3 id="21-activer-lldp">2.1 Activer LLDP :</h3>
 <p>Le protocole LLDP n'est pas par défaut actif sur les équipements Cisco, mais il est possible de l'activer comme ceci :</p>
@@ -191,6 +206,7 @@ SW-1(config)# no cdp enable
 SW-1(config)# lldp transmit
 </code></pre>
 
+<hr />
 <h3 id="12-desactiver-lldp">1.2 Désactiver LLDP :</h3>
 <p>Pour désactiver LLDP globalement :</p>
 <pre><code class="text">SW-1(config)# no lldp run
@@ -202,8 +218,15 @@ SW-1(config)# no lldp transmit
 </code></pre>
 
 <h3 id="13-voir-les-voisins-lldp-depuis-kali">1.3 Voir les voisins LLDP depuis Kali :</h3>
-<p>Depuis la VM KALI, utilisation de  Wireshark avec le filtre <strong>lldp</strong> :
-<img alt="img" src="../../images/Cisco/CDP-LLDP/lldp.png" /></p>
+<p>Depuis la VM KALI, utilisation de  Wireshark avec le filtre <strong>lldp*<em> :
+<img alt="img" src="../../images/Cisco/CDP-LLDP/lldp.png" />
+<div align="center"></em></strong>Illustration 3 :*<em><em> </em>Trame LLDP de SW-1.</em></div></p>
+<p>Sous Kali-Linux, il est aussi possible d'utiliser ces logiciels pour récupérer les informations LLDP :</p>
+<ul>
+<li>Lldpd,</li>
+<li>Yersinia,</li>
+</ul>
+<hr />
 <h3 id="14-voir-les-voisins-lldp-depuis-cisco">1.4 Voir les voisins LLDP depuis Cisco :</h3>
 <p>Sur un switch Cisco pour voir les voisins :</p>
 <pre><code class="text">SW-1# show lldp neighbors detail
