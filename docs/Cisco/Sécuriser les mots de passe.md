@@ -93,10 +93,18 @@ Les deux mots de passe sont de type 9 en scrypt.
 
 ---
 
-## 3 Mot de passe :
+## 3 Service de chiffrement des mots de passe :
 Au sein d'IOS, il existe une fonction qui chiffre les mots de passe qui sont déjà spécifié dans la configuration et les mots de passe qui seront spécifiés dans le futur. Cette fonction s'appele **password-encryption**.
 
 Pour activer cette fonction :
 ````text
 SW-1(config)# service password-encryption
 ````
+
+## 4 Conclusion :
+Pour sécuriser l'accès à un équipement Cisco, il faut définir des mots de passe sur :
+
+* L'accès à la console,
+* L'accès depuis un protocole distant,
+
+Ces mots de passe doivent être chiffrés dans la configuration à l'aide de l'algorithme **scrypt**.

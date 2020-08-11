@@ -28,7 +28,7 @@ Configuration du serveur DHCP :
 option domain-name "example.org";
 option domain-name-servers ns1.example.org, ns2.example.org;
 
-defauylt-lease-time 600;
+default-lease-time 600;
 max-lease-time 7200;
 
 subnet 192.168.10.0 netmask 255.255.255.0 {

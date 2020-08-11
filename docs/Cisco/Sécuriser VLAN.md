@@ -254,7 +254,7 @@ Je recommande de priviligé de désactiver DTP sur les ports de cascades et de m
 
 ---
 
-## 4 Conclusion :
+## 3 Conclusion :
 Nous avons vu deux attaques sur les vlan :
 
 * Double tagging

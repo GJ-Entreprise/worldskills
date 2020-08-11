@@ -4,6 +4,8 @@ Ressource :
 
 * [https://cisco.goffinet.org/ccna/gestion-infrastructure/cdp-et-lldp/](https://cisco.goffinet.org/ccna/gestion-infrastructure/cdp-et-lldp/)
 
+Dans ce billet j'utilise uniquement un switch mais la configuration est identique sur un routeur.
+
 ---
 
 ## 0 Le laboratoire :
@@ -122,3 +124,14 @@ Sur un switch Cisco pour voir les voisins :
 ````text
 SW-1# show lldp neighbors detail
 ````
+
+## 3 Conclusion :
+Par défaut, sur les switchs et routeurs Cisco :
+
+* CDP est activé,
+* LLDP est désactivé
+
+Il peut être possible de désactiver ces deux protocoles :
+
+* Sur l'équipement en entier,
+* Sur une interface spécifique,
