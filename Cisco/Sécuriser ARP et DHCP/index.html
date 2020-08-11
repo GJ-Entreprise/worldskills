@@ -244,19 +244,15 @@ Cette limitation permet de "voler" au maximum 3 baux par le pirate (DHCP Starvat
 <pre><code class="text">SW-1# show ip dhcp snooping
 </code></pre>
 
-<div align="center">![img](../images/Cisco/ARP-DHCP/status-snooping.png)</div>
-
-<div align="center">***Illustration 2 :*** *Vérification des ports trusts.*</div>
-
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/status-snooping.png" />
+<div align="center"><strong><em>Illustration 2 :</em></strong> <em>Vérification des ports trusts.</em></div></p>
 <p>Il est possible de noter que l'option 82 est désactivé et que l'interface Gi3/1 est une interface trust par le switch pour les trames DHCP Offer.</p>
 <p>Commandes pour voir le cache des trames DHCP :</p>
 <pre><code class="text">SW-1# show ip dhcp snooping binding
 </code></pre>
 
-<div align="center">![img](../images/Cisco/ARP-DHCP/dhcp-binding.png)</div>
-
-<div align="center">***Illustration 3 :*** *Vérification des baux DHCP.*</div>
-
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/dhcp-binding.png" />
+<div align="center"><strong><em>Illustration 3 :</em></strong> <em>Vérification des baux DHCP.</em></div></p>
 <p>Dans cette capture il est possible de voir que le DHCP à distribué trois baux DHCP, on y retrouve :</p>
 <ul>
 <li>@MAC du client,</li>
@@ -272,10 +268,8 @@ Cette limitation permet de "voler" au maximum 3 baux par le pirate (DHCP Starvat
 <pre><code class="text">SW-1# show port-security
 </code></pre>
 
-<div align="center">![img](../images/Cisco/ARP-DHCP/port-security.png)</div>
-
-<div align="center">***Illustration 4 :*** *Port security configuration initiale.*</div>
-
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/port-security.png" />
+<div align="center"><strong><em>Illustration 4 :</em></strong> <em>Port security configuration initiale.</em></div></p>
 <p>Nous pouvons remarquer que le port security permet à chaque port 3 adresse MAC différentes.
 Une adresse MAC est déja utilisé sur chaque port il en reste donc deux de disponible.</p>
 <hr />
@@ -293,14 +287,10 @@ Utilisation de yersinia, depuis la VM KALI :</p>
 SW-1# show interface status
 </code></pre>
 
-<div align="center">![img](../images/Cisco/ARP-DHCP/dhcp-attack-1.png)</div>
-
-<div align="center">***Illustration 5 :*** *Status du port security après l'attaque.*</div>
-
-<div align="center">![img](../images/Cisco/ARP-DHCP/dhcp-attack-11.png)</div>
-
-<div align="center">***Illustration 6 :*** *Port désactivé zpar le DHCP snooping.*</div>
-
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/dhcp-attack-1.png" />
+<div align="center"><strong><em>Illustration 5 :</em></strong> <em>Status du port security après l'attaque.</em></div></p>
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/dhcp-attack-11.png" />
+<div align="center"><strong><em>Illustration 6 :</em></strong> <em>Port désactivé zpar le DHCP snooping.</em></div></p>
 <p>Afin de placer cette interface en status up :</p>
 <pre><code class="text">SW-1(config)# interface GigabitEthernet 2/1
 SW-1(config-if)# shutdown
@@ -330,16 +320,14 @@ PC-2&gt; ip dhcp
 </code></pre>
 
 <p>Depuis Ethercap :
-<div align="center"><img alt="img" src="../../images/Cisco/ARP-DHCP/dhcp-attack-2.png" /></div>
+<img alt="img" src="../../images/Cisco/ARP-DHCP/dhcp-attack-2.png" />
 <div align="center"><strong><em>Illustration 7 :</em></strong> <em>Log d'ethercap.</em></div></p>
 <p>Configuration IP des postes :</p>
 <pre><code class="text">PC-1&gt; show ip
 </code></pre>
 
-<div align="center">![img](../images/Cisco/ARP-DHCP/dhcp-attack-22.png)</div>
-
-<div align="center">***Illustration 8 :*** *Bail DHCP des postes.*</div>
-
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/dhcp-attack-22.png" />
+<div align="center"><strong><em>Illustration 8 :</em></strong> <em>Bail DHCP des postes.</em></div></p>
 <p>La VM Kali est devenus la Gateway sur les postes.</p>
 <p>Mais sans la modification du switch pour trust le port de la KALI, les clients n'aurai jamais obtenu cette configuration IP.</p>
 <hr />
@@ -386,12 +374,10 @@ Auprès de PC-1 (192.168.10.118) fait moi passer pour PC-2 (192.168.10.120).</p>
 <pre><code class="text">PC-1&gt; show arp
 </code></pre>
 
-<div align="center">![img](../images/Cisco/ARP-DHCP/arp-attack-2.png)</div>
-
-<div align="center">***Illustration 9 :*** *Cache ARP de la victime.*</div>
-
-<p>Mais depuis le switch (SW-1), il est possible d'observer ces lignes de logs :
-<div align="center"><img alt="img" src="../../images/Cisco/ARP-DHCP/arp-attack-22.png" /></div>
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/arp-attack-2.png" />
+<div align="center"><strong><em>Illustration 9 :</em></strong> <em>Cache ARP de la victime.</em></div></p>
+<p>Mais depuis le switch (SW-1), il est possible d'observer ces lignes de logs :</p>
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/arp-attack-22.png" />
 <div align="center"><strong><em>Illustration 10 :</em></strong> <em>Ligne de log depuis SW-1 dans la console.</em></div></p>
 <p>Le switch a détecter que KALI envoie des réponses ARP falsifiés car cette association (MAC &lt;-&gt; IP ) n'est pas présente :</p>
 <ul>
