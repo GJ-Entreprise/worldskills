@@ -1,10 +1,9 @@
 # Sécuriser - Les VLAN :
 
 Ressource :
-
-* https://cybersecurity.att.com/blogs/security-essentials/vlan-hopping-and-mitigation
-* https://www.notsosecure.com/exploiting-vlan-double-tagging/
-* https://networklessons.com/cisco/ccnp-switch/vlan-hopping
+* [https://cybersecurity.att.com/blogs/security-essentials/vlan-hopping-and-mitigation](https://cybersecurity.att.com/blogs/security-essentials/vlan-hopping-and-mitigation)
+* [https://www.notsosecure.com/exploiting-vlan-double-tagging/](https://www.notsosecure.com/exploiting-vlan-double-tagging/)
+* [https://networklessons.com/cisco/ccnp-switch/vlan-hopping](https://networklessons.com/cisco/ccnp-switch/vlan-hopping)
 
 Cette documentation illustre les méthodes pour mitiguer les attaques de rebonds des VLAN.
 Il existe deux méthodes pour réaliser cette attaque :
@@ -104,11 +103,11 @@ L'objectif de cette action est de diffusé uniquement la trame au vlan associé.
 
 Par exemple une trame de demande ARP est émise par un poste elle est diffusé dans le VLAN 10 :
 
-1. Le switch regarde les ports qui sont positionné dans le VLAN 10 et transmet la trame,
-2. Ensuite le switch ajoute un champ **VLAN_ID** dans la trame ethernet qui correspond au numéros de VLAN (VLAN 10),
-3. Le switch transmet cette trame au second switch,
-4. Le second switch ouvre la trame récupère la valeur de VLAN_ID,
-5. Et il transmet la trame aux ports configurés dans le VLAN 10,
+* 1. Le switch regarde les ports qui sont positionné dans le VLAN 10 et transmet la trame,
+* 2. Ensuite le switch ajoute un champ **VLAN_ID** dans la trame ethernet qui correspond au numéros de VLAN (VLAN 10),
+* 3. Le switch transmet cette trame au second switch,
+* 4. Le second switch ouvre la trame récupère la valeur de VLAN_ID,
+* 5. Et il transmet la trame aux ports configurés dans le VLAN 10,
 
 Dans ce contexte, le poste envoie au switch (avant l'étape 1) une trame doublement entaguée :
 ![img](../images/Cisco/VLAN-secure/double_tag.png)
@@ -121,8 +120,8 @@ L'attaquant envoie une trame avec deux balise 802.1Q :
 
 Le switch reçoit cette trame et il effectue les actions suivantes :
 
-1. Supprime la première entête 802.1Q (vlan natif),
-2. Il relais la trame à l'ID de vlan de la seconde entête,
+* 1. Supprime la première entête 802.1Q (vlan natif),
+* 2. Il relais la trame à l'ID de vlan de la seconde entête,
 
 Définition VLAN natif :
 ***Certaines trames véhiculées sur un trunk ne sont pas marquées d’un tag dot1q.
