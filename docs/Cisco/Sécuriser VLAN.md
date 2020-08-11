@@ -12,6 +12,8 @@ Il existe deux méthodes pour réaliser cette attaque :
 * Double tag,
 * Protocole DTP,
 
+---
+
 ## 1 Le double tag :
 ### 1.1 Le laboratoire :
 Voici le laboratoire que j'utilise pour ce lab :

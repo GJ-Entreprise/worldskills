@@ -144,6 +144,12 @@
             <div class="section">
               
                 <h1 id="securiser-arp-et-dhcp">Sécuriser - ARP et DHCP :</h1>
+<p>Ressources :</p>
+<ul>
+<li>DHCP, <a href="https://formip.com/dhcp-snooping/">https://formip.com/dhcp-snooping/</a></li>
+<li>DHCP, <a href="https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84">https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84</a></li>
+<li>ARP, <a href="https://formip.com/dai/">https://formip.com/dai/</a></li>
+</ul>
 <h2 id="0-le-laboratoire">0 Le laboratoire :</h2>
 <p>Voici le laboratoire que j'utilise pour tester la sécurité des protocoles DHCP et ARP :
 <img alt="img" src="../../images/Cisco/ARP-DHCP/networkPlan.png" />
@@ -173,11 +179,6 @@ subnet 192.168.10.0 netmask 255.255.255.0 {
 
 <hr />
 <h2 id="1-securiser-le-protocole-dhcp">1 Sécuriser le protocole DHCP :</h2>
-<p>Ressources :</p>
-<ul>
-<li><a href="https://formip.com/dhcp-snooping/">https://formip.com/dhcp-snooping/</a></li>
-<li><a href="https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84">https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84</a></li>
-</ul>
 <p>Attaque sur le protocole DHCP :</p>
 <ul>
 <li>Une réservation totale des baux DHCP du vrai serveur DHCP (DHCP Starvation),</li>
@@ -332,10 +333,6 @@ PC-2&gt; ip dhcp
 <p>Mais sans la modification du switch pour trust le port de la KALI, les clients n'aurai jamais obtenu cette configuration IP.</p>
 <hr />
 <h2 id="2-securiser-le-protocole-arp">2 Sécuriser le protocole ARP :</h2>
-<p>Ressource :</p>
-<ul>
-<li><a href="https://formip.com/dai/">https://formip.com/dai/</a></li>
-</ul>
 <p>Pour sécuriser le protocole ARP, il est possible de s'appuyer sur la fonctionalité DHCP snooping. En effet cette fonctionalité construit une table (que l'on peux consulter avec la commande : </p>
 <pre><code class="text">show ip dhcp snooping binding
 </code></pre>

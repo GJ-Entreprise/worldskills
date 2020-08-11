@@ -6,6 +6,8 @@ Ressources :
 * DHCP, [https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84](https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84)
 * ARP, [https://formip.com/dai/](https://formip.com/dai/)
 
+---
+
 ## 0 Le laboratoire :
 Voici le laboratoire que j'utilise pour tester la sécurité des protocoles DHCP et ARP :
 ![img](../images/Cisco/ARP-DHCP/networkPlan.png)
