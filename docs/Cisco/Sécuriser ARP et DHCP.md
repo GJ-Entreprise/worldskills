@@ -112,7 +112,7 @@ Commandes pour vérifier le DHCP snooping :
 `````text
 SW-1# show ip dhcp snooping
 `````
-<div align="center">![img](../images/Cisco/ARP-DHCP/status-snooping.png)</div>
+![img](../images/Cisco/ARP-DHCP/status-snooping.png)
 <div align="center">***Illustration 2 :*** *Vérification des ports trusts.*</div>
 
 Il est possible de noter que l'option 82 est désactivé et que l'interface Gi3/1 est une interface trust par le switch pour les trames DHCP Offer.
@@ -121,7 +121,7 @@ Commandes pour voir le cache des trames DHCP :
 `````text
 SW-1# show ip dhcp snooping binding
 `````
-<div align="center">![img](../images/Cisco/ARP-DHCP/dhcp-binding.png)</div>
+![img](../images/Cisco/ARP-DHCP/dhcp-binding.png)
 <div align="center">***Illustration 3 :*** *Vérification des baux DHCP.*</div>
 
 Dans cette capture il est possible de voir que le DHCP à distribué trois baux DHCP, on y retrouve :
@@ -140,7 +140,7 @@ Enfin pour le port-security :
 ````text
 SW-1# show port-security
 ````
-<div align="center">![img](../images/Cisco/ARP-DHCP/port-security.png)</div>
+![img](../images/Cisco/ARP-DHCP/port-security.png)
 <div align="center">***Illustration 4 :*** *Port security configuration initiale.*</div>
 
 Nous pouvons remarquer que le port security permet à chaque port 3 adresse MAC différentes.
@@ -165,10 +165,10 @@ Aperçu :
 SW-1# show port-security
 SW-1# show interface status
 ````
-<div align="center">![img](../images/Cisco/ARP-DHCP/dhcp-attack-1.png)</div>
+![img](../images/Cisco/ARP-DHCP/dhcp-attack-1.png)
 <div align="center">***Illustration 5 :*** *Status du port security après l'attaque.*</div>
 
-<div align="center">![img](../images/Cisco/ARP-DHCP/dhcp-attack-11.png)</div>
+![img](../images/Cisco/ARP-DHCP/dhcp-attack-11.png)
 <div align="center">***Illustration 6 :*** *Port désactivé zpar le DHCP snooping.*</div>
 
 Afin de placer cette interface en status up :
@@ -207,14 +207,14 @@ PC-2> ip dhcp
 ````
 
 Depuis Ethercap :
-<div align="center">![img](../images/Cisco/ARP-DHCP/dhcp-attack-2.png)</div>
+![img](../images/Cisco/ARP-DHCP/dhcp-attack-2.png)
 <div align="center">***Illustration 7 :*** *Log d'ethercap.*</div>
 
 Configuration IP des postes :
 ````text
 PC-1> show ip
 ````
-<div align="center">![img](../images/Cisco/ARP-DHCP/dhcp-attack-22.png)</div>
+![img](../images/Cisco/ARP-DHCP/dhcp-attack-22.png)
 <div align="center">***Illustration 8 :*** *Bail DHCP des postes.*</div>
 
 La VM Kali est devenus la Gateway sur les postes.
@@ -276,11 +276,12 @@ Sur le poste le cache ARP est vide :
 ````text
 PC-1> show arp
 ````
-<div align="center">![img](../images/Cisco/ARP-DHCP/arp-attack-2.png)</div>
+![img](../images/Cisco/ARP-DHCP/arp-attack-2.png)
 <div align="center">***Illustration 9 :*** *Cache ARP de la victime.*</div>
 
 Mais depuis le switch (SW-1), il est possible d'observer ces lignes de logs :
-<div align="center">![img](../images/Cisco/ARP-DHCP/arp-attack-22.png)</div>
+
+![img](../images/Cisco/ARP-DHCP/arp-attack-22.png)
 <div align="center">***Illustration 10 :*** *Ligne de log depuis SW-1 dans la console.*</div>
 
 Le switch a détecter que KALI envoie des réponses ARP falsifiés car cette association (MAC <-> IP ) n'est pas présente :
