@@ -4,7 +4,8 @@
 Voici le laboratoire que j'utilise pour tester la sécurité des protocoles DHCP et ARP :
 ![img](../images/Cisco/ARP-DHCP/networkPlan.png)
 
-***Illustration 1 :*** *Plan réseau du laboratoire.*
+[center]***Illustration 1 :*** *Plan réseau du laboratoire.*[/center]
+
 
 Adressage IP et MAC :
 
@@ -35,8 +36,9 @@ subnet 192.168.10.0 netmask 255.255.255.0 {
 
 ## 1 Sécuriser le protocole DHCP :
 Ressource :
- * https://formip.com/dhcp-snooping/
- * https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84
+
+* https://formip.com/dhcp-snooping/
+* https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84
 
 Attaque sur le protocole DHCP :
  * Une réservation totale des baux DHCP du vrai serveur DHCP, (DHCP Starvation)
@@ -249,9 +251,10 @@ Switch(config-if)# ip arp inspection trust
 Depuis KALI je vais tenter d'empoisoner la table ARP de PC-1 pour me faire passer pour PC-2, la table ARP de PC-1 est actuellement vide.
 
 Pour rappel :
- * PC-1 : 00:50:79:66:68:00, 192.168.10.118
- * PC-2 : 00:50:79:66:68:01, 192.168.10.120
- * KALI : 00:0C:29:05:A1:31, 192.168.10.104
+
+* PC-1 : 00:50:79:66:68:00, 192.168.10.118
+* PC-2 : 00:50:79:66:68:01, 192.168.10.120
+* KALI : 00:0C:29:05:A1:31, 192.168.10.104
 
 Depuis KALI :
 ````bash
@@ -270,13 +273,15 @@ Mais depuis le switch (SW-1), il est possible d'observer ces lignes de logs :
 ![img](../images/Cisco/ARP-DHCP/arp-attack-22.png)
 
 Le switch a détecter que KALI envoie des réponses ARP falsifiés car cette association (MAC <-> IP ) n'est pas présente :
- * Dans le cache DHCP snooping,
- * Le port n'a pas été définis en trust donc cette association n'est pas pris en compte par le switch,
+
+* Dans le cache DHCP snooping,
+* Le port n'a pas été définis en trust donc cette association n'est pas pris en compte par le switch,
 
 ---
 
 ## 3 Conclusion :
 Pour conclure sur la sécurité des protocoles :
- * Attaque DHCP Starvation -> Port Security,
- * Attaque DHCP Spoofing -> DHCP Snooping,
- * Attaque ARP Spoofing -> DAI avec DHCP Snooping,
+
+* Attaque DHCP Starvation -> Port Security,
+* Attaque DHCP Spoofing -> DHCP Snooping,
+* Attaque ARP Spoofing -> DAI avec DHCP Snooping,
