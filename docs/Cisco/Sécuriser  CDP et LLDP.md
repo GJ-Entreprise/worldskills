@@ -54,7 +54,6 @@ SW-1(config)# no cdp enable
 Depuis la VM KALI, utilisation de  Wireshark avec le filtre **cdp** :
 
 ![img](../images/Cisco/CDP-LLDP/cdp.png)
-
 <div align="center">
 	<i><b>Illustration 2 :</b> Trame CDP de SW-1.</i>
 </div>
@@ -107,7 +106,6 @@ SW-1(config)# no lldp transmit
 Depuis la VM KALI, utilisation de  Wireshark avec le filtre **lldp** :
 
 ![img](../images/Cisco/CDP-LLDP/lldp.png)
-
 <div align="center">
 	<i><b>Illustration 3 :</b> Trame LLDP de SW-1.</i>
 </div>
