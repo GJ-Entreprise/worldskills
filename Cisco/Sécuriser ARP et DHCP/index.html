@@ -147,7 +147,7 @@
 <h2 id="0-le-laboratoire">0 Le laboratoire :</h2>
 <p>Voici le laboratoire que j'utilise pour tester la sécurité des protocoles DHCP et ARP :
 <img alt="img" src="../../images/Cisco/ARP-DHCP/networkPlan.png" /></p>
-<p><strong><em>Illustration 1 :</em></strong> <em>Plan réseau du laboratoire.</em></p>
+<p>[center]<strong><em>Illustration 1 :</em></strong> <em>Plan réseau du laboratoire.</em>[/center]</p>
 <p>Adressage IP et MAC :</p>
 <ul>
 <li>PC-1, DHCP, 00:50:79:66:68:00 </li>
@@ -173,9 +173,11 @@ subnet 192.168.10.0 netmask 255.255.255.0 {
 
 <hr />
 <h2 id="1-securiser-le-protocole-dhcp">1 Sécuriser le protocole DHCP :</h2>
-<p>Ressource :
- * https://formip.com/dhcp-snooping/
- * https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84</p>
+<p>Ressource :</p>
+<ul>
+<li>https://formip.com/dhcp-snooping/</li>
+<li>https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84</li>
+</ul>
 <p>Attaque sur le protocole DHCP :
  * Une réservation totale des baux DHCP du vrai serveur DHCP, (DHCP Starvation)
  * Une distribution de DHCP Offer avec l'@IP de passerelle l'IP du rogue DHCP, (DHCP Spoofing)</p>
@@ -343,10 +345,12 @@ Switch(config-if)# ip arp inspection trust
 <hr />
 <h3 id="22-tentative-dattaque">2.2 Tentative d'attaque :</h3>
 <p>Depuis KALI je vais tenter d'empoisoner la table ARP de PC-1 pour me faire passer pour PC-2, la table ARP de PC-1 est actuellement vide.</p>
-<p>Pour rappel :
- * PC-1 : 00:50:79:66:68:00, 192.168.10.118
- * PC-2 : 00:50:79:66:68:01, 192.168.10.120
- * KALI : 00:0C:29:05:A1:31, 192.168.10.104</p>
+<p>Pour rappel :</p>
+<ul>
+<li>PC-1 : 00:50:79:66:68:00, 192.168.10.118</li>
+<li>PC-2 : 00:50:79:66:68:01, 192.168.10.120</li>
+<li>KALI : 00:0C:29:05:A1:31, 192.168.10.104</li>
+</ul>
 <p>Depuis KALI :</p>
 <pre><code class="bash">arpspoof -t 192.168.10.118 192.168.10.120
 </code></pre>
@@ -360,15 +364,19 @@ Auprès de PC-1 (192.168.10.118) fait moi passer pour PC-2 (192.168.10.120).</p>
 <p><img alt="img" src="../../images/Cisco/ARP-DHCP/arp-attack-2.png" /></p>
 <p>Mais depuis le switch (SW-1), il est possible d'observer ces lignes de logs :
 <img alt="img" src="../../images/Cisco/ARP-DHCP/arp-attack-22.png" /></p>
-<p>Le switch a détecter que KALI envoie des réponses ARP falsifiés car cette association (MAC &lt;-&gt; IP ) n'est pas présente :
- * Dans le cache DHCP snooping,
- * Le port n'a pas été définis en trust donc cette association n'est pas pris en compte par le switch,</p>
+<p>Le switch a détecter que KALI envoie des réponses ARP falsifiés car cette association (MAC &lt;-&gt; IP ) n'est pas présente :</p>
+<ul>
+<li>Dans le cache DHCP snooping,</li>
+<li>Le port n'a pas été définis en trust donc cette association n'est pas pris en compte par le switch,</li>
+</ul>
 <hr />
 <h2 id="3-conclusion">3 Conclusion :</h2>
-<p>Pour conclure sur la sécurité des protocoles :
- * Attaque DHCP Starvation -&gt; Port Security,
- * Attaque DHCP Spoofing -&gt; DHCP Snooping,
- * Attaque ARP Spoofing -&gt; DAI avec DHCP Snooping,</p>
+<p>Pour conclure sur la sécurité des protocoles :</p>
+<ul>
+<li>Attaque DHCP Starvation -&gt; Port Security,</li>
+<li>Attaque DHCP Spoofing -&gt; DHCP Snooping,</li>
+<li>Attaque ARP Spoofing -&gt; DAI avec DHCP Snooping,</li>
+</ul>
               
             </div>
           </div>
