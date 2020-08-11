@@ -153,7 +153,7 @@
 <h2 id="1-le-double-tag">1 Le double tag :</h2>
 <h3 id="11-le-laboratoire">1.1 Le laboratoire :</h3>
 <p>Voici le laboratoire que j'utilise pour ce lab :
-<img alt="img" src="../../images/VLAN-secure/network.png" /></p>
+<img alt="img" src="../../images/Cisco/VLAN-secure/network.png" /></p>
 <p>Ce lab est composer d'un VLAN :
  - VLAN 10 ; 192.168.10.0/24</p>
 <p>Le PC-1 se rouve dans le vlan 10 et l'attaquant dajns le VLAN 1 (par défaut).
@@ -238,7 +238,7 @@ L'objectif de cette action est de diffusé uniquement la trame au vlan associé.
 4. Le second switch ouvre la trame récupère la valeur de VLAN_ID,
 5. Et il transmet la trame aux ports configurés dans le VLAN 10,</p>
 <p>Dans ce contexte, le poste envoie au switch (avant l'étape 1) une trame doublement entaguée :
-<img alt="img" src="../../images/VLAN-secure/double_tag.png" /></p>
+<img alt="img" src="../../images/Cisco/VLAN-secure/double_tag.png" /></p>
 <p>L'attaquant envoie une trame avec deux balise 802.1Q :
  - la balise interne correspond au vlan natif,
  - la balise externe correspond au vlan que l'attaquant souhaite contacter,</p>
@@ -292,7 +292,7 @@ SW-2(config-if)# exit
 <h2 id="2-le-protocole-dtp">2 Le protocole DTP :</h2>
 <h3 id="21-le-laboratoire">2.1 Le laboratoire :</h3>
 <p>Voici le laboratoire que j'utilise pour ce lab :
-<img alt="img" src="../../images/VLAN-secure/network-2.png" /></p>
+<img alt="img" src="../../images/Cisco/VLAN-secure/network-2.png" /></p>
 <p>Voici le script de configuration du switch SW-1 :</p>
 <pre><code class="text">    interface GigabitEthernet0/0
         switchport mode dynamic auto
@@ -308,9 +308,9 @@ do wr
 Par défaut il est activé et il permet à un attaquant de monter une liason trunk entreson PC et le switch.
 Ce qui à pour conséquence qu'il peut détourner tous les vlan configurés sur le switch.</p>
 <p>Il existe plusieurs mode DTP :
-<img alt="img" src="../../images/VLAN-secure/dtp_mode-1.png" /></p>
+<img alt="img" src="../../images/Cisco/VLAN-secure/dtp_mode-1.png" /></p>
 <p>Et ces mode mènent à plusieurs résultats :
-<img alt="img" src="../../images/VLAN-secure/dtp_mode-2.png" /></p>
+<img alt="img" src="../../images/Cisco/VLAN-secure/dtp_mode-2.png" /></p>
 <hr />
 <h3 id="23-attaque">2.3 Attaque :</h3>
 <p>Aparavant, je m'assure qu'aucun port et à monter une liason trunk :</p>
@@ -327,7 +327,7 @@ Ensuite avec yersinia :</p>
 <pre><code class="text">SW-1# show interface trunk
 </code></pre>
 
-<p><img alt="img" src="../../images/VLAN-secure/mount-trunk.png" /></p>
+<p><img alt="img" src="../../images/Cisco/VLAN-secure/mount-trunk.png" /></p>
 <p>L'interface de l'attaquant est monté en trunk.</p>
 <hr />
 <h3 id="24-mitigation">2.4 Mitigation :</h3>

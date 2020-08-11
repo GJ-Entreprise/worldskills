@@ -132,7 +132,7 @@
  * https://cisco.goffinet.org/ccna/gestion-securisee-peripheriques/chiffrement-des-mots-de-passes-locaux-cisco-ios/</p>
 <h2 id="0-le-laboratoire">0 Le laboratoire :</h2>
 <p>Voici le laboratoire que j'utilise pour ce sujet :
-<img alt="img" src="../../images/Password-Cisco/network.png" /></p>
+<img alt="img" src="../../images/Cisco/Password-Cisco/network.png" /></p>
 <p>Il est possible de distinguer deux accès aux équipements Cisco :
  * out-band ; accès par la console (qui ne nécessite pas de configuration réseau ; ex câble console etc.),
  * in-band ; accès par un service réseau (nécessite une configuration IP ; ex SSH etc.),</p>
@@ -147,7 +147,7 @@
 <pre><code class="text">SW-1# sh run
 </code></pre>
 
-<p><img alt="img" src="../../images/Password-Cisco/enable_password.png" /></p>
+<p><img alt="img" src="../../images/Cisco/Password-Cisco/enable_password.png" /></p>
 <p>Nous pouvons constater que le mot de passe est de type 9 et chiffré.</p>
 <h2 id="2-acces-in-band">2 Accès in-band :</h2>
 <p>Pour avoir un accès in-band il est necessaire d'avoir une configuration IP.</p>
@@ -182,7 +182,7 @@ SW-1(config-line)# exit
 
 <p>L'option <strong>privilege 15</strong> spécifie que cet utilisateur à les droits administrateur sur le switch.</p>
 <p>Lorsque l'on regarde la configuration, on peut voir les deux mots de passe chiffrés :
-<img alt="img" src="../../images/Password-Cisco/password.png" /></p>
+<img alt="img" src="../../images/Cisco/Password-Cisco/password.png" /></p>
 <p>Les deux mots de passe sont de type 9 en scrypt.</p>
 <p>Enfin on active la fonction qui permet de chiffrer des mots de passe :</p>
 <pre><code class="text">SW-1(config)# service password-encryption

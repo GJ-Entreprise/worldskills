@@ -109,7 +109,7 @@ Commandes pour vérifier le DHCP snooping :
 `````text
 SW-1# show ip dhcp snooping
 `````
-![img](../images/Cisco/Cisco/ARP-DHCP/status-snooping.png)
+![img](../images/Cisco/ARP-DHCP/status-snooping.png)
 
 Il est possible de noter que l'option 82 est désactivé et que l'interface Gi3/1 est une interface trust par le switch pour les trames DHCP Offer.
 
@@ -117,7 +117,7 @@ Commandes pour voir le cache des trames DHCP :
 `````text
 SW-1# show ip dhcp snooping binding
 `````
-![img](../images/Cisco/Cisco/ARP-DHCP/dhcp-binding.png)
+![img](../images/Cisco/ARP-DHCP/dhcp-binding.png)
 
 Dans cette capture il est possible de voir que le DHCP à distribué trois baux DHCP, on y retrouve :
  * @MAC du client,
