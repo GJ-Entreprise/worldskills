@@ -238,31 +238,11 @@ Pour rappel la norme dot1q ajoute un champ dans les trames ethernet, ce champ sp
 L'objectif de cette action est de diffusé uniquement la trame au vlan associé.</p>
 <p>Par exemple une trame de demande ARP est émise par un poste elle est diffusé dans le VLAN 10 :</p>
 <ul>
-<li>
-<ol>
-<li>Le switch regarde les ports qui sont positionné dans le VLAN 10 et transmet la trame,</li>
-</ol>
-</li>
-<li>
-<ol>
-<li>Ensuite le switch ajoute un champ <strong>VLAN_ID</strong> dans la trame ethernet qui correspond au numéros de VLAN (VLAN 10),</li>
-</ol>
-</li>
-<li>
-<ol>
-<li>Le switch transmet cette trame au second switch,</li>
-</ol>
-</li>
-<li>
-<ol>
-<li>Le second switch ouvre la trame récupère la valeur de VLAN_ID,</li>
-</ol>
-</li>
-<li>
-<ol>
-<li>Et il transmet la trame aux ports configurés dans le VLAN 10,</li>
-</ol>
-</li>
+<li>1 Le switch regarde les ports qui sont positionné dans le VLAN 10 et transmet la trame,</li>
+<li>2 Ensuite le switch ajoute un champ <strong>VLAN_ID</strong> dans la trame ethernet qui correspond au numéros de VLAN (VLAN 10),</li>
+<li>3 Le switch transmet cette trame au second switch,</li>
+<li>4 Le second switch ouvre la trame récupère la valeur de VLAN_ID,</li>
+<li>5 Et il transmet la trame aux ports configurés dans le VLAN 10,</li>
 </ul>
 <p>Dans ce contexte, le poste envoie au switch (avant l'étape 1) une trame doublement entaguée :
 <img alt="img" src="../../images/Cisco/VLAN-secure/double_tag.png" />
@@ -274,16 +254,8 @@ L'objectif de cette action est de diffusé uniquement la trame au vlan associé.
 </ul>
 <p>Le switch reçoit cette trame et il effectue les actions suivantes :</p>
 <ul>
-<li>
-<ol>
-<li>Supprime la première entête 802.1Q (vlan natif),</li>
-</ol>
-</li>
-<li>
-<ol>
-<li>Il relais la trame à l'ID de vlan de la seconde entête,</li>
-</ol>
-</li>
+<li>1 Supprime la première entête 802.1Q (vlan natif),</li>
+<li>2 Il relais la trame à l'ID de vlan de la seconde entête,</li>
 </ul>
 <p>Définition VLAN natif :
 <strong><em>Certaines trames véhiculées sur un trunk ne sont pas marquées d’un tag dot1q.
