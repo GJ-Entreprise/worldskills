@@ -33,10 +33,10 @@ subnet 192.168.10.0 netmask 255.255.255.0 {
 ---
 
 ## 1 Sécuriser le protocole DHCP :
-Ressource :
+Ressources :
 
-* https://formip.com/dhcp-snooping/
-* https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84
+* [https://formip.com/dhcp-snooping/](https://formip.com/dhcp-snooping/)
+* [https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84](https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84)
 
 Attaque sur le protocole DHCP :
  * Une réservation totale des baux DHCP du vrai serveur DHCP, (DHCP Starvation)
