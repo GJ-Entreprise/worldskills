@@ -84,7 +84,7 @@ SW-1(config)# lldp transmit
 
 ---
 
-### 1.2 Désactiver LLDP :
+### 2.2 Désactiver LLDP :
 Pour désactiver LLDP globalement :
 ````text
 SW-1(config)# no lldp run
@@ -98,7 +98,7 @@ SW-1(config)# no lldp transmit
 
 ---
 
-### 1.3 Voir les voisins LLDP depuis Kali :
+### 2.3 Voir les voisins LLDP depuis Kali :
 Depuis la VM KALI, utilisation de  Wireshark avec le filtre **lldp** :
 ![img](../images/Cisco/CDP-LLDP/lldp.png)
 
@@ -111,7 +111,7 @@ Sous Kali-Linux, il est aussi possible d'utiliser ces logiciels pour récupérer
 
 ---
 
-### 1.4 Voir les voisins LLDP depuis Cisco :
+### 2.4 Voir les voisins LLDP depuis Cisco :
 Sur un switch Cisco pour voir les voisins :
 ````text
 SW-1# show lldp neighbors detail
