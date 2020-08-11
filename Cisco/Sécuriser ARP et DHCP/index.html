@@ -237,13 +237,13 @@ Cette limitation permet de "voler" au maximum 3 baux par le pirate (DHCP Starvat
 <pre><code class="text">SW-1# show ip dhcp snooping
 </code></pre>
 
-<p><img alt="img" src="../images/Cisco/Cisco/ARP-DHCP/status-snooping.png" /></p>
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/status-snooping.png" /></p>
 <p>Il est possible de noter que l'option 82 est désactivé et que l'interface Gi3/1 est une interface trust par le switch pour les trames DHCP Offer.</p>
 <p>Commandes pour voir le cache des trames DHCP :</p>
 <pre><code class="text">SW-1# show ip dhcp snooping binding
 </code></pre>
 
-<p><img alt="img" src="../images/Cisco/Cisco/ARP-DHCP/dhcp-binding.png" /></p>
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/dhcp-binding.png" /></p>
 <p>Dans cette capture il est possible de voir que le DHCP à distribué trois baux DHCP, on y retrouve :
  * @MAC du client,
  * @IP distribué par le DHCP,
