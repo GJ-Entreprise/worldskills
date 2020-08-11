@@ -23,7 +23,7 @@ Adressage MAC :
 
 ## 1 Le protocole CDP :
 ### 1.1 Activer CDP :
-Par CDP est actif sur tous les ports d'un equipements Cisco, mais il est possible de l'activer comme ceci :
+Par défaut CDP est actif sur tous les ports d'un equipement Cisco, mais il est possible de l'activer (ou ré-activer) comme ceci :
 ````text
 SW-1(config)# cdp run
 ````
