@@ -257,11 +257,13 @@ Cette limitation permet de "voler" au maximum 3 baux par le pirate (DHCP Starvat
 
 <div align="center">***Illustration 3 :*** *Vérification des baux DHCP.*</div>
 
-<p>Dans cette capture il est possible de voir que le DHCP à distribué trois baux DHCP, on y retrouve :
- * @MAC du client,
- * @IP distribué par le DHCP,
- * Lease time du bail DHCP,
- * Interface du client,</p>
+<p>Dans cette capture il est possible de voir que le DHCP à distribué trois baux DHCP, on y retrouve :</p>
+<ul>
+<li>@MAC du client,</li>
+<li>@IP distribué par le DHCP,</li>
+<li>Lease time du bail DHCP,</li>
+<li>Interface du client,</li>
+</ul>
 <p>Il est possible de clear ce cache :</p>
 <pre><code class="text">SW-1# clear ip dhcp snooping binding *
 </code></pre>
