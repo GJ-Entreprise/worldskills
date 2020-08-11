@@ -142,12 +142,10 @@
             <div class="section">
               
                 <h1 id="securiser-les-vlan">Sécuriser - Les VLAN :</h1>
-<p>Ressource :</p>
-<ul>
-<li>https://cybersecurity.att.com/blogs/security-essentials/vlan-hopping-and-mitigation</li>
-<li>https://www.notsosecure.com/exploiting-vlan-double-tagging/</li>
-<li>https://networklessons.com/cisco/ccnp-switch/vlan-hopping</li>
-</ul>
+<p>Ressource :
+* <a href="https://cybersecurity.att.com/blogs/security-essentials/vlan-hopping-and-mitigation">https://cybersecurity.att.com/blogs/security-essentials/vlan-hopping-and-mitigation</a>
+* <a href="https://www.notsosecure.com/exploiting-vlan-double-tagging/">https://www.notsosecure.com/exploiting-vlan-double-tagging/</a>
+* <a href="https://networklessons.com/cisco/ccnp-switch/vlan-hopping">https://networklessons.com/cisco/ccnp-switch/vlan-hopping</a></p>
 <p>Cette documentation illustre les méthodes pour mitiguer les attaques de rebonds des VLAN.
 Il existe deux méthodes pour réaliser cette attaque :</p>
 <ul>
@@ -239,13 +237,33 @@ do wr
 Pour rappel la norme dot1q ajoute un champ dans les trames ethernet, ce champ specifie le numéros du vlan qui est associé à la trame.
 L'objectif de cette action est de diffusé uniquement la trame au vlan associé.</p>
 <p>Par exemple une trame de demande ARP est émise par un poste elle est diffusé dans le VLAN 10 :</p>
+<ul>
+<li>
 <ol>
 <li>Le switch regarde les ports qui sont positionné dans le VLAN 10 et transmet la trame,</li>
+</ol>
+</li>
+<li>
+<ol>
 <li>Ensuite le switch ajoute un champ <strong>VLAN_ID</strong> dans la trame ethernet qui correspond au numéros de VLAN (VLAN 10),</li>
+</ol>
+</li>
+<li>
+<ol>
 <li>Le switch transmet cette trame au second switch,</li>
+</ol>
+</li>
+<li>
+<ol>
 <li>Le second switch ouvre la trame récupère la valeur de VLAN_ID,</li>
+</ol>
+</li>
+<li>
+<ol>
 <li>Et il transmet la trame aux ports configurés dans le VLAN 10,</li>
 </ol>
+</li>
+</ul>
 <p>Dans ce contexte, le poste envoie au switch (avant l'étape 1) une trame doublement entaguée :
 <img alt="img" src="../../images/Cisco/VLAN-secure/double_tag.png" />
 <div align="center"><strong><em>Illustration 2 :</em></strong> <em>Trame double tag.</em></div></p>
@@ -255,10 +273,18 @@ L'objectif de cette action est de diffusé uniquement la trame au vlan associé.
 <li>La balise externe correspond au vlan que l'attaquant souhaite contacter,</li>
 </ul>
 <p>Le switch reçoit cette trame et il effectue les actions suivantes :</p>
+<ul>
+<li>
 <ol>
 <li>Supprime la première entête 802.1Q (vlan natif),</li>
+</ol>
+</li>
+<li>
+<ol>
 <li>Il relais la trame à l'ID de vlan de la seconde entête,</li>
 </ol>
+</li>
+</ul>
 <p>Définition VLAN natif :
 <strong><em>Certaines trames véhiculées sur un trunk ne sont pas marquées d’un tag dot1q.
 Dés lors il faut pouvoir les placer quelque part. C’est là qu’intervient le vlan natif.
