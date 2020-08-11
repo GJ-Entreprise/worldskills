@@ -14,7 +14,7 @@ Il existe deux méthodes pour réaliser cette attaque :
 ## 1 Le double tag :
 ### 1.1 Le laboratoire :
 Voici le laboratoire que j'utilise pour ce lab :
-![img](../images/VLAN-secure/network.png)
+![img](../images/Cisco/VLAN-secure/network.png)
 
 Ce lab est composer d'un VLAN :
  - VLAN 10 ; 192.168.10.0/24
@@ -107,7 +107,7 @@ Par exemple une trame de demande ARP est émise par un poste elle est diffusé d
 5. Et il transmet la trame aux ports configurés dans le VLAN 10,
 
 Dans ce contexte, le poste envoie au switch (avant l'étape 1) une trame doublement entaguée :
-![img](../images/VLAN-secure/double_tag.png)
+![img](../images/Cisco/VLAN-secure/double_tag.png)
 
 L'attaquant envoie une trame avec deux balise 802.1Q :
  - la balise interne correspond au vlan natif,
@@ -175,7 +175,7 @@ SW-2(config-if)# exit
 ## 2 Le protocole DTP :
 ### 2.1 Le laboratoire :
 Voici le laboratoire que j'utilise pour ce lab :
-![img](../images/VLAN-secure/network-2.png)
+![img](../images/Cisco/VLAN-secure/network-2.png)
 
 Voici le script de configuration du switch SW-1 :
 ````text
@@ -195,10 +195,10 @@ Par défaut il est activé et il permet à un attaquant de monter une liason tru
 Ce qui à pour conséquence qu'il peut détourner tous les vlan configurés sur le switch.
 
 Il existe plusieurs mode DTP :
-![img](../images/VLAN-secure/dtp_mode-1.png)
+![img](../images/Cisco/VLAN-secure/dtp_mode-1.png)
 
 Et ces mode mènent à plusieurs résultats :
-![img](../images/VLAN-secure/dtp_mode-2.png)
+![img](../images/Cisco/VLAN-secure/dtp_mode-2.png)
 
 ---
 
@@ -221,7 +221,7 @@ Je retourne sur le switch :
 SW-1# show interface trunk
 ````
 
-![img](../images/VLAN-secure/mount-trunk.png)
+![img](../images/Cisco/VLAN-secure/mount-trunk.png)
 
 L'interface de l'attaquant est monté en trunk.
 

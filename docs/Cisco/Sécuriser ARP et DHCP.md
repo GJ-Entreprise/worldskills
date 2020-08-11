@@ -2,7 +2,7 @@
 
 ## 0 Le laboratoire :
 Voici le laboratoire que j'utilise pour tester la sécurité des protocoles DHCP et ARP :
-![img](../images/ARP-DHCP/networkPlan.png)
+![img](../images/Cisco/ARP-DHCP/networkPlan.png)
 
 
 Adressage IP et MAC :
@@ -109,7 +109,7 @@ Commandes pour vérifier le DHCP snooping :
 `````text
 SW-1# show ip dhcp snooping
 `````
-![img](../images/ARP-DHCP/status-snooping.png)
+![img](../images/Cisco/Cisco/ARP-DHCP/status-snooping.png)
 
 Il est possible de noter que l'option 82 est désactivé et que l'interface Gi3/1 est une interface trust par le switch pour les trames DHCP Offer.
 
@@ -117,7 +117,7 @@ Commandes pour voir le cache des trames DHCP :
 `````text
 SW-1# show ip dhcp snooping binding
 `````
-![img](../images/ARP-DHCP/dhcp-binding.png)
+![img](../images/Cisco/Cisco/ARP-DHCP/dhcp-binding.png)
 
 Dans cette capture il est possible de voir que le DHCP à distribué trois baux DHCP, on y retrouve :
  * @MAC du client,
@@ -134,7 +134,7 @@ Enfin pour le port-security :
 ````text
 SW-1# show port-security
 ````
-![img](../images/ARP-DHCP/port-security.png)
+![img](../images/Cisco/ARP-DHCP/port-security.png)
 
 Nous pouvons remarquer que le port security permet à chaque port 3 adresse MAC différentes.
 Une adresse MAC est déja utilisé sur chaque port il en reste donc deux de disponible.
@@ -158,9 +158,9 @@ Aperçu :
 SW-1# show port-security
 SW-1# show interface status
 ````
-![img](../images/ARP-DHCP/dhcp-attack-1.png)
+![img](../images/Cisco/ARP-DHCP/dhcp-attack-1.png)
 
-![img](../images/ARP-DHCP/dhcp-attack-11.png)
+![img](../images/Cisco/ARP-DHCP/dhcp-attack-11.png)
 
 Afin de placer cette interface en status up :
 ````text
@@ -196,13 +196,13 @@ PC-2> ip dhcp
 ````
 
 Depuis Ethercap :
-![img](../images/ARP-DHCP/dhcp-attack-2.png)
+![img](../images/Cisco/ARP-DHCP/dhcp-attack-2.png)
 
 Configuration IP des postes :
 ````text
 PC-1> show ip
 ````
-![img](../images/ARP-DHCP/dhcp-attack-22.png)
+![img](../images/Cisco/ARP-DHCP/dhcp-attack-22.png)
 
 La VM Kali est devenus la Gateway sur les postes.
 
@@ -256,10 +256,10 @@ Sur le poste le cache ARP est vide :
 ````text
 PC-1> show arp
 ````
-![img](../images/ARP-DHCP/arp-attack-2.png)
+![img](../images/Cisco/ARP-DHCP/arp-attack-2.png)
 
 Mais depuis le switch (SW-1), il est possible d'observer ces lignes de logs :
-![img](../images/ARP-DHCP/arp-attack-22.png)
+![img](../images/Cisco/ARP-DHCP/arp-attack-22.png)
 
 Le switch a détecter que KALI envoie des réponses ARP falsifiés car cette association (MAC <-> IP ) n'est pas présente :
  * Dans le cache DHCP snooping,

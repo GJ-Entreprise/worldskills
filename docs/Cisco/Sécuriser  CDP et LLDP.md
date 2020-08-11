@@ -2,7 +2,7 @@
 
 ## 0 Le laboratoire :
 Voici le laboratoire que j'utilise pour tester la sécurité des protocoles CDP et LLDP :
-![img](../images/CDP-LLDP/networkPlan.png)
+![img](../images/Cisco/CDP-LLDP/networkPlan.png)
 
 Adressage MAC :
  * KALI ; 00:0C:29:05:A1:31
@@ -35,7 +35,7 @@ SW-1(config)# no cdp enable
 
 ### 1.3 Voir les voisins CDP depuis Kali :
 Depuis la VM KALI, utilisation de  Wireshark avec le filtre **cdp** :
-![img](../images/CDP-LLDP/cdp.png)
+![img](../images/Cisco/CDP-LLDP/cdp.png)
 
 ### 1.4 Voir les voisins CDP depuis Cisco :
 Sur un switch Cisco pour voir les voisins :
@@ -70,7 +70,7 @@ SW-1(config)# no lldp transmit
 
 ### 1.3 Voir les voisins LLDP depuis Kali :
 Depuis la VM KALI, utilisation de  Wireshark avec le filtre **lldp** :
-![img](../images/CDP-LLDP/lldp.png)
+![img](../images/Cisco/CDP-LLDP/lldp.png)
 
 ### 1.4 Voir les voisins LLDP depuis Cisco :
 Sur un switch Cisco pour voir les voisins :

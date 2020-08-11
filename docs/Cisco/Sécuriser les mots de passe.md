@@ -5,7 +5,7 @@ Ressource :
 
 ## 0 Le laboratoire :
 Voici le laboratoire que j'utilise pour ce sujet :
-![img](../images/Password-Cisco/network.png)
+![img](../images/Cisco/Password-Cisco/network.png)
 
 Il est possible de distinguer deux accès aux équipements Cisco :
  * out-band ; accès par la console (qui ne nécessite pas de configuration réseau ; ex câble console etc.),
@@ -26,7 +26,7 @@ Lorsque l'on regarde la configartion :
 SW-1# sh run
 ````
 
-![img](../images/Password-Cisco/enable_password.png)
+![img](../images/Cisco/Password-Cisco/enable_password.png)
 
 Nous pouvons constater que le mot de passe est de type 9 et chiffré.
 
@@ -67,7 +67,7 @@ SW-1(config)# username admin privilege 15 algorithm-type scrypt secret test
 L'option **privilege 15** spécifie que cet utilisateur à les droits administrateur sur le switch.
 
 Lorsque l'on regarde la configuration, on peut voir les deux mots de passe chiffrés :
-![img](../images/Password-Cisco/password.png)
+![img](../images/Cisco/Password-Cisco/password.png)
 
 Les deux mots de passe sont de type 9 en scrypt.
 
