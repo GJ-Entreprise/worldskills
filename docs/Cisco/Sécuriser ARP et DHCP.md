@@ -6,11 +6,11 @@ Voici le laboratoire que j'utilise pour tester la sécurité des protocoles DHCP
 
 
 Adressage IP et MAC :
-* PC-1 ; DHCP ; 00:50:79:66:68:00 
-* PC-2 ; DHCP ; 00:50:79:66:68:01
-* DHCP ; 192.168.10.31/24 ; 00:0C:29:07:DB:B1
-* KALI ; DHCP ; 00:0C:29:05:A1:31
-* SW-1 ; 192.168.10.1/24 ; //
+	* PC-1 ; DHCP ; 00:50:79:66:68:00 
+	* PC-2 ; DHCP ; 00:50:79:66:68:01
+	* DHCP ; 192.168.10.31/24 ; 00:0C:29:07:DB:B1
+	* KALI ; DHCP ; 00:0C:29:05:A1:31
+	* SW-1 ; 192.168.10.1/24 ; //
 
 Tous les hôtes sont dans le vlan 1.
 
