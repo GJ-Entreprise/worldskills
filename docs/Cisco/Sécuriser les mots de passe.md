@@ -3,6 +3,7 @@
 Ressource :
 
 * [https://cisco.goffinet.org/ccna/gestion-securisee-peripheriques/chiffrement-des-mots-de-passes-locaux-cisco-ios/](https://cisco.goffinet.org/ccna/gestion-securisee-peripheriques/chiffrement-des-mots-de-passes-locaux-cisco-ios/)
+* [https://fr.wikipedia.org/wiki/Scrypt](https://fr.wikipedia.org/wiki/Scrypt)
 
 ---
 
@@ -12,9 +13,9 @@ Voici le laboratoire que j'utilise pour ce sujet :
 ![img](../images/Cisco/Password-Cisco/network.png)
 <div align="center">***Illustration 1 :*** *Plan réseau du laboratoire.*</div>
 
-Il est possible de distinguer deux accès aux équipements Cisco :
+Il est possible de distinguer deux types d'accès aux équipements Cisco :
 
-* out-band ; accès par la console (qui ne nécessite pas de configuration réseau ; ex câble console etc.),
+* out-band ; accès par la console (ne nécessite pas de configuration réseau ; ex câble console etc.),
 * in-band ; accès par un service réseau (nécessite une configuration IP ; ex SSH etc.),
 
 ---
@@ -37,7 +38,7 @@ SW-1# sh run
 ![img](../images/Cisco/Password-Cisco/enable_password.png)
 <div align="center">***Illustration 2 :*** *Mot de passe enable chiffré.*</div>
 
-Nous pouvons constater que le mot de passe est de type 9 et chiffré.
+Nous pouvons constater que le mot de passe **test** est chiffré et de type 9.
 
 ---
 
@@ -79,7 +80,9 @@ Création d'un administrateur **admin** avec le mot de passe **test** :
 SW-1(config)# username admin privilege 15 algorithm-type scrypt secret test
 ````
 
-L'option **privilege 15** spécifie que cet utilisateur à les droits administrateur sur le switch.
+Détail des options :
+ * privilege 15, spécifie que cet utilisateur à les droits administrateur sur le switch,
+ * algorithme-type, permet de spécifier quel sea l'algorithme de chiffrement utilisé pour chiffrer le mot de passe dans la configuration,
 
 Lorsque l'on regarde la configuration, on peut voir les deux mots de passe chiffrés :
 ![img](../images/Cisco/Password-Cisco/password.png)
@@ -87,9 +90,12 @@ Lorsque l'on regarde la configuration, on peut voir les deux mots de passe chiff
 
 Les deux mots de passe sont de type 9 en scrypt.
 
-Enfin on active la fonction qui permet de chiffrer des mots de passe :
+---
+
+## 3 Mot de passe :
+Au sein d'IOS, il existe une fonction qui chiffre les mots de passe qui sont déja spécifier dans la configuartion et les mots de passe qui seront spécifiés dans le futur. Cette fonction s'appele **password-encryption**.
+
+Pour activer cette fonction :
 ````text
 SW-1(config)# service password-encryption
 ````
-
-Cette fonction chiffre tous les mots de passe en clair dans la configuration et les potentiels mots de passe ajoutés dans le future.
