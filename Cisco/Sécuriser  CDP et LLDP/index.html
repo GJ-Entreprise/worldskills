@@ -144,7 +144,7 @@
                 <h1 id="securiser-cdp-et-lldp">Sécuriser - CDP et LLDP :</h1>
 <h2 id="0-le-laboratoire">0 Le laboratoire :</h2>
 <p>Voici le laboratoire que j'utilise pour tester la sécurité des protocoles CDP et LLDP :
-<img alt="img" src="../../images/CDP-LLDP/networkPlan.png" /></p>
+<img alt="img" src="../../images/Cisco/CDP-LLDP/networkPlan.png" /></p>
 <p>Adressage MAC :
  * KALI ; 00:0C:29:05:A1:31
  * SW-1 ; 0C:44:BE:18:8F:00</p>
@@ -171,7 +171,7 @@ SW-1(config)# no cdp enable
 
 <h3 id="13-voir-les-voisins-cdp-depuis-kali">1.3 Voir les voisins CDP depuis Kali :</h3>
 <p>Depuis la VM KALI, utilisation de  Wireshark avec le filtre <strong>cdp</strong> :
-<img alt="img" src="../../images/CDP-LLDP/cdp.png" /></p>
+<img alt="img" src="../../images/Cisco/CDP-LLDP/cdp.png" /></p>
 <h3 id="14-voir-les-voisins-cdp-depuis-cisco">1.4 Voir les voisins CDP depuis Cisco :</h3>
 <p>Sur un switch Cisco pour voir les voisins :</p>
 <pre><code class="text">SW-1# show cdp neighbors detail
@@ -200,7 +200,7 @@ SW-1(config)# no lldp transmit
 
 <h3 id="13-voir-les-voisins-lldp-depuis-kali">1.3 Voir les voisins LLDP depuis Kali :</h3>
 <p>Depuis la VM KALI, utilisation de  Wireshark avec le filtre <strong>lldp</strong> :
-<img alt="img" src="../../images/CDP-LLDP/lldp.png" /></p>
+<img alt="img" src="../../images/Cisco/CDP-LLDP/lldp.png" /></p>
 <h3 id="14-voir-les-voisins-lldp-depuis-cisco">1.4 Voir les voisins LLDP depuis Cisco :</h3>
 <p>Sur un switch Cisco pour voir les voisins :</p>
 <pre><code class="text">SW-1# show lldp neighbors detail
