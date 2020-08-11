@@ -11,6 +11,7 @@ Voici le laboratoire que j'utilise pour tester la sécurité des protocoles CDP 
 
 ![img](../images/Cisco/CDP-LLDP/networkPlan.png)
 
+<img src="../images/Cisco/CDP-LLDP/networkPlan.png" style="text-align:center;">
 <div align="center">***Illustration 1 :*** *Plan réseau du laboratoire.*</div>
 
 Adressage MAC :
