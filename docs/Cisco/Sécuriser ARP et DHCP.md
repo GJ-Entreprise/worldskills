@@ -287,8 +287,8 @@ SW-1(config-if)# ip arp inspection trust
 
 Méthode 2, trust de l'association adresse MAC et adresse IP du serveur **DHCP** :
 ````text
-SW-1(config)# access-list ARP-TRUST
-SW-1(config-nacl)# permit ip 192.168.10.31 mac 00:0C:29:07:DB:B1
+SW-1(config)# arp access-list ARP-TRUST
+SW-1(config-nacl)# permit ip host 192.168.10.31 mac host 00:0C:29:07:DB:B1
 SW-1(config-nacl)# exit
 SW-1(config)# ip arp inspection filter ARP-TRUST vlan 1
 ````

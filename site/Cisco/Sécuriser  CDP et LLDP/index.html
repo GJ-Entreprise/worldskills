@@ -68,6 +68,8 @@
                 </ul>
                 <p class="caption"><span class="caption-text">Cisco</span></p>
                 <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Segmenter%20les%20communications%20et%20les%20filtrer/">Segmenter les communications et les filtrer</a>
+                    </li>
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Sécuriser - CDP et LLDP :</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#0-le-laboratoire">0 Le laboratoire :</a>
@@ -95,6 +97,8 @@
     <li class="toctree-l3"><a class="reference internal" href="#24-voir-les-voisins-lldp-depuis-cisco">2.4 Voir les voisins LLDP depuis Cisco :</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-conclusion">3 Conclusion :</a>
     </li>
     </ul>
                     </li>
@@ -146,6 +150,7 @@
 <ul>
 <li><a href="https://cisco.goffinet.org/ccna/gestion-infrastructure/cdp-et-lldp/">https://cisco.goffinet.org/ccna/gestion-infrastructure/cdp-et-lldp/</a></li>
 </ul>
+<p>Dans ce billet j'utilise uniquement un switch mais la configuration est identique sur un routeur.</p>
 <hr />
 <h2 id="0-le-laboratoire">0 Le laboratoire :</h2>
 <p>Voici le laboratoire que j'utilise pour tester la sécurité des protocoles CDP et LLDP :</p>
@@ -239,6 +244,18 @@ SW-1(config)# no lldp transmit
 <p>Sur un switch Cisco pour voir les voisins :</p>
 <pre><code class="text">SW-1# show lldp neighbors detail
 </code></pre>
+
+<h2 id="3-conclusion">3 Conclusion :</h2>
+<p>Par défaut, sur les switchs et routeurs Cisco :</p>
+<ul>
+<li>CDP est activé,</li>
+<li>LLDP est désactivé</li>
+</ul>
+<p>Il peut être possible de désactiver ces deux protocoles :</p>
+<ul>
+<li>Sur l'équipement en entier,</li>
+<li>Sur une interface spécifique,</li>
+</ul>
               
             </div>
           </div>
@@ -249,7 +266,7 @@ SW-1(config)# no lldp transmit
         <a href="../S%C3%A9curiser%20ARP%20et%20DHCP/" class="btn btn-neutral float-right" title="Sécuriser - ARP et DHCP :">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../CentOs/regle_parfeu/" class="btn btn-neutral" title="Mise en place de règles firewall"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Segmenter%20les%20communications%20et%20les%20filtrer/" class="btn btn-neutral" title="Segmenter les communications et les filtrer"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -275,7 +292,7 @@ SW-1(config)# no lldp transmit
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../../CentOs/regle_parfeu/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../Segmenter%20les%20communications%20et%20les%20filtrer/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../S%C3%A9curiser%20ARP%20et%20DHCP/" style="color: #fcfcfc">Next &raquo;</a></span>
