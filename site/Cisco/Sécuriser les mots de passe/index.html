@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Sécuriser - Les mots de passe sur Cisco : - Worldskills - GJ enterprise</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "S\u00e9curiser - Les mots de passe sur Cisco :";
+    var mkdocs_page_input_path = "Cisco\\S\u00e9curiser les mots de passe.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Worldskills - GJ enterprise</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Welcome to GJ enterprise documentation website !</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../ajouter_documentations/">Ajout_documentations.md</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">CentOs</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/Installer_apache_httpd/">Installation d'un serveur Aapche HTTPD</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/apache_TLS_SSL/">Apache / TLS / SSL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/creation_compte_utilisateurs/">Création de compte utilisateur</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/regle_parfeu/">Mise en place de règles firewall</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Cisco</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Segmenter%20les%20communications%20et%20les%20filtrer/">Segmenter - les communications :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../S%C3%A9curiser%20%20CDP%20et%20LLDP/">Sécuriser - CDP et LLDP :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../S%C3%A9curiser%20ARP%20et%20DHCP/">Sécuriser - ARP et DHCP :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../S%C3%A9curiser%20VLAN/">Sécuriser - Les VLAN :</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Sécuriser - Les mots de passe sur Cisco :</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#0-le-laboratoire">0 Le laboratoire :</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1-acces-out-band">1 Accès out-band :</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-acces-in-band">2 Accès in-band :</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21-activer-ssh">2.1 Activer SSH :</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22-creer-un-administrateur">2.2 Créer un administrateur :</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-service-de-chiffrement-des-mots-de-passe">3 Service de chiffrement des mots de passe :</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-conclusion">4 Conclusion :</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Worldskills - GJ enterprise</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Cisco &raquo;</li>
+        
+      
+    
+    <li>Sécuriser - Les mots de passe sur Cisco :</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="securiser-les-mots-de-passe-sur-cisco">Sécuriser - Les mots de passe sur Cisco :</h1>
+<p>Ressource :</p>
+<ul>
+<li><a href="https://cisco.goffinet.org/ccna/gestion-securisee-peripheriques/chiffrement-des-mots-de-passes-locaux-cisco-ios/">https://cisco.goffinet.org/ccna/gestion-securisee-peripheriques/chiffrement-des-mots-de-passes-locaux-cisco-ios/</a></li>
+<li><a href="https://fr.wikipedia.org/wiki/Scrypt">https://fr.wikipedia.org/wiki/Scrypt</a></li>
+</ul>
+<hr />
+<h2 id="0-le-laboratoire">0 Le laboratoire :</h2>
+<p>Voici le laboratoire que j'utilise pour ce sujet :</p>
+<p><img alt="image" src="../../images/Cisco/Password-Cisco/network.png" />
+<div align="center"><strong><em>Illustration 1 :</em></strong> <em>Plan réseau du laboratoire.</em></div></p>
+<p>Il est possible de distinguer deux types d'accès aux équipements Cisco :</p>
+<ul>
+<li>out-band ; accès par la console (ne nécessite pas de configuration réseau ; ex câble console, etc.),</li>
+<li>in-band ; accès par un service réseau (nécessite une configuration IP ; ex SSH, etc.),</li>
+</ul>
+<hr />
+<h2 id="1-acces-out-band">1 Accès out-band :</h2>
+<p>Pour définir un mot de passe pour l'accès à la console de manière sécurisé, j'utilise l'algorithme scrypt.</p>
+<p>Par exemple avec le mot de passe <strong>test</strong> :</p>
+<pre><code class="text">SW-1(config)# enable algorithm-type scrypt secret test
+</code></pre>
+
+<p>Le mot de passe est défini en type 9 tandis que le sha-256 est définis en type 8. Donc le scrypt apporte un gain de sécurité.</p>
+<p>Lorsque l'on regarde la configuration :</p>
+<pre><code class="text">SW-1# sh run
+</code></pre>
+
+<p><img alt="img" src="../../images/Cisco/Password-Cisco/enable_password.png" />
+<div align="center"><strong><em>Illustration 2 :</em></strong> <em>Mot de passe enable chiffré.</em></div></p>
+<p>Nous pouvons constater que le mot de passe <strong>test</strong> est chiffré et de type 9.</p>
+<hr />
+<h2 id="2-acces-in-band">2 Accès in-band :</h2>
+<p>Pour avoir un accès in-band, il est nécessaire de définir une  une configuration IP sur le switch.</p>
+<hr />
+<h3 id="21-activer-ssh">2.1 Activer SSH :</h3>
+<p>Prérequis :</p>
+<pre><code class="text">SW-1(config)# ip domain-name test.com
+SW-1(config)# crypto key generate rsa modulus 4096
+</code></pre>
+
+<ul>
+<li>1 Définir un nom de domaine pour la paire de clé,</li>
+<li>2 Générer la paire de clé,</li>
+</ul>
+<p>Activer SSH :</p>
+<pre><code class="text">SW-1(config)# ip ssh version 2
+SW-1(config)# line vty 0 15
+SW-1(config-line)# login local
+SW-1(config-line)# transport input ssh
+SW-1(config-line)# exit
+</code></pre>
+
+<ul>
+<li>1 Activer le protocole SSH,</li>
+<li>2 Sélectionner les terminaux virtuels 0 à 15,</li>
+<li>3 Spécifier une authentification locale,</li>
+<li>4 Spécifier que l'on utilise SSH sur ces terminaux,</li>
+</ul>
+<hr />
+<h3 id="22-creer-un-administrateur">2.2 Créer un administrateur :</h3>
+<p>Création d'un administrateur <strong>admin</strong> avec le mot de passe <strong>test</strong> :</p>
+<pre><code class="text">SW-1(config)# username admin privilege 15 algorithm-type scrypt secret test
+</code></pre>
+
+<p>Détail des options :</p>
+<ul>
+<li>privilege 15, spécifie que cet utilisateur possède les droits administrateurs sur le switch,</li>
+<li>algorithme-type, permet de spécifier quel sea l'algorithme de chiffrement utilisé pour chiffrer le mot de passe dans la configuration,</li>
+</ul>
+<p>Lorsque l'on regarde la configuration, on peut voir les deux mots de passe chiffrés :
+<img alt="img" src="../../images/Cisco/Password-Cisco/password.png" />
+<div align="center"><strong><em>Illustration 3 :</em></strong> <em>Mots de passe chiffrés.</em></div></p>
+<p>Les deux mots de passe sont de type 9 en scrypt.</p>
+<hr />
+<h2 id="3-service-de-chiffrement-des-mots-de-passe">3 Service de chiffrement des mots de passe :</h2>
+<p>Au sein d'IOS, il existe une fonction qui chiffre les mots de passe qui sont déjà spécifié dans la configuration et les mots de passe qui seront spécifiés dans le futur. Cette fonction s'appele <strong>password-encryption</strong>.</p>
+<p>Pour activer cette fonction :</p>
+<pre><code class="text">SW-1(config)# service password-encryption
+</code></pre>
+
+<h2 id="4-conclusion">4 Conclusion :</h2>
+<p>Pour sécuriser l'accès à un équipement Cisco, il faut définir des mots de passe sur :</p>
+<ul>
+<li>L'accès à la console,</li>
+<li>L'accès depuis un protocole distant,</li>
+</ul>
+<p>Ces mots de passe doivent être chiffrés dans la configuration à l'aide de l'algorithme <strong>scrypt</strong>.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../S%C3%A9curiser%20VLAN/" class="btn btn-neutral" title="Sécuriser - Les VLAN :"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../S%C3%A9curiser%20VLAN/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
