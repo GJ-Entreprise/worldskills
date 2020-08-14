@@ -1,14 +1,17 @@
 # Segmenter - les communications :
 
 Ressources :
+
 * [https://www.ciscomadesimple.be/2010/03/04/cisco-application-router-on-a-stick/](https://www.ciscomadesimple.be/2010/03/04/cisco-application-router-on-a-stick/)
-* 
-*
-*
+* [https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus5000/sw/configuration/guide/cli/CLIConfigurationGuide/PrivateVLANs.html](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus5000/sw/configuration/guide/cli/CLIConfigurationGuide/PrivateVLANs.html) 
 
 ---
 
 ## 1 Les VLAN et ACL :
+Pour isoler des réseaux il est possible d'utiliser :
+
+* Les VLAN pour limiter le domaine de diffusion (broadcast et multicast routable),
+* Les ACL pour interdire les communication unicast d'un VLAN à un autre,
 
 ---
 
@@ -398,21 +401,194 @@ RT-1# show run | include password
 ---
 
 ## 2 Les PVLAN :
+La première solution nécessite de créer des ACL pour que deux VLAN soit *étanche*, mais il est possible d'utiliser les PVLAN.
+Par leur conception, les PVLAN empreche la communication d'un VLAN à l'autre, avec l'utilisation de cette techn
+
+* Les VLAN pour limiter le domaine de diffusion (broadcast et multicast routable),
+* Les ACL pour interdire les communication unicast d'un VLAN à un autre,
 
 ---
 
 ### 2.1 Le laboratoire :
 
+![img](../images/Cisco/segment&filter/network-plan.png)
+<div align="center">***Illustration 13 :*** *Plan réseau du laboratoire.*</div>
+
+Vous pouvez noter que ce laboratoire est composé en plus de :
+
+* Un VLAN, le VLAN 30,
+* Un serveur HTTP,
+* Un siwtch SW-2,
+
+
+Voici le script de configuration du laboratoire :
+Pour le routeur RT-1 :
+````
+RT-1(config)# hostname RT-1
+RT-1(config)# no ip domain-lookup
+
+RT-1(config)# interface GigabitEthernet 0/0
+RT-1(config-if)# no shutdown
+RT-1(config-if)# exit
+
+RT-1(config)# interface GigabitEthernet 0/0.10
+RT-1(config-subif)# encapsulation dot1q 10
+RT-1(config-subif)# ip address 192.168.10.254 255.255.255.0
+RT-1(config-subif)# no shutdown
+RT-1(config-subif)# exit
+
+RT-1(config)# interface GigabitEthernet 0/0.20
+RT-1(config-subif)# encapsulation dot1q 20
+RT-1(config-subif)# ip address 192.168.20.254 255.255.255.0
+RT-1(config-subif)# no shutdown
+RT-1(config-subif)# exit
+
+RT-1(config)# interface GigabitEthernet 0/0.30
+RT-1(config-subif)# encapsulation dot1q 20
+RT-1(config-subif)# ip address 192.168.30.254 255.255.255.0
+RT-1(config-subif)# no shutdown
+RT-1(config-subif)# exit
+
+RT-1(config)# do wr
+````
+
+Configuration IP des postes :
+````text
+             @IP           MASK        Gateway
+         ____________ ------------- ______________
+
+PC-1> ip 192.168.10.1 255.255.255.0 192.168.10.254
+PC-2> ip 192.168.10.2 255.255.255.0 192.168.10.254
+PC-3> ip 192.168.20.1 255.255.255.0 192.168.20.254
+PC-4> ip 192.168.20.2 255.255.255.0 192.168.20.254
+HTTP> ip 192.168.30.2 255.255.255.0 192.168.20.254
+````
+
 ---
 
 ### 2.2 Mise en pratique :
+Configuration du switch SW-1 :
+````text
+Switch(config)# hostname SW-1
+SW-1(config)# no ip domain-lookup
 
----
+SW-1(config)# vtp mode transparent
 
-### 2.3 Sécurisation de l'infrastructure :
+SW-1(config)# vlan 100
+SW-1(config-vlan)# private-vlan primary
+SW-1(config-vlan)# private-vlan association 10,20,30
+SW-1(config-vlan)# name VLAN_PRIM
+SW-1(config-vlan)# no shutdown
+SW-1(config-vlan)# exit
 
----
+SW-1(config)# vlan 99
+SW-1(config-vlan)# name NATIF
+SW-1(config-vlan)# exit
 
-### 2.4 Test :
+SW-1(config)# vlan 10
+SW-1(config-vlan)# private-vlan community
+SW-1(config-vlan)# name VLAN_COM_1
+SW-1(config-vlan)# no shutdown
+SW-1(config-vlan)# exit
 
----
+SW-1(config)# vlan 20
+SW-1(config-vlan)# private-vlan community
+SW-1(config-vlan)# name VLAN_COM_2
+SW-1(config-vlan)# no shutdown
+SW-1(config-vlan)# exit
+
+SW-1(config)# interface GigabitEthernet 1/1
+SW-1(config-if)# switchport mode private-vlan host
+SW-1(config-if)# switchport private-vlan host-association 100 10
+SW-1(config-if)# exit
+
+SW-1(config)# interface GigabitEthernet 1/2
+SW-1(config-if)# switchport mode private-vlan host
+SW-1(config-if)# switchport private-vlan host-association 100 10
+SW-1(config-if)# exit
+
+SW-1(config)# interface GigabitEthernet 2/1
+SW-1(config-if)# switchport mode private-vlan host
+SW-1(config-if)# switchport private-vlan host-association 100 20
+SW-1(config-if)# exit
+
+SW-1(config)# interface GigabitEthernet 2/2
+SW-1(config-if)# switchport mode private-vlan host
+SW-1(config-if)# switchport private-vlan host-association 100 20
+SW-1(config-if)# exit
+
+SW-1(config)# interface GigabitEthernet 3/3
+SW-1(config-if)# no shutdown
+SW-1(config-if)# switchport trunk encapsulation dot1q
+SW-1(config-if)# switchport mode trunk
+SW-1(config-if)# switchport trunk native vlan 99
+SW-1(config-if)# switchport trunk allowed vlan all
+SW-1(config-if)# switchport mode private-vlan promiscuous
+SW-1(config-if)# switchport private-vlan mapping 100 10,20
+SW-1(config-if)# exit
+
+SW-1(config)# interface GigabitEthernet 0/0
+SW-1(config-if)# no shutdown
+SW-1(config-if)# switchport trunk encapsulation dot1q
+SW-1(config-if)# switchport mode trunk 
+SW-1(config-if)# switchport trunk native vlan 99
+SW-2(config-if)# switchport mode private-vlan prosmicuous
+SW-1(config-if)# switchport private-vlan mapping 100 10,20
+SW-1(config-if)# exit
+
+SW-1(config)# do wr
+````
+
+Configuration du switch SW-2 :
+````text
+Switch(config)# hostname SW-2
+SW-2(config)# no ip domain-lookup
+
+SW-2(config)# vtp mode transparent
+
+SW-2(config)# vlan 100
+SW-2(config-vlan)# name PRIMARY
+SW-2(config-vlan)# private-vlan primary
+SW-2(config-vlan)# private-vlan association 10,20
+SW-2(config-vlan)# no shutdown
+SW-2(config-vlan)# exit
+
+SW-2(config)# vlan 99
+SW-2(config-vlan)# name NATIF
+SW-2(config-vlan)# no shutdown
+SW-2(config-vlan# exit
+
+SW-2(config)# vlan 10
+SW-2(config-vlan)# name VLAN_COM_1
+SW-2(config-vlan)# private-vlan community
+SW-2(config-vlan)# no shutdown
+SW-2(config-vlan)# exit
+
+SW-2(config)# vlan 20
+SW-2(config-vlan)# name VLAN_COM_2
+SW-2(config-vlan)# no shutdown
+SW-2(config-vlan)# exit
+
+SW-2(config)# interface GigabitEthernet 3/3
+SW-2(config-if)# no shutdown
+SW-2(config-if)# switchport trunk encapsulation dot1q
+SW-2(config-if)# switchport mode trunk
+SW-2(config-if)# switchport trunk native vlan 99
+SW-2(config-if)# switchport trunk allowed vlan all
+SW-2(config-if)# switchport mode private-vlan prosmicuous
+SW-2(config-if)# switchport private-vlan mapping 100 10,20
+SW-2(config-if)# exit
+
+SW-2(config)# interface GigabitEthernet 0/0
+SW-2(config-if)# no shutdown
+SW-2(config-if)# switchport mode private-vlan promiscuous
+SW-2(config-if)# switchport private-vlan mappping 100 10,20
+SW-2(config-if)# exit
+
+SW-2(config)# do wr
+````
+
+Il m'ést malheurement impossible de mettre en place les PVLAN car il nécessite du matériel physique.
+IL est impossible de les émuler avec GNS.
+
+* https://gns3vault.com/switching/private-vlan
