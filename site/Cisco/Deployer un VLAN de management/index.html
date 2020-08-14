@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Deployer - un VLAN de management : - Worldskills - GJ enterprise</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Deployer - un VLAN de management :";
+    var mkdocs_page_input_path = "Cisco\\Deployer un VLAN de management.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Worldskills - GJ enterprise</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Welcome to GJ enterprise documentation website !</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../ajouter_documentations/">Ajout_documentations.md</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">CentOs</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/Installer_apache_httpd/">Installation d'un serveur Aapche HTTPD</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/apache_TLS_SSL/">Apache / TLS / SSL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/creation_compte_utilisateurs/">Création de compte utilisateur</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/regle_parfeu/">Mise en place de règles firewall</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Cisco</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Deployer - un VLAN de management :</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#0-le-laboratoire">0 Le laboratoire :</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1-configuration">1 Configuration :</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-verification">2 Vérification :</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-renforcement-de-linfrastructure">3 Renforcement de l'infrastructure :</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#31-cdp-et-lldp">3.1 CDP et LLDP :</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#32-arp-et-dhcp">3.2 ARP et DHCP :</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#33-dtp">3.3 DTP :</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#34-port-security">3.4 Port Security :</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Segmenter%20les%20communications%20et%20les%20filtrer/">Segmenter - les communications :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../S%C3%A9curiser%20%20CDP%20et%20LLDP/">Sécuriser - CDP et LLDP :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../S%C3%A9curiser%20ARP%20et%20DHCP/">Sécuriser - ARP et DHCP :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../S%C3%A9curiser%20VLAN/">Sécuriser - Les VLAN :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../S%C3%A9curiser%20les%20mots%20de%20passe/">Sécuriser - Les mots de passe sur Cisco :</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Worldskills - GJ enterprise</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Cisco &raquo;</li>
+        
+      
+    
+    <li>Deployer - un VLAN de management :</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="deployer-un-vlan-de-management">Deployer - un VLAN de management :</h1>
+<p>Ressources :</p>
+<ul>
+<li><a href="https://reussirsonccna.fr/configurer-interface-vlan-administration-du-switch/">https://reussirsonccna.fr/configurer-interface-vlan-administration-du-switch/</a> </li>
+</ul>
+<h2 id="0-le-laboratoire">0 Le laboratoire :</h2>
+<p><img alt="img" src="../../images/Cisco/VLAN-MANAGEMENT/network.png" />
+<div align="center"><strong><em>Illustration 1 :</em></strong> <em>Le laboratoire.</em></div></p>
+<h2 id="1-configuration">1 Configuration :</h2>
+<p>Un VLAN de management permet de manager un switch via un accès in-band (avec une configuration IP).
+L'accès a cet equipement peut être possible via différents protocoles applicatifs :</p>
+<ul>
+<li>Telnet,</li>
+<li>SSH,</li>
+<li>HTTP,</li>
+</ul>
+<p>Pour pouvoir accéder à ce services, il est nécessaire de définir une SVI (Switch Virtual Interface), avec une configuration IP montée.
+Il est possible que cette configuration IP soit définis par :</p>
+<ul>
+<li>Un serveur DHCP,</li>
+<li>L'admin réseau,</li>
+</ul>
+<p>Les bonnes paratiques de sécurités veille à ce que le VLAN de management soit définis dans un VLAN spécifique.
+Et que ce VLAN spécifique soit uniquement accessible par les administrateurs réseaux. (ACL)</p>
+<p>Configuration sur le switch SW-1, partie système :</p>
+<pre><code class="text">Switch(config)# hostname SW-1
+
+SW-1(config)# no ip domain-lookup
+SW-1(config)# ip domain-name cisco.com
+
+SW-1(config)# crypto key generate rsa modulus 4096
+SW-1(config)# ip ssh version 2
+
+SW-1(config)# line vty 0 15
+SW-1(config-line)# login local
+SW-1(config-line)# transport input ssh
+SW-1(config-line)# exit
+
+SW-1(config)# line console 0
+SW-1(config-line)# login local
+SW-1(config-line)# exit
+
+SW-1(config)# enable algorithm-type scrypt secret guillaume
+
+SW-1(config)# username admin privilege 7 algorithme-type scrypt secret worldskills
+SW-1(config)# do wr
+</code></pre>
+
+<p>Configuration sur le switch SW-1, partie résau :</p>
+<pre><code class="text">SW-1(config)# vlan 98
+SW-1(config-vlan)# name MANAGEMENT
+SW-1(config-vlan)# no shutdown
+SW-1(config-vlan)# exit
+
+SW-1(config)# interface vlan 98
+SW-1(config-if)# ip address 192.168.98.1 255.255.255.0
+SW-1(config-if)# no shutdown
+SW-1(config-if)# exit
+
+SW-1(config)# interface GigabitEthernet 0/0
+SW-1(config-if)# switchport mode access
+SW-1(config-if)# switchport acces vlan 98
+SW-1(config-if)# no shutdown
+SW-1(config-if)# exit
+</code></pre>
+
+<h2 id="2-verification">2 Vérification :</h2>
+<p>Depuis le poste de l'administrateur je réalise une connxion SSH sur le service SSH du switch correspondant à la SVI configurée :</p>
+<pre><code class="bash">ssh admin@192.168.98.1
+password: worldskills
+</code></pre>
+
+<p>Connexion réussie :
+<img alt="img" src="../../images/Cisco/VLAN-MANAGEMENT/connect.png" />
+<div align="center"><strong><em>Illustration 2 :</em></strong> <em>Connexion à SW-1.</em></div></p>
+<p>Seul le poste de l'adminustrateur peut se connecter au SWitch étant donné que c'est le seul qui est placé dans le VLAN 98.
+Dans ce contexte de l'architecture réseau, il n'y a pas de routeur, mais si il y avais un routeur il serait nécessaire d'isoler les deux réseaux (<strong>ACL</strong>) afin que le poste PC-1 ne puisse pas se connecter au switch SW-1.</p>
+<p>Exemple d'acl :</p>
+<pre><code class="text">RT-1(config-nacl-ext)# deny any any 192.168.98.1 22 tcp
+</code></pre>
+
+<p>Cette ACL étendue, empêche la communication de nimorte quel hôte vers la SVI du switch sur le port 22 en utilisant le protocole TCP.</p>
+<h2 id="3-renforcement-de-linfrastructure">3 Renforcement de l'infrastructure :</h2>
+<h3 id="31-cdp-et-lldp">3.1 CDP et LLDP :</h3>
+<p>Désactiver les protocoles de reconnaissance des voisins :</p>
+<pre><code class="text">SW-1(config)# no cdp run
+SW-1(config)# no lldp run
+</code></pre>
+
+<h3 id="32-arp-et-dhcp">3.2 ARP et DHCP :</h3>
+<p>DHCP snooping et DAI :</p>
+<pre><code class="text">SW-1(config)# ip dhcp snooping
+SW-1(config)# ip dhcp snooping vlan 1,98
+SW-1(config)# ip arp inspection vlan 1,98
+
+SW-1(config)# arp access-list VLAN-1
+SW-1(config-nacl)# permit ip host mac host
+SW-1(config-nacl)# exit
+
+SW-1(config)# arp access-list VLAN-98
+SW-1(config-nacl)# permit ip host 192.168.98.2 mac host
+SW-1(config-nacl)# exit
+</code></pre>
+
+<h3 id="33-dtp">3.3 DTP :</h3>
+<p>Désactiver le protocoel DTP :</p>
+<pre><code class="text">SW-1(config)# interface range GigabitEthernet 0/0-3, GigabitEthernet 1/0-3, GigabitEthernet 2/0-3, GigabitEthernet 3/0-3
+SW-1(config-if-range)# switchport mode access
+SW-1(config-if-range)# switchport nonegotiate
+</code></pre>
+
+<h3 id="34-port-security">3.4 Port Security :</h3>
+<p>Activer le DTP sur tous les ports :
+```text
+SW-1(config)# interface range GigabitEthernet 0/0-3, GigabitEthernet 1/0-3, GigabitEthernet 2/0-3, GigabitEthernet 3/0-3
+SW-1(config-if-range)# switchport port-security
+SW-1(config-if-range)# switchport port-security maximum 3
+SW-1(config-if-range)# switchport port-security violation shutdown
+SW-1(config-if-range)# switchport port-security mac-address sticky</p>
+<pre><code>
+Si plus de trois adresses sont référencé dans la table CAM du switch pour un port spécifique, le switch shutdown ce port.
+
+
+### 3.5 Complément :
+Pour conclure, shutdown manuellent (administratively down) tous les autres ports inutilisés par mesure de sécurité :
+````text
+SW-1(config)# interface range GigabitEthernet 0/1-3, GigabitEthernet 1/0-3, GigabitEthernet 2/0-3, GigabitEthernet 3/0-2 
+SW-1(config-if-range)# shutdown
+SW-1(config-if-range)# exit
+
+SW-1(config)# do wr 
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Segmenter%20les%20communications%20et%20les%20filtrer/" class="btn btn-neutral float-right" title="Segmenter - les communications :">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../CentOs/regle_parfeu/" class="btn btn-neutral" title="Mise en place de règles firewall"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../../CentOs/regle_parfeu/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Segmenter%20les%20communications%20et%20les%20filtrer/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
