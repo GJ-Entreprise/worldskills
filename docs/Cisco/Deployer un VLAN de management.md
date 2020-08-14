@@ -1,4 +1,4 @@
-# Deployer - un VLAN de management :
+# Deployer - VLAN de management :
 
 Ressources :
 
