@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Mise en place de règles firewall - Worldskills - GJ enterprise</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Mise en place de r\u00e8gles firewall";
+    var mkdocs_page_input_path = "CentOs\\regle_parfeu.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Worldskills - GJ enterprise</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Welcome to GJ enterprise documentation website !</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../ajouter_documentations/">Ajout_documentations.md</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">CentOs</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Installer_apache_httpd/">Installation d'un serveur Aapche HTTPD</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../apache_TLS_SSL/">Apache / TLS / SSL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../creation_compte_utilisateurs/">Création de compte utilisateur</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Mise en place de règles firewall</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#source-httpswwwdigitaloceancomcommunitytutorialshow-to-set-up-a-firewall-using-firewalld-on-centos-7">source : https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-firewalld-on-centos-7</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Cisco</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Cisco/Deployer%20un%20VLAN%20de%20management/">Deployer - VLAN de management :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Cisco/Segmenter%20les%20communications%20et%20les%20filtrer/">Segmenter - les communications :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Cisco/S%C3%A9curiser%20%20CDP%20et%20LLDP/">Sécuriser - CDP et LLDP :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Cisco/S%C3%A9curiser%20ARP%20et%20DHCP/">Sécuriser - ARP et DHCP :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Cisco/S%C3%A9curiser%20VLAN/">Sécuriser - Les VLAN :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Cisco/S%C3%A9curiser%20les%20mots%20de%20passe/">Sécuriser - Les mots de passe sur Cisco :</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Worldskills - GJ enterprise</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>CentOs &raquo;</li>
+        
+      
+    
+    <li>Mise en place de règles firewall</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="mise-en-place-de-regles-firewall">Mise en place de règles firewall</h1>
+<h5 id="source-httpswwwdigitaloceancomcommunitytutorialshow-to-set-up-a-firewall-using-firewalld-on-centos-7">source : https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-firewalld-on-centos-7</h5>
+<h1 id="firewall-cmd">firewall-cmd</h1>
+<h2 id="concept">Concept</h2>
+<p>Le processus <strong>wirewalld</strong> gère des groupes de règles appelés <strong>zones</strong>.
+Une <strong>zone</strong> et un ensemble de règle qui défini les actions à réaliser sur le traffic réseau.
+Le tout en se basant sur un système de <strong>niveau de confiance</strong>.</p>
+<h3 id="les-zones-predefinies">Les zones prédéfinies</h3>
+<ul>
+<li>
+<p><strong>drop</strong> : The lowest level of trust. All incoming connections are dropped without reply and only outgoing connections are possible.</p>
+</li>
+<li>
+<p><strong>block</strong> : Similar to the above, but instead of simply dropping connections, incoming requests are rejected with an icmp-host-prohibited or icmp6-adm-prohibited message.</p>
+</li>
+<li>
+<p><strong>public</strong> : Represents public, untrusted networks. You don’t trust other computers but may allow selected incoming connections on a case-by-case basis.</p>
+</li>
+<li>
+<p><strong>external</strong> : External networks in the event that you are using the firewall as your gateway. It is configured for NAT masquerading so that your internal network remains private but reachable.</p>
+</li>
+<li>
+<p><strong>internal</strong> : The other side of the external zone, used for the internal portion of a gateway. The computers are fairly trustworthy and some additional services are available.</p>
+</li>
+<li>
+<p><strong>dmz</strong> : Used for computers located in a DMZ (isolated computers that will not have access to the rest of your network). Only certain incoming connections are allowed.</p>
+</li>
+<li>
+<p><strong>work</strong> : Used for work machines. Trust most of the computers in the network. A few more services might be allowed.
+home: A home environment. It generally implies that you trust most of the other computers and that a few more services will be accepted.</p>
+</li>
+<li>
+<p><strong>trusted</strong> : Trust all of the machines in the network. The most open of the available options and should be used sparingly.</p>
+</li>
+</ul>
+<h3 id="rules">Rules</h3>
+<p>Les règles peuvent être permanantes ou immédiates, les règles immédiates sont supprimés à chaque reboot.</p>
+<h2 id="installation">Installation</h2>
+<ul>
+<li>
+<p>firewalld vient par défaut dans la pluspart des distributions linux, dont CentOs.</p>
+</li>
+<li>
+<p>Sinon il faut l'installer comme suit : </p>
+</li>
+</ul>
+<pre><code>sudo yum install firewalld
+</code></pre>
+
+<pre><code>sudo systemctl enable firewalld
+sudo reboot
+</code></pre>
+
+<ul>
+<li>Voir le status de firewalld</li>
+</ul>
+<pre><code>sudo firewall-cmd --state
+</code></pre>
+
+<h2 id="usage">usage</h2>
+<ul>
+<li>Zone par defaut</li>
+</ul>
+<pre><code>sudo firewall-cmd --get-default-zone
+</code></pre>
+
+<ul>
+<li>Zone active et sur quelles interfaces</li>
+</ul>
+<pre><code>sudo firewall-cmd --get-active-zones
+</code></pre>
+
+<p><img alt="" src="../../images/regle_parfeu/active_zones.png" /></p>
+<p><strong>On peut voir qu'une seul interface est gérer par le parfeu, configuré en zone public</strong></p>
+<ul>
+<li>Voir toutes les règles sur la zone active</li>
+</ul>
+<pre><code>sudo firewall-cmd --list-all
+</code></pre>
+
+<p><img alt="" src="../../images/regle_parfeu/all_rules_zones.png" /></p>
+<p>Notes : Les port 80 et 443 proviennent d'une autre configuration.</p>
+<ul>
+<li>Voir toutes les zones disponibles</li>
+</ul>
+<pre><code>firewall-cmd --get-zones
+</code></pre>
+
+<ul>
+<li>Voir toutes les règles de toutes les zones : </li>
+</ul>
+<pre><code>sudo firewall-cmd --list-all-zones
+</code></pre>
+
+<h2 id="configurer-une-interface-avec-une-zone">Configurer une interface avec une zone</h2>
+<ul>
+<li>De base, toutes les interfaces sont configurer sur la zone par defaut</li>
+</ul>
+<h3 id="affecter-une-interface-a-une-zone">Affecter une interface à une zone</h3>
+<pre><code>sudo firewall-cmd --zone=home --change-interface=eth0
+</code></pre>
+
+<h3 id="changer-la-zone-par-defaut">Changer la zone par defaut</h3>
+<ul>
+<li>Toutes les interfaces qui sont configurés sur la zone par défaut seront changées.</li>
+</ul>
+<pre><code>sudo firewall-cmd --set-default-zone=home
+</code></pre>
+
+<h3 id="manager-les-services">Manager les services</h3>
+<h4 id="afficher-tous-les-services">Afficher tous les services</h4>
+<pre><code>sudo firewall-cmd --get-services
+</code></pre>
+
+<p><img alt="" src="../../images/regle_parfeu/get_services.png" /></p>
+<ul>
+<li>Le dossier <code>/usr/lib/firewalld/services/</code> contient les fichiers xml de chaque service, donnant plus d'informations.
+<img alt="" src="../../images/regle_parfeu/service_details.png" /></li>
+</ul>
+<h4 id="ajouter-un-service-a-une-zone">Ajouter un service à une zone</h4>
+<pre><code>sudo firewall-cmd --zone=public --add-service=http
+</code></pre>
+
+<ul>
+<li>Arguments optionnels : </li>
+<li><strong>--zone :</strong> si non précisé =&gt; zone par defaut</li>
+<li><strong>--permanent :</strong> si non précisé =&gt; regle temporaire</li>
+</ul>
+<h4 id="voir-les-services-lies-a-une-zone">Voir les services liés à une zone :</h4>
+<pre><code>sudo firewall-cmd --zone=public --list-services
+</code></pre>
+
+<p><img alt="" src="../../images/regle_parfeu/public_list_services.png" /></p>
+<h4 id="creer-un-service">Créer un service</h4>
+<p>Avec le temps et le nombre de règles, il peut-être difficile de se rappeller pourquoi cette règle ? pourquoi ce port ? etc dans la configuration des zones.</p>
+<p>Il est possible de créer dun service, de lui attribuer un nom, une description et des ports ouverts.
+Il ne restera plus qu'à ajouter, ou non, le service à une zone.</p>
+<ul>
+<li>Copier/coller un service déjà existant dans <code>/usr/lib/firewalld/services/</code> et renomer le comme désiré.</li>
+</ul>
+<pre><code>sudo cp /usr/lib/firewalld/services/bitcoin.xml /usr/lib/firewalld/services/plex.xml
+</code></pre>
+
+<ul>
+<li>
+<p>Modifier le fichier de configuration
+<img alt="" src="../../images/regle_parfeu/service_config.png" /></p>
+</li>
+<li>
+<p>Recharger firewalld</p>
+</li>
+</ul>
+<pre><code>sudo firewall-cmd --reload
+</code></pre>
+
+<h3 id="zones">zones</h3>
+<h4 id="creer-une-zone">Créer une zone</h4>
+<ul>
+<li>Il peut-être utile de créer ses propres zones quand celle de base ne nous conviennent pas, créées en nous une pour un serveur web.</li>
+</ul>
+<pre><code>sudo firewall-cmd --permanent --new-zone=publicweb
+</code></pre>
+
+<p><strong>Il faut recharger firewalld pour prendre en compte la nouvelle zone</strong></p>
+<pre><code>sudo firewall-cmd --reload
+</code></pre>
+
+<ul>
+<li>Ajoutons-y quelques règles, sans oublier de recharger par la suite.</li>
+</ul>
+<pre><code>sudo firewall-cmd --zone=publicweb --add-service=ssh
+sudo firewall-cmd --zone=publicweb --add-service=http
+sudo firewall-cmd --zone=publicweb --add-service=https
+sudo firewall-cmd --zone=publicweb --list-all
+</code></pre>
+
+<p><img alt="" src="../../images/regle_parfeu/add_service_publicweb.png" /></p>
+<ul>
+<li>Affectons notre nouvelle zone à une interface</li>
+</ul>
+<pre><code>sudo firewall-cmd --zone=publicweb --change-interface=ens33
+</code></pre>
+
+<p><img alt="" src="../../images/regle_parfeu/affect_zone.png" /></p>
+<h3 id="ports">Ports</h3>
+<h4 id="ouvir-un-port-pour-une-zone">Ouvir un port pour une zone</h4>
+<pre><code>sudo firewall-cmd --zone=public --add-port=80/tcp
+sudo firewall-cmd --zone=public --add-port=4990-4999/udp
+</code></pre>
+
+<h4 id="liste-des-ports-ouvert-sur-une-zone">Liste des ports ouvert sur une zone</h4>
+<pre><code>sudo firewall-cmd --zone=public --permanent --list-ports
+</code></pre>
+
+<h1 id="iptables">iptables</h1>
+<p><strong>Depuis CentOS 7, iptables est déprécié, il est conseillé d'utiliser firewalld</strong>.</p>
+<h4 id="source-httpslinoxidecomfirewallsetup-iptable-rules-centos">source : https://linoxide.com/firewall/setup-iptable-rules-centos/</h4>
+<ul>
+<li>Liste des règles</li>
+</ul>
+<pre><code>sudo iptables -L
+</code></pre>
+
+<h3 id="exemples">Exemples</h3>
+<ul>
+<li>Affiche le status d'IP table</li>
+</ul>
+<pre><code>iptables -L -n -v
+</code></pre>
+
+<ul>
+<li>Block NULL paquets</li>
+</ul>
+<pre><code>iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP
+</code></pre>
+
+<ul>
+<li>Block SYN flood attaque</li>
+</ul>
+<pre><code>iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
+</code></pre>
+
+<ul>
+<li>Block Recon paquet</li>
+</ul>
+<pre><code>iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP
+</code></pre>
+
+<ul>
+<li>Autorise addresse de loopback</li>
+</ul>
+<pre><code>iptables -A INPUT -i lo -j ACCEPT
+</code></pre>
+
+<ul>
+<li>Autorise le traffic web</li>
+</ul>
+<pre><code>iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
+</code></pre>
+
+<ul>
+<li>Autorise les le traffic smtp</li>
+</ul>
+<pre><code>iptables -A INPUT -p tcp -m tcp --dport 25 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 465 -j ACCEPT
+</code></pre>
+
+<ul>
+<li>Autorise SSH Globalité</li>
+</ul>
+<pre><code>iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
+</code></pre>
+
+<ul>
+<li>Autorise SSH depuis une source</li>
+</ul>
+<pre><code>iptables -A INPUT -p tcp -s YOUR_IP_ADDRESS -m tcp --dport 22 -j ACCEPT
+</code></pre>
+
+<ul>
+<li>Autorise une connection sortante établie à recevoir une réponse</li>
+</ul>
+<pre><code>iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+</code></pre>
+
+<ul>
+<li>Bannir une adresse IP</li>
+</ul>
+<pre><code>iptables -A INPUT -s IP_ADDRESS -j DROP
+</code></pre>
+
+<ul>
+<li>Bannir un port d'une certaine adresse</li>
+</ul>
+<pre><code>iptables -A INPUT -p tcp -s IP_ADDRESS --dport PORT -j DROP
+</code></pre>
+
+<ul>
+<li>Autoriser l'accès à  un port pour une certaine adresse IP</li>
+</ul>
+<pre><code>iptables -A INPUT -p tcp -s IP_ADDRESS --dport PORT -j ACCEPT
+</code></pre>
+
+<ul>
+<li>Open DNS</li>
+</ul>
+<pre><code>iptables -A INPUT -m state --state NEW -p tcp --dport 53 -j ACCEPT
+</code></pre>
+
+<ul>
+<li>Autoriser l'accès MYSQL port</li>
+</ul>
+<pre><code>iptables -A INPUT -p tcp --dport 3306 -j ACCEPT
+</code></pre>
+
+<ul>
+<li>Autorise l'accès sur une palge de port</li>
+</ul>
+<pre><code>iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 7000:7100 -j ACCEPT
+</code></pre>
+
+<h3 id="sauvegarder-les-regles-et-recharger-iptable">Sauvegarder les règles et recharger iptable</h3>
+<pre><code>service iptables save
+service iptables restart
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../Cisco/Deployer%20un%20VLAN%20de%20management/" class="btn btn-neutral float-right" title="Deployer - VLAN de management :">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../creation_compte_utilisateurs/" class="btn btn-neutral" title="Création de compte utilisateur"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../creation_compte_utilisateurs/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../Cisco/Deployer%20un%20VLAN%20de%20management/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

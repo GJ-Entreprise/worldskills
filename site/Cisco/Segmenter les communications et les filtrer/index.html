@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Segmenter - les communications : - Worldskills - GJ enterprise</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Segmenter - les communications :";
+    var mkdocs_page_input_path = "Cisco\\Segmenter les communications et les filtrer.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Worldskills - GJ enterprise</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Welcome to GJ enterprise documentation website !</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../ajouter_documentations/">Ajout_documentations.md</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">CentOs</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/Installer_apache_httpd/">Installation d'un serveur Aapche HTTPD</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/apache_TLS_SSL/">Apache / TLS / SSL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/creation_compte_utilisateurs/">Création de compte utilisateur</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/regle_parfeu/">Mise en place de règles firewall</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Cisco</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Deployer%20un%20VLAN%20de%20management/">Deployer - VLAN de management :</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Segmenter - les communications :</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-les-vlan-et-acl">1 Les VLAN et ACL :</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#11-le-laboratoire">1.1 Le laboratoire :</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#12-mise-en-pratique">1.2 Mise en pratique :</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#121-vlan-et-router-on-a-stick">1.2.1 VLAN et Router On a Stick :</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#122-acl">1.2.2 ACL :</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#13-securisation-de-linfrastructure">1.3 Sécurisation de l'infrastructure :</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-les-pvlan">2 Les PVLAN :</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21-le-laboratoire">2.1 Le laboratoire :</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22-mise-en-pratique">2.2 Mise en pratique :</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../S%C3%A9curiser%20%20CDP%20et%20LLDP/">Sécuriser - CDP et LLDP :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../S%C3%A9curiser%20ARP%20et%20DHCP/">Sécuriser - ARP et DHCP :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../S%C3%A9curiser%20VLAN/">Sécuriser - Les VLAN :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../S%C3%A9curiser%20les%20mots%20de%20passe/">Sécuriser - Les mots de passe sur Cisco :</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Worldskills - GJ enterprise</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Cisco &raquo;</li>
+        
+      
+    
+    <li>Segmenter - les communications :</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="segmenter-les-communications">Segmenter - les communications :</h1>
+<p>Ressources :</p>
+<ul>
+<li><a href="https://www.ciscomadesimple.be/2010/03/04/cisco-application-router-on-a-stick/">https://www.ciscomadesimple.be/2010/03/04/cisco-application-router-on-a-stick/</a></li>
+<li><a href="https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus5000/sw/configuration/guide/cli/CLIConfigurationGuide/PrivateVLANs.html">https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus5000/sw/configuration/guide/cli/CLIConfigurationGuide/PrivateVLANs.html</a> </li>
+</ul>
+<hr />
+<h2 id="1-les-vlan-et-acl">1 Les VLAN et ACL :</h2>
+<p>Pour isoler des réseaux il est possible d'utiliser :</p>
+<ul>
+<li>Les VLAN pour limiter le domaine de diffusion (broadcast et multicast routable),</li>
+<li>Les ACL pour interdire les communication unicast d'un VLAN à un autre,</li>
+</ul>
+<hr />
+<h3 id="11-le-laboratoire">1.1 Le laboratoire :</h3>
+<p><img alt="img" src="../../images/Cisco/segment%26filter/network-plan.png" />
+<div align="center"><strong><em>Illustration 1 :</em></strong> <em>Plan réseau du laboratoire.</em></div></p>
+<p>Au sein de mon laboratoire, plusieurs vlan existe :</p>
+<ul>
+<li>VLAN 10, 192.168.10.0/24,</li>
+<li>VLAN 20, 192.168.20.0/24,</li>
+<li>VLAN 99, 192.168.99.0/24, (vlan natif)</li>
+</ul>
+<hr />
+<h3 id="12-mise-en-pratique">1.2 Mise en pratique :</h3>
+<h4 id="121-vlan-et-router-on-a-stick">1.2.1 VLAN et Router On a Stick :</h4>
+<p>Script de configuration du switch SW-1 :</p>
+<pre><code class="text">SW-1(config)# vlan 10
+SW-1(config-vlan)# name vlan_1
+SW-1(config-vlan)# no shutdown
+SW-1(config-vlan)# exit
+SW-1(config)# interface vlan 10
+SW-1(config-if)# ip address 192.168.10.10 255.255.255.0
+SW-1(config-if)# no shutdown
+SW-1(config-if)# exit
+
+SW-1(config)# vlan 20
+SW-1(config-vlan)# name vlan_2
+SW-1(config-vlan)# no shutdown
+SW-1(config-vlan)# exit
+SW-1(config)# interface vlan 20
+SW-1(config-if)# ip address 192.168.20.10 255.255.255.0
+SW-1(config-if)# no shutdown
+SW-1(config-if)# exit
+
+SW-1(config)# interface GigabitEthernet 1/1
+SW-1(config-if)# switchport mode access
+SW-1(config-if)# switchport access vlan 10
+SW-1(config-if)# exit
+
+SW-1(config)# interface GigabitEthernet 1/2
+SW-1(config-if)# switchport mode access
+SW-1(config-if)# switchport access vlan 10
+SW-1(config-if)# exit
+GigabitEthernet 1/2
+
+SW-1(config)# interface GigabitEthernet 2/1
+SW-1(config-if)# switchport mode access
+SW-1(config-if)# switchport access vlan 20
+SW-1(config-if)# exit
+
+SW-1(config)# interface GigabitEthernet 2/2
+SW-1(config-if)# switchport mode access
+SW-1(config-if)# switchport access vlan 20
+SW-1(config-if)# exit
+
+SW-1(config)# interface GigabitEthernet 0/0
+SW-1(config-if)# switchport trunk encapsulation dot1q
+SW-1(config-if)# switchport mode trunk
+SW-1(config-if)# switchport trunk allowed vlan all
+SW-1(config-if)# exit
+
+SW-1(config)# do wr
+</code></pre>
+
+<p>Script de configuration de RT-1 :</p>
+<pre><code class="text">RT-1(config)# hostname RT-1
+
+RT-1(config)# interface GigabitEthernet 0/0
+RT-1(config-if)# no shutdown
+RT-1(config-if)# exit
+
+RT-1(config)# interface GigabitEthernet 0/0.10
+RT-1(config-subif)# encapsulation dot1q 10
+RT-1(config-subif)# ip address 192.168.10.254 255.255.255.0
+RT-1(config-subif)# no shutdown
+RT-1(config-subif)# exit
+
+RT-1(config)# interface GigabitEthernet 0/0.20
+RT-1(config-subif)# encapsulation dot1q 20
+RT-1(config-subif)# ip address 192.168.20.254 255.255.255.0
+RT-1(config-subif)# no shutdown
+RT-1(config-subif)# exit
+</code></pre>
+
+<p>Configuration IP des postes :</p>
+<pre><code class="text">             @IP           MASK        Gateway
+         ____________ ------------- ______________
+
+PC-1&gt; ip 192.168.10.1 255.255.255.0 192.168.10.254
+PC-2&gt; ip 192.168.10.2 255.255.255.0 192.168.10.254
+PC-3&gt; ip 192.168.20.1 255.255.255.0 192.168.20.254
+PC-4&gt; ip 192.168.20.2 255.255.255.0 192.168.20.254
+</code></pre>
+
+<p>Grâce à cette configuration, tous les postes peuvent se pinguer et les trames sont routées d'un VLAN à un autre.</p>
+<p>Les tables de routages ont été dynamiquement créer par le routeur :</p>
+<pre><code>RT-1(config)# show ip route
+</code></pre>
+
+<p><img alt="img" src="../../images/Cisco/segment%26filter/routing-table.png" />
+<div align="center"><strong><em>Illustration 2 :</em></strong> <em>Table de routage de RT-1.</em></div></p>
+<p>A cette étape, les deux réseaux sont segmenter, c'est à dire que les trames de <strong>broadcast</strong> et <strong>multicast</strong> non routée ne traverse pas le routeur.
+Mais les communications unicast peuvent encore traverser le routeur. Pour palier à cela il est nécessaire d'appliqer des ACL sur le routeur pour filtrer ces communications et rendre les deux réseaux étanches.</p>
+<h4 id="122-acl">1.2.2 ACL :</h4>
+<p>Tous les postes peuvent communiquer entre eux sur n'importe quel :</p>
+<ul>
+<li>N'importe quel hôte,</li>
+<li>Protocole (TCP/UDP),</li>
+<li>Port,</li>
+</ul>
+<p>Il existe deux types d'ACL :</p>
+<ul>
+<li>ACL standart ne filtre que sur l'adresse IP source et destination,</li>
+<li>ACL étendue filtre sur l'adresse IP source, l'adresse IP de destination, le port source, le port de destination et le prtocole utilisé,</li>
+</ul>
+<p>Ces ACL sont placé sur les interfaces et elles peuvent avoir deux positions :</p>
+<ul>
+<li>in,</li>
+<li>out,</li>
+</ul>
+<p><img alt="img" src="../../images/Cisco/segment%26filter/acl-plan.png" />
+<div align="center"><strong><em>Illustration  3:</em></strong> <em>Chemin des trames</em></div></p>
+<p>Isoler des réseaux à l'aide d'ACL.
+Ces ACL seront positionée en out des interfaces virtuelle <strong>GigabitEthernet0/0.10</strong> et <strong>GigabitEthernet0/0.20</strong> du routeur <strong>RT-1</strong>.</p>
+<p>Création de l'ACL n°10 qui interdit les hôtes du réseau 192.168.20.0/24 de communiquer avec le réseau 192.168.10.0/24 :</p>
+<pre><code class="text">RT-1(config)# ip access-list standard 10
+RT-1(config-std-nacl)# deny 192.168.20.0 0.0.0.255 
+RT-1(config-std-nacl)# exit
+RT-1(config)# interface GigabitEthernet 0/0.10
+RT-1(config-subif)# ip access-group 10 out
+</code></pre>
+
+<p>Création de l'ACL n°20 qui interdit les hôtes du réseau 192.168.10.0/24 de communiquer avec le réseau 192.168.20.0/24 :</p>
+<pre><code class="text">SW-1(config)# ip access-list standard 20
+SW-1(config-std-nacl)# deny 192.168.10.0 0.0.0.255 
+SW-1(config-std-nacl)# exit
+SW-1(config)# interface GigabitEthernet 0/0.20
+SW-1(config-subif)# ip access-group 20 out
+</code></pre>
+
+<p>Les deux <strong>ACL</strong> sont appliqué en <strong>out</strong>, dès qu'une trame transite par le routeur :</p>
+<ul>
+<li>Cas 1 Le champs IP source correspond à ce qui est deny dans l'ACL =&gt; le routeur drop,</li>
+<li>Cas 2 Le champs IP destination correspond à ce qui est deny dans l'ACL =&gt; le routeur drop</li>
+<li>Cas 3 Le champs IP source et destination ne correspond pas à ce qui est deny dans l'ACL =&gt; le routeur forward</li>
+</ul>
+<p>La trame est transmise uniquement si l'adresse IP source ou destination n'est pas définis dans l'ACL.</p>
+<hr />
+<h3 id="13-securisation-de-linfrastructure">1.3 Sécurisation de l'infrastructure :</h3>
+<p>Afin de renforcer la sécurité de l'infrastructure plusieurs points :</p>
+<ul>
+<li>Protéger les protocoles voisins,</li>
+<li>Eviter les attaques VLAN hopping,</li>
+<li>Protéger ARP, </li>
+<li>Pas nécessaire de protéger DHCP car les postes sont définis en statique,</li>
+</ul>
+<p>Protéger les protocoles voisins :</p>
+<pre><code class="text">RT-1(config)# no cdp run
+RT-1(config)# no lldp run
+
+SW-1(config)# no cdp run
+SW-1(config)# no lldp run
+</code></pre>
+
+<p>Eviter les attaques de VLAN hopping (Switch spoof et double tag) :</p>
+<pre><code class="text"># DTP :
+SW-1(config)# interface range GigabitEthernet 0/1-3, GigabitEthernet 1/0-3, GigabitEthernet 2/0-3, GigabitEthernet 3/0-3
+SW-1(config-if-range)# switchport mode access
+SW-1(config-if-range)# switchport nonegotiate
+SW-1(config-if-range)# exit
+
+SW-1(config)# interface range GigabitEthernet 0/0
+SW-1(config-if-range)# switchport nonegotiate
+SW-1(config-if)# exit
+
+------------------------------------------------
+
+# Native Vlan :
+SW-1(config)# vlan 99
+SW-1(config-vlan)# name NATIF
+SW-1(config-vlan)# no shutdown
+SW-1(config-vlan)# exit
+
+SW-1(config)# interface GigabitEthernet 0/0
+SW-1(config-if)# switchport trunk native vlan 99
+SW-1(config-if)# exit
+
+RT-1(config)# interface GigabitEthernet 0/0.99
+RT-1(config-if)# encapsulation dot1Q 99 native
+RT-1(config-if)# exit
+</code></pre>
+
+<p>Sur le routeur, l'interface virtuelle <strong>GigabitEthernet 0/0.99</strong> est définie comme interface pour le vlan natif.</p>
+<p>Protéger ARP et DHCP, étant donné que DHCP n'est pas utilisé au sein de ce réseau je n'ai pas a définir de trust port pour le DHCP Snooping. Mais je dois l'activer pour éviter toute attaque DHCP spoof.</p>
+<pre><code class="text">SW-1(config)# ip dhcp snooping 
+SW-1(config)# ip dhcp snooping vlan 10
+SW-1(config)# ip dhcp snooping vlan 20
+SW-1(config)# ip arp inspection vlan 10
+SW-1(config)# ip arp inspection vlan 20
+
+SW-1(config)# arp access-list ARP-TRUST-VLAN-10
+SW-1(config-nacl)# permit ip host 192.168.10.1 mac host 0050.7966.6800
+SW-1(config-nacl)# permit ip host 192.168.10.2 mac host 0050.7966.6801
+SW-1(config-nacl)# permit ip host 192.168.10.254 mac host 0c:31:49:50:8a:00
+SW-1(config-nacl)# exit
+SW-1(config)# ip arp inspection filter ARP-TRUST-VLAN-10 vlan 10
+
+SW-1(config)# arp access-list ARP-TRUST-VLAN-20
+SW-1(config-nacl)# permit ip host 192.168.20.1 mac host 00:0c:29:07:db:b1
+SW-1(config-nacl)# permit ip host 192.168.20.2 mac host 00:50:79:66:68:02
+SW-1(config-nacl)# permit ip host 192.168.20.254 mac host 0c:31:49:50:8a:00
+SW-1(config)# ip arp inspection filter ARP-TRUST-VLAN-20 vlan 20
+</code></pre>
+
+<p>Le port security sur tous les ports :</p>
+<pre><code class="text">SW-1(config)# interface range GigabitEthernet 0/1-3, GigabitEthernet 1/0-3, GigabitEthernet 2/0-3, GigabitEthernet 3/0-3
+SW-1(config-if-range)# switchport mode access
+SW-1(config-if-range)# switchport port-security
+SW-1(config-if-range)# switchport port-security maximum 3
+SW-1(config-if-range)# switchport port-security violation shutdown
+SW-1(config-if-range)# switchport port-security mac-address sticky
+SW-1(config-if-range)# exit
+</code></pre>
+
+<p>Et pour le port de trunk :</p>
+<pre><code class="text">SW-1(config)# interface GigabitEthernet 0/0
+SW-1(config-if)# switchport port-security
+SW-1(config-if)# switchport port-security maximum 3
+SW-1(config-if)# switchport port-security violation shutdown
+SW-1(config-if)# switchport port-security mac-address sticky
+SW-1(config-if)# exit
+</code></pre>
+
+<p>Et enfin les dernières mesures de sécurités :</p>
+<pre><code class="text"># Shutdown les interfaces :
+SW-1(config)# interface range GigabitEthernet 0/1-3, GigabitEthernet1/0, GigabitEthernet1/3, GigabitEthernet2/0, GigabitEthernet2/3, GigabitEthernet3/0-3
+SW-1(config-if-range)# shutdown
+SW-1(config-if-range)# exit
+
+RT-1(config)# interface range GigabitEthernet0/1-3
+RT-1(config-if-range)# shutdown
+RT-1(config-if-range)# exit
+
+------------------------------------------------
+
+# Les mots de passes :
+SW-1(config)# enable algorithm-type scrypt secret worldskills
+SW-1(config)# service passord-encryption
+SW-1(config)# do wr 
+
+RT-1(config)# enable algorithm-type scrypt secret worldskills
+RT-1(config)# service passord-encryption
+SW-1(config)# do wr 
+ ````
+
+---
+
+### 1.4 Vérifications :
+Vérifications de CDP et LLDP :
+````text
+SW-1# show cdp
+SW-1# show lldp
+
+RT-1# show cdp
+RT-1# show lldp
+</code></pre>
+
+<p><img alt="img" src="../../images/Cisco/segment%26filter/check-voisin-SW.png" />
+<div align="center"><strong><em>Illustration 2 :</em></strong> <em>Status des protocoles CDP et LLDP.</em></div></p>
+<p><img alt="img" src="../../images/Cisco/segment%26filter/check-voisin-RT.png" />
+<div align="center"><strong><em>Illustration 3 :</em></strong> <em>Status des protocoles CDP et LLDP.</em></div></p>
+<p>Vérifications de CDP et LLDP :</p>
+<pre><code class="text">SW-1# show cdp
+SW-1# show lldp
+
+RT-1# show cdp
+RT-1# show lldp
+</code></pre>
+
+<p>Vérification de DTP :</p>
+<pre><code class="text">SW-1# show dtp interface | include Hello
+</code></pre>
+
+<p>Cette commande affiche les (hello) timers pour DTP.
+Chaque ligne corrspond à une interface.
+Si toutes les lignes correpondent à  la valeur <strong>never/STOPPED</strong> alors DTPest arrêté sur toutes les interfaces.</p>
+<p><img alt="img" src="../../images/Cisco/segment%26filter/check-dtp.png" />
+<div align="center"><strong><em>Illustration 3 :</em></strong> <em>Status des protocoles CDP et LLDP.</em></div></p>
+<p>Vérification du native vlan :</p>
+<pre><code class="text">SW-1# show interface trunk 
+</code></pre>
+
+<p><img alt="img" src="../../images/Cisco/segment%26filter/check-native.png" />
+<div align="center"><strong><em>Illustration 4 :</em></strong> <em>Vlan natif SW-1.</em></div></p>
+<pre><code class="text">RT-1# show run | section interface GigabitEthernet0/0.99
+</code></pre>
+
+<p><img alt="img" src="../../images/Cisco/segment%26filter/check-native-RT.png" />
+<div align="center"><strong><em>Illustration 5 :</em></strong> <em>Vlan natif RT-1.</em></div></p>
+<p>Vérification du DHCP snooping :</p>
+<pre><code class="text">RT-1# show ip dhcp snooping
+</code></pre>
+
+<p><img alt="img" src="../../images/Cisco/segment%26filter/dhcp-snooping.png" />
+<div align="center"><strong><em>Illustration 6 :</em></strong> <em>Vlan natif RT-1.</em></div></p>
+<p>Vérification du DAI :</p>
+<pre><code class="text">RT-1# show ip arp inspection
+</code></pre>
+
+<p><img alt="img" src="../../images/Cisco/segment%26filter/check-dai.png" />
+<div align="center"><strong><em>Illustration 7 :</em></strong> <em>Vérification de l'insepection ARP.</em></div></p>
+<p>Vérification du port security :</p>
+<pre><code class="text">RT-1# show port-security
+</code></pre>
+
+<p><img alt="img" src="../../images/Cisco/segment%26filter/port-security.png" />
+<div align="center"><strong><em>Illustration 8 :</em></strong> <em>Vérification du port security.</em></div></p>
+<p>Vérification du status des interfaces :</p>
+<pre><code class="text">SW-1# show ip interface brief
+RT-1# show ip interface brief
+</code></pre>
+
+<p><img alt="img" src="../../images/Cisco/segment%26filter/interface-status.png" />
+<div align="center"><strong><em>Illustration 9 :</em></strong> <em>Vérification du status des interfaces SW-1.</em></div></p>
+<p><img alt="img" src="../../images/Cisco/segment%26filter/interface-status-2.png" />
+<div align="center"><strong><em>Illustration 10 :</em></strong> <em>Vérification du status des interfaces RT-1.</em></div></p>
+<p>Vérification des mots de passe :</p>
+<pre><code class="text">SW-1# show run | include enable
+SW-1# show run | include password
+
+RT-1# show run | include enable
+RT-1# show run | include password
+</code></pre>
+
+<p><img alt="img" src="../../images/Cisco/segment%26filter/password-sw1.png" />
+<div align="center"><strong><em>Illustration 11 :</em></strong> <em>Vérification du status des interfaces RT-1.</em></div></p>
+<p><img alt="img" src="../../images/Cisco/segment%26filter/password-rt1.png" />
+<div align="center"><strong><em>Illustration 12 :</em></strong> <em>Vérification du status des interfaces RT-1.</em></div></p>
+<hr />
+<h2 id="2-les-pvlan">2 Les PVLAN :</h2>
+<p>La première solution nécessite de créer des ACL pour que deux VLAN soit <em>étanche</em>, mais il est possible d'utiliser les PVLAN.
+Par leur conception, les PVLAN empreche la communication d'un VLAN à l'autre, avec l'utilisation de cette techn</p>
+<ul>
+<li>Les VLAN pour limiter le domaine de diffusion (broadcast et multicast routable),</li>
+<li>Les ACL pour interdire les communication unicast d'un VLAN à un autre,</li>
+</ul>
+<hr />
+<h3 id="21-le-laboratoire">2.1 Le laboratoire :</h3>
+<p><img alt="img" src="../../images/Cisco/segment%26filter/network-plan.png" />
+<div align="center"><strong><em>Illustration 13 :</em></strong> <em>Plan réseau du laboratoire.</em></div></p>
+<p>Vous pouvez noter que ce laboratoire est composé en plus de :</p>
+<ul>
+<li>Un VLAN, le VLAN 30,</li>
+<li>Un serveur HTTP,</li>
+<li>Un siwtch SW-2,</li>
+</ul>
+<p>Voici le script de configuration du laboratoire :
+Pour le routeur RT-1 :</p>
+<pre><code>RT-1(config)# hostname RT-1
+RT-1(config)# no ip domain-lookup
+
+RT-1(config)# interface GigabitEthernet 0/0
+RT-1(config-if)# no shutdown
+RT-1(config-if)# exit
+
+RT-1(config)# interface GigabitEthernet 0/0.10
+RT-1(config-subif)# encapsulation dot1q 10
+RT-1(config-subif)# ip address 192.168.10.254 255.255.255.0
+RT-1(config-subif)# no shutdown
+RT-1(config-subif)# exit
+
+RT-1(config)# interface GigabitEthernet 0/0.20
+RT-1(config-subif)# encapsulation dot1q 20
+RT-1(config-subif)# ip address 192.168.20.254 255.255.255.0
+RT-1(config-subif)# no shutdown
+RT-1(config-subif)# exit
+
+RT-1(config)# interface GigabitEthernet 0/0.30
+RT-1(config-subif)# encapsulation dot1q 20
+RT-1(config-subif)# ip address 192.168.30.254 255.255.255.0
+RT-1(config-subif)# no shutdown
+RT-1(config-subif)# exit
+
+RT-1(config)# do wr
+</code></pre>
+
+<p>Configuration IP des postes :</p>
+<pre><code class="text">             @IP           MASK        Gateway
+         ____________ ------------- ______________
+
+PC-1&gt; ip 192.168.10.1 255.255.255.0 192.168.10.254
+PC-2&gt; ip 192.168.10.2 255.255.255.0 192.168.10.254
+PC-3&gt; ip 192.168.20.1 255.255.255.0 192.168.20.254
+PC-4&gt; ip 192.168.20.2 255.255.255.0 192.168.20.254
+HTTP&gt; ip 192.168.30.2 255.255.255.0 192.168.20.254
+</code></pre>
+
+<hr />
+<h3 id="22-mise-en-pratique">2.2 Mise en pratique :</h3>
+<p>Configuration du switch SW-1 :</p>
+<pre><code class="text">Switch(config)# hostname SW-1
+SW-1(config)# no ip domain-lookup
+
+SW-1(config)# vtp mode transparent
+
+SW-1(config)# vlan 100
+SW-1(config-vlan)# private-vlan primary
+SW-1(config-vlan)# private-vlan association 10,20,30
+SW-1(config-vlan)# name VLAN_PRIM
+SW-1(config-vlan)# no shutdown
+SW-1(config-vlan)# exit
+
+SW-1(config)# vlan 99
+SW-1(config-vlan)# name NATIF
+SW-1(config-vlan)# exit
+
+SW-1(config)# vlan 10
+SW-1(config-vlan)# private-vlan community
+SW-1(config-vlan)# name VLAN_COM_1
+SW-1(config-vlan)# no shutdown
+SW-1(config-vlan)# exit
+
+SW-1(config)# vlan 20
+SW-1(config-vlan)# private-vlan community
+SW-1(config-vlan)# name VLAN_COM_2
+SW-1(config-vlan)# no shutdown
+SW-1(config-vlan)# exit
+
+SW-1(config)# interface GigabitEthernet 1/1
+SW-1(config-if)# switchport mode private-vlan host
+SW-1(config-if)# switchport private-vlan host-association 100 10
+SW-1(config-if)# exit
+
+SW-1(config)# interface GigabitEthernet 1/2
+SW-1(config-if)# switchport mode private-vlan host
+SW-1(config-if)# switchport private-vlan host-association 100 10
+SW-1(config-if)# exit
+
+SW-1(config)# interface GigabitEthernet 2/1
+SW-1(config-if)# switchport mode private-vlan host
+SW-1(config-if)# switchport private-vlan host-association 100 20
+SW-1(config-if)# exit
+
+SW-1(config)# interface GigabitEthernet 2/2
+SW-1(config-if)# switchport mode private-vlan host
+SW-1(config-if)# switchport private-vlan host-association 100 20
+SW-1(config-if)# exit
+
+SW-1(config)# interface GigabitEthernet 3/3
+SW-1(config-if)# no shutdown
+SW-1(config-if)# switchport trunk encapsulation dot1q
+SW-1(config-if)# switchport mode trunk
+SW-1(config-if)# switchport trunk native vlan 99
+SW-1(config-if)# switchport trunk allowed vlan all
+SW-1(config-if)# switchport mode private-vlan promiscuous
+SW-1(config-if)# switchport private-vlan mapping 100 10,20
+SW-1(config-if)# exit
+
+SW-1(config)# interface GigabitEthernet 0/0
+SW-1(config-if)# no shutdown
+SW-1(config-if)# switchport trunk encapsulation dot1q
+SW-1(config-if)# switchport mode trunk 
+SW-1(config-if)# switchport trunk native vlan 99
+SW-2(config-if)# switchport mode private-vlan prosmicuous
+SW-1(config-if)# switchport private-vlan mapping 100 10,20
+SW-1(config-if)# exit
+
+SW-1(config)# do wr
+</code></pre>
+
+<p>Configuration du switch SW-2 :</p>
+<pre><code class="text">Switch(config)# hostname SW-2
+SW-2(config)# no ip domain-lookup
+
+SW-2(config)# vtp mode transparent
+
+SW-2(config)# vlan 100
+SW-2(config-vlan)# name PRIMARY
+SW-2(config-vlan)# private-vlan primary
+SW-2(config-vlan)# private-vlan association 10,20
+SW-2(config-vlan)# no shutdown
+SW-2(config-vlan)# exit
+
+SW-2(config)# vlan 99
+SW-2(config-vlan)# name NATIF
+SW-2(config-vlan)# no shutdown
+SW-2(config-vlan# exit
+
+SW-2(config)# vlan 10
+SW-2(config-vlan)# name VLAN_COM_1
+SW-2(config-vlan)# private-vlan community
+SW-2(config-vlan)# no shutdown
+SW-2(config-vlan)# exit
+
+SW-2(config)# vlan 20
+SW-2(config-vlan)# name VLAN_COM_2
+SW-2(config-vlan)# no shutdown
+SW-2(config-vlan)# exit
+
+SW-2(config)# interface GigabitEthernet 3/3
+SW-2(config-if)# no shutdown
+SW-2(config-if)# switchport trunk encapsulation dot1q
+SW-2(config-if)# switchport mode trunk
+SW-2(config-if)# switchport trunk native vlan 99
+SW-2(config-if)# switchport trunk allowed vlan all
+SW-2(config-if)# switchport mode private-vlan prosmicuous
+SW-2(config-if)# switchport private-vlan mapping 100 10,20
+SW-2(config-if)# exit
+
+SW-2(config)# interface GigabitEthernet 0/0
+SW-2(config-if)# no shutdown
+SW-2(config-if)# switchport mode private-vlan promiscuous
+SW-2(config-if)# switchport private-vlan mappping 100 10,20
+SW-2(config-if)# exit
+
+SW-2(config)# do wr
+</code></pre>
+
+<p>Il m'ést malheurement impossible de mettre en place les PVLAN car il nécessite du matériel physique.
+IL est impossible de les émuler avec GNS.</p>
+<ul>
+<li><a href="https://gns3vault.com/switching/private-vlan">https://gns3vault.com/switching/private-vlan</a></li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../S%C3%A9curiser%20%20CDP%20et%20LLDP/" class="btn btn-neutral float-right" title="Sécuriser - CDP et LLDP :">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Deployer%20un%20VLAN%20de%20management/" class="btn btn-neutral" title="Deployer - VLAN de management :"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../Deployer%20un%20VLAN%20de%20management/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../S%C3%A9curiser%20%20CDP%20et%20LLDP/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

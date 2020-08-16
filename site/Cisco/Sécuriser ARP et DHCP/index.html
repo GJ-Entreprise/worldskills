@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Sécuriser - ARP et DHCP : - Worldskills - GJ enterprise</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "S\u00e9curiser - ARP et DHCP :";
+    var mkdocs_page_input_path = "Cisco\\S\u00e9curiser ARP et DHCP.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Worldskills - GJ enterprise</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Welcome to GJ enterprise documentation website !</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../ajouter_documentations/">Ajout_documentations.md</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">CentOs</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/Installer_apache_httpd/">Installation d'un serveur Aapche HTTPD</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/apache_TLS_SSL/">Apache / TLS / SSL</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/creation_compte_utilisateurs/">Création de compte utilisateur</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/regle_parfeu/">Mise en place de règles firewall</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Cisco</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Deployer%20un%20VLAN%20de%20management/">Deployer - VLAN de management :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Segmenter%20les%20communications%20et%20les%20filtrer/">Segmenter - les communications :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../S%C3%A9curiser%20%20CDP%20et%20LLDP/">Sécuriser - CDP et LLDP :</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Sécuriser - ARP et DHCP :</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#0-le-laboratoire">0 Le laboratoire :</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1-securiser-le-protocole-dhcp">1 Sécuriser le protocole DHCP :</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#11-miitigation">1.1 Miitigation :</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#111-dhcp-snooping">1.1.1 DHCP Snooping :</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#112-port-security">1.1.2 Port Security :</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#12-verification">1.2 Vérification :</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#121-verification-dhcp-snooping">1.2.1 Vérification DHCP Snooping :</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#121-verification-port-security">1.2.1 Vérification Port Security :</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#13-tentative-dattaque">1.3 Tentative d'attaque :</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#131-dhcp-starvation">1.3.1 DHCP Starvation :</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#132-dhcp-spoofing">1.3.2 DHCP Spoofing :</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-securiser-le-protocole-arp">2 Sécuriser le protocole ARP :</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21-definir-les-ip-statiques">2.1 Définir les IP statiques :</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#21-mise-en-place-du-dai">2.1 Mise en place du DAI :</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#22-tentative-dattaque">2.2 Tentative d'attaque :</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-conclusion">3 Conclusion :</a>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../S%C3%A9curiser%20VLAN/">Sécuriser - Les VLAN :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../S%C3%A9curiser%20les%20mots%20de%20passe/">Sécuriser - Les mots de passe sur Cisco :</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Worldskills - GJ enterprise</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Cisco &raquo;</li>
+        
+      
+    
+    <li>Sécuriser - ARP et DHCP :</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="securiser-arp-et-dhcp">Sécuriser - ARP et DHCP :</h1>
+<p>Ressources :</p>
+<ul>
+<li>DHCP, <a href="https://formip.com/dhcp-snooping/">https://formip.com/dhcp-snooping/</a></li>
+<li>DHCP, <a href="https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84">https://medium.com/@ayushir/dhcp-snooping-attack-ca728e4dd84</a></li>
+<li>ARP, <a href="https://formip.com/dai/">https://formip.com/dai/</a></li>
+</ul>
+<hr />
+<h2 id="0-le-laboratoire">0 Le laboratoire :</h2>
+<p>Voici le laboratoire que j'utilise pour tester la sécurité des protocoles DHCP et ARP :
+<img alt="img" src="../../images/Cisco/ARP-DHCP/networkPlan.png" />
+<div align="center"><strong><em>Illustration 1 :</em></strong> <em>Plan réseau du laboratoire.</em></div></p>
+<p>Adressage IP et MAC :</p>
+<ul>
+<li>PC-1, DHCP, 00:50:79:66:68:00 </li>
+<li>PC-2, DHCP, 00:50:79:66:68:01</li>
+<li>DHCP, 192.168.10.31/24, 00:0C:29:07:DB:B1</li>
+<li>KALI, DHCP, 00:0C:29:05:A1:31</li>
+<li>SW-1, 192.168.10.1/24</li>
+</ul>
+<p>Tous les hôtes du laboratoire sont dans le VLAN 1.</p>
+<p>Configuration du serveur DHCP :</p>
+<pre><code class="text">option domain-name &quot;example.org&quot;;
+option domain-name-servers ns1.example.org, ns2.example.org;
+
+default-lease-time 600;
+max-lease-time 7200;
+
+subnet 192.168.10.0 netmask 255.255.255.0 {
+    range 192.168.10.100 192.168.10.120;
+    option subnet-mask 255.255.255.0;
+    option broadcast-address 192.168.10.255;
+}
+</code></pre>
+
+<hr />
+<h2 id="1-securiser-le-protocole-dhcp">1 Sécuriser le protocole DHCP :</h2>
+<p>Les attaques sur le protocole DHCP :</p>
+<ul>
+<li>DHCP Starvation, reserver tous les baux du serveur DHCP. Ce qui à pour conséquence que les clients n'obtiennent plus de configuration IP.</li>
+<li>DHCP Spoofing, un attaquant distribue des configuration IP où il se définit en tant que passerelle. Ce qui permet de réaliser un MITM,</li>
+</ul>
+<hr />
+<h3 id="11-miitigation">1.1 Miitigation :</h3>
+<h4 id="111-dhcp-snooping">1.1.1 DHCP Snooping :</h4>
+<p>Mise en place du DHCP snooping sur le <strong>VLAN 1</strong> :</p>
+<pre><code class="text">SW-1(config)# ip dhcp snooping
+SW-1(config)# ip dhcp snooping vlan 1
+SW-1(config)# no ip dhcp snooping information option
+</code></pre>
+
+<p>Détail des commandes :</p>
+<ul>
+<li>1 Activation du DHCP Snooping globalement,</li>
+<li>2 Activation du DHCP Snooping sur le VLAN 1, <strong>étape nécessaire</strong> sans celle-ci le DHCP snooping n'est pas fonctionnel,</li>
+<li>3 L'activation globale du DHCP snooping active l'option DHCP 82, </li>
+</ul>
+<p>Option 82 définition :
+<strong>Cette option spécifie le réseau source de la demande, dans une architecture réseau ou le serveur DHCP se trouve dans un sous-réseau différent. La trame est relayée par le routeur via l'agent relai. Dans ce contexte, un switch ou un routeur peut ajouter dans l'option 82 le réseau source de la demande DHCP.
+Certains serveurs DHCP n'acceptent pas l'option 82, il peut être nécessaire de la désactiver.</strong></p>
+<p>Trust du port <strong>GigabitEthernet 3/1</strong> du switch <strong>SW-1</strong> ou le serveur <strong>DHCP</strong> est connecté :</p>
+<pre><code class="text">SW-1(config)# interface GigabitEthernet 3/1
+SW-1(config-if)# ip dhcp snooping trust
+SW-1(config-if)# ip dhcp snooping limit rate 80
+</code></pre>
+
+<p>Détail des commandes :
+*
+* 1 Sélection de l'interface,
+* 2 Trust de l'interface
+* 3 Mise en place d'un quota, dans l'exemple ce port est limité à 80 requêtes DHCP/secondes.</p>
+<h4 id="112-port-security">1.1.2 Port Security :</h4>
+<p>Le port-security limite le nombre d'adresses MAC référencé sur un port.
+Ce qui à pour conséquence direct de mitiguer l'attaque DHCP Starvation</p>
+<p>Sur le switch <strong>SW-1</strong> sur le port de <strong>PC-1</strong> :</p>
+<pre><code class="text">SW-1(config)# interface GigabitEthernet 1/1
+SW-1(config-if)# switchport mode access
+SW-1(config-if)# switchport port-security
+SW-1(config-if)# switchport port-security max 3
+SW-1(config-if)# switchport port-security violation shutdown
+SW-1(config-if)# exit
+</code></pre>
+
+<p>Sur le switch <strong>SW-1</strong> sur le port de <strong>PC-2</strong> :</p>
+<pre><code class="text">SW-1(config)# interface GigabitEthernet 1/2
+SW-1(config-if)# switchport mode access
+SW-1(config-if)# switchport port-security max 3
+SW-1(config-if)# switchport port-security violation shutdown
+SW-1(config-if)# exit
+</code></pre>
+
+<p>Sur le switch <strong>SW-1</strong> sur le port de <strong>KALI</strong> :</p>
+<pre><code class="text">SW-1(config)# interface GigabitEthernet 2/1
+SW-1(config-if)# switchport mode access
+SW-1(config-if)# switchport port-security max 3
+SW-1(config-if)# switchport port-security violation shutdown
+SW-1(config-if)# exit
+</code></pre>
+
+<p>S'il y a plus de trois adresse MAC associé à un port dans la table CAM du switch <strong>SW-1</strong>, le port en question est éteint (shutdown).
+Cette limitation permet de "voler" au maximum trois baux par le pirate.</p>
+<hr />
+<h3 id="12-verification">1.2 Vérification :</h3>
+<h4 id="121-verification-dhcp-snooping">1.2.1 Vérification DHCP Snooping :</h4>
+<p>Commandes pour vérifier le DHCP Snooping :</p>
+<pre><code class="text">SW-1# show ip dhcp snooping
+</code></pre>
+
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/status-snooping.png" />
+<div align="center"><strong><em>Illustration 2 :</em></strong> <em>Vérification des ports trusts.</em></div></p>
+<p>Il est possible de noter : </p>
+<ul>
+<li>L'option 82 est désactivé,</li>
+<li>L'interface <strong>GigabitEthernet 3/1</strong> est une interface trust par le switch SW-1 pour les trames DHCP,</li>
+</ul>
+<p>Commandes pour voir les baux DHCP distribués (table DHCP Snooping) :</p>
+<pre><code class="text">SW-1# show ip dhcp snooping binding
+</code></pre>
+
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/dhcp-binding.png" />
+<div align="center"><strong><em>Illustration 3 :</em></strong> <em>Vérification des baux DHCP.</em></div></p>
+<p>Dans cette capture, il est possible de voir que le DHCP à distribué trois baux DHCP, on y retrouve :</p>
+<ul>
+<li>L'adresse MAC du client,</li>
+<li>L'adresse IP distribuée par le DHCP,</li>
+<li>Lease time du bail DHCP,</li>
+<li>L'interface du client,</li>
+</ul>
+<p>Il est possible de clear la table DHCP Snooping :</p>
+<pre><code class="text">SW-1# clear ip dhcp snooping binding *
+</code></pre>
+
+<h4 id="121-verification-port-security">1.2.1 Vérification Port Security :</h4>
+<p>Voir les ports définis en tant que port security :</p>
+<pre><code class="text">SW-1# show port-security
+</code></pre>
+
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/port-security.png" />
+<div align="center"><strong><em>Illustration 4 :</em></strong> <em>Port security configuration initiale.</em></div></p>
+<p>Nous pouvons remarquer que le port security permet à chaque port, trois adresses MAC différentes au maximum.
+Une adresse MAC est déja utilisé sur chaque port il en reste donc deux de disponible.</p>
+<hr />
+<h3 id="13-tentative-dattaque">1.3 Tentative d'attaque :</h3>
+<h4 id="131-dhcp-starvation">1.3.1 DHCP Starvation :</h4>
+<p>Pour rappel le port security est actif est configurer pour autoriser trois adresses MAC différentes sur chaque port du switch SW-1.</p>
+<p>Utilisation de <strong>yersinia</strong>, depuis la <strong>VM KALI</strong> :</p>
+<pre><code class="bash">yersinia -G
+</code></pre>
+
+<p>Se rendre dans :
+<strong>onglet DHCP -&gt; DHCP Starvation -&gt; OK</strong></p>
+<p>Après un cours instant, la VM KALI réalise un nombre infini de requête DHCP Discover dans l'objectif d'utiliser tous les baux DHCP du serveur DHCP.</p>
+<p>Mais le port security limite à un maximum de trois adresses MAC sur le port ou est connecté KALI (donc trois demandes DHCP Discover).
+Ce qui à pour conséquence de placer le port en mode <strong>err-disabled</strong> et de le rendre inutilisable.</p>
+<p>Aperçu :</p>
+<pre><code class="text">SW-1# show port-security
+SW-1# show interface status
+</code></pre>
+
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/dhcp-attack-1.png" />
+<div align="center"><strong><em>Illustration 5 :</em></strong> <em>Status du port security après l'attaque.</em></div></p>
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/dhcp-attack-11.png" />
+<div align="center"><strong><em>Illustration 6 :</em></strong> <em>Port désactivé zpar le DHCP snooping.</em></div></p>
+<p>Pour rendre ce port à nouveau fonctionnel :</p>
+<pre><code class="text">SW-1(config)# interface GigabitEthernet 2/1
+SW-1(config-if)# shutdown
+SW-1(config-if)# no shutdown
+</code></pre>
+
+<hr />
+<h4 id="132-dhcp-spoofing">1.3.2 DHCP Spoofing :</h4>
+<p>Pour rappel seul le port vers le serveur DHCP <strong>GigabitEthernet 3/1</strong> est trust pour les trames DHCP Offer.</p>
+<p>Utilisation de ethercap, depuis la <strong>VM KALI</strong> :</p>
+<pre><code class="bash">ettercap -G
+</code></pre>
+
+<p>Afin d'obtenir de meilleurs résultats, j'arrête le service DHCP du serveur <strong>DHCP</strong> :</p>
+<pre><code class="bash">/etc/init.d/isc-dhcp-server stop
+</code></pre>
+
+<p>Malgré que la <strong>VM KALI</strong> distribue des baux DHCP, aucun poste obtient une configuration IP.</p>
+<p>Mais si je place l'interface de la <strong>VM KALI</strong> en mode <strong>DHCP Snooping trust</strong> :</p>
+<pre><code class="text">SW-1(config)# interface GigabitEthernet 2/1
+SW-1(config-if)# ip dhcp snooping trust
+</code></pre>
+
+<p>Et que je renouvelle les demande DHCP de <strong>PC-1</strong> et <strong>PC-2</strong> :</p>
+<pre><code class="text">PC-1&gt; ip dhcp
+PC-2&gt; ip dhcp
+</code></pre>
+
+<p>Les postes obtiennent une configuration IP.</p>
+<p>Depuis Ethercap :
+<img alt="img" src="../../images/Cisco/ARP-DHCP/dhcp-attack-2.png" />
+<div align="center"><strong><em>Illustration 7 :</em></strong> <em>Log d'ethercap.</em></div></p>
+<p>Configuration IP des postes :</p>
+<pre><code class="text">PC-1&gt; show ip
+</code></pre>
+
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/dhcp-attack-22.png" />
+<div align="center"><strong><em>Illustration 8 :</em></strong> <em>Bail DHCP des postes.</em></div></p>
+<p>Nous pouvons remarquer que la valeur de la passerelle des configurations IP des postes correspond à l'adresse IP de la <strong>VM KALI</strong>.
+Cette action a uniquement été possible car j'ai placé le port de la <strong>VM KALI</strong> en mode <strong>DHCP Snooping trust</strong>.
+Sans cette modifications, les postes n'auraient jamais pu obtenir un bail DHCP.</p>
+<hr />
+<h2 id="2-securiser-le-protocole-arp">2 Sécuriser le protocole ARP :</h2>
+<p>Pour sécuriser le protocole ARP, il est possible de s'appuyer sur la fonctionnalité <strong>DHCP snooping</strong>.
+En effet, le <strong>DHCP Snooping</strong> construit une table de correspondance qui référence l'adresse MAC et l'adresse IP des baux DHCP.</p>
+<p>Il est possible de consulter cette table de correspondance via la commande :</p>
+<pre><code class="text">show ip dhcp snooping binding
+</code></pre>
+
+<p>La fonctionnalité dans Cisco IOS qui s'appuie sur la table de correspondance du <strong>DHCP Snooping</strong> pour éviter les attaques ARP est le <strong>DAI, Dynamic ARP Inspection</strong>.</p>
+<p>Description du procédé, les adresses MAC et les adresses IP sont analysés dans toutes les trames :</p>
+<ul>
+<li>Cas 1, La correspondance est référencé dans la table <strong>DHCP Snooping</strong> =&gt; le switch forward la trame,</li>
+<li>Cas 2, La correspondance n'est pas référencé dans la table <strong>DHCP Snooping</strong> mais elle à été définis dans une entrée statique =&gt; le switch forward la trame,</li>
+<li>Cas 3, La correspondance n'est pas référencé dans la table <strong>DHCP Snooping</strong> et elle n'est pas définis comme une entrée statique =&gt; le switch drop la trame,</li>
+</ul>
+<hr />
+<h3 id="21-definir-les-ip-statiques">2.1 Définir les IP statiques :</h3>
+<p>Dans le laboratoire, le serveur <strong>DHCP</strong> est défini en configuration IP statique.
+Son association adresse MAC adresse IP n'est pas connu par la fonction DHCP Snooping du switch. 
+Il est donc nécessaire de trust le serveur <strong>DHCP</strong>.</p>
+<p>Pour cela deux possibilités :</p>
+<ul>
+<li>Méthode 1, trust du port du serveur DHCP,</li>
+<li>Méthode 2, trust de l'association adresse MAC et adresse IP,</li>
+</ul>
+<p>Méthode 1, trust du port du serveur <strong>DHCP</strong> par le <strong>DHCP snooping</strong> :</p>
+<pre><code class="text">SW-1(config)# interface GigabitEthernet 3/1
+SW-1(config-if)# ip arp inspection trust
+</code></pre>
+
+<p>Méthode 2, trust de l'association adresse MAC et adresse IP du serveur <strong>DHCP</strong> :</p>
+<pre><code class="text">SW-1(config)# arp access-list ARP-TRUST
+SW-1(config-nacl)# permit ip host 192.168.10.31 mac host 00:0C:29:07:DB:B1
+SW-1(config-nacl)# exit
+SW-1(config)# ip arp inspection filter ARP-TRUST vlan 1
+</code></pre>
+
+<p>La première méthode est plus facile à utiliser, mais moins sécurisé, elle n'empêchera pas une attaque ARP mais elle fera juste confiance au port.
+Tandis que la seconde méthode accepte uniquement une association adresse IP et MAC.
+Je recommande d'utiliser la seconde méthode.</p>
+<hr />
+<h3 id="21-mise-en-place-du-dai">2.1 Mise en place du DAI :</h3>
+<p>Pour mettre en place <strong>DAI</strong> (se base sur la table DHCP Snooping) :</p>
+<pre><code class="text">SW-1(config)# ip arp inspection vlan 1
+</code></pre>
+
+<hr />
+<h3 id="22-tentative-dattaque">2.2 Tentative d'attaque :</h3>
+<p>Depuis <strong>KALI</strong>, je vais tenter d'empoisonner la table ARP de <strong>PC-1</strong> pour me faire passer pour <strong>PC-2</strong>, la table ARP de <strong>PC-1</strong> est actuellement vide.</p>
+<p>Pour rappel :</p>
+<ul>
+<li>PC-1 : 00:50:79:66:68:00, 192.168.10.118</li>
+<li>PC-2 : 00:50:79:66:68:01, 192.168.10.120</li>
+<li>KALI : 00:0C:29:05:A1:31, 192.168.10.104</li>
+</ul>
+<p>Depuis la VM KALI :</p>
+<pre><code class="bash">arpspoof -t 192.168.10.118 192.168.10.120
+</code></pre>
+
+<p>Traduction littérale :
+Auprès de <strong>PC-1</strong> (192.168.10.118), fait moi passer pour <strong>PC-2</strong> (192.168.10.120).</p>
+<p>Sur le poste, le cache ARP est vide :</p>
+<pre><code class="text">PC-1&gt; show arp
+</code></pre>
+
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/arp-attack-2.png" />
+<div align="center"><strong><em>Illustration 9 :</em></strong> <em>Cache ARP de la victime.</em></div></p>
+<p>Mais depuis le switch SW-1, il est possible d'observer ces lignes de logs :</p>
+<p><img alt="img" src="../../images/Cisco/ARP-DHCP/arp-attack-22.png" />
+<div align="center"><strong><em>Illustration 10 :</em></strong> <em>Ligne de log depuis SW-1 dans la console.</em></div></p>
+<p>Le switch <strong>SW-1</strong> à détecté que la <strong>VM KALI</strong> envoie des réponses ARP falsifiés car  l'association adresse MAC et adresse IP n'est pas présente :</p>
+<ul>
+<li>Dans le cache <strong>DHCP snooping</strong>,</li>
+<li>Dans une ACL ou dans un trust de port,</li>
+</ul>
+<p>Ce qui à pour conséquence que le switch <strong>SW-1</strong> drop les trames de ma <strong>VM KALI</strong>.</p>
+<hr />
+<h2 id="3-conclusion">3 Conclusion :</h2>
+<p>Pour conclure sur la sécurité des protocoles DHCP et ARP :</p>
+<ul>
+<li>Attaque DHCP Starvation -&gt; Port Security,</li>
+<li>Attaque DHCP Spoofing -&gt; DHCP Snooping,</li>
+<li>Attaque ARP Spoofing -&gt; DAI avec DHCP Snooping,</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../S%C3%A9curiser%20VLAN/" class="btn btn-neutral float-right" title="Sécuriser - Les VLAN :">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../S%C3%A9curiser%20%20CDP%20et%20LLDP/" class="btn btn-neutral" title="Sécuriser - CDP et LLDP :"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../S%C3%A9curiser%20%20CDP%20et%20LLDP/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../S%C3%A9curiser%20VLAN/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
