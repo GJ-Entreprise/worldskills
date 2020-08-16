@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Management d'utilisateurs et de groupes dans CentOS - Worldskills - GJ enterprise</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Management d'utilisateurs et de groupes dans CentOS";
+    var mkdocs_page_input_path = "CentOs/management_utilisateur_&_groupes.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Worldskills - GJ enterprise</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Welcome to GJ enterprise documentation website !</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../ajouter_documentations/">Ajout_documentations.md</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">CentOs</span></p>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Installer_apache_httpd/">Installation d'un serveur Aapche HTTPD</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../apache_TLS_SSL/">Apache / TLS / SSL</a>
+                    </li>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Management d'utilisateurs et de groupes dans CentOS</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#types-dutilisateurs">Types d'utilisateurs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#creer-un-utilisateur">Créer un utilisateur</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#utilisation">Utilisation</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#que-sest-il-passe-0_o">Que s'est-il passé !? 0_o</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-nouvelle-entree-dans-etcpasswd">1. Nouvelle entrée dans /etc/passwd</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-nouvelle-entree-dans-etcshadow">2. Nouvelle entrée dans /etc/shadow</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../regle_parfeu/">Mise en place de règles firewall</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Cisco</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Cisco/Deployer%20un%20VLAN%20de%20management/">Deployer - VLAN de management :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Cisco/Segmenter%20les%20communications%20et%20les%20filtrer/">Segmenter - les communications :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Cisco/S%C3%A9curiser%20%20CDP%20et%20LLDP/">Sécuriser - CDP et LLDP :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Cisco/S%C3%A9curiser%20ARP%20et%20DHCP/">Sécuriser - ARP et DHCP :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Cisco/S%C3%A9curiser%20VLAN/">Sécuriser - Les VLAN :</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Cisco/S%C3%A9curiser%20les%20mots%20de%20passe/">Sécuriser - Les mots de passe sur Cisco :</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Worldskills - GJ enterprise</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>CentOs &raquo;</li>
+        
+      
+    
+    <li>Management d'utilisateurs et de groupes dans CentOS</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="management-dutilisateurs-et-de-groupes-dans-centos">Management d'utilisateurs et de groupes dans CentOS</h1>
+<h2 id="types-dutilisateurs">Types d'utilisateurs</h2>
+<p>Il existe 3 types d'utilisateurs : 
+* <strong>Super utilisateur</strong> : C'est le big boss, il a les pleins pouvoirs sur l'ensemble du système. Créer lors de l'installation du système.
+* <strong>Utilisateur système</strong> : Utilisateurs créer par le système pour le système. Ex : bin, games, ftp, name, mail, daemon, apache etc. C'est utilisateurs de peuvent pas se loger au système car par défaut leur "login shell" est sur  "nologin".
+* <strong>Utilisateur régulier</strong> : Créer par le super utilisateur, l'utilisateur régulier a des droits limités, accordés par le super, pour utiliser le système. L'utilisateur régulier peut être :  ftp user, a samba user or a mail user par exemple.</p>
+<p><img alt="" src="../../images/management_utilisateur_%26_groupes/list_users.png" /></p>
+<h2 id="creer-un-utilisateur">Créer un utilisateur</h2>
+<p>L'ajout d'utilisateur se fait via la commande <strong>useradd</strong>.</p>
+<pre><code>Usage: useradd [options] LOGIN
+       useradd -D
+       useradd -D [options]
+
+Options:
+  -b, --base-dir BASE_DIR       base directory for the home directory of the
+                                new account
+  -c, --comment COMMENT         GECOS field of the new account
+  -d, --home-dir HOME_DIR       home directory of the new account
+  -D, --defaults                print or change default useradd configuration
+  -e, --expiredate EXPIRE_DATE  expiration date of the new account
+  -f, --inactive INACTIVE       password inactivity period of the new account
+  -g, --gid GROUP               name or ID of the primary group of the new
+                                account
+  -G, --groups GROUPS           list of supplementary groups of the new
+                                account
+  -h, --help                    display this help message and exit
+  -k, --skel SKEL_DIR           use this alternative skeleton directory
+  -K, --key KEY=VALUE           override /etc/login.defs defaults
+  -l, --no-log-init             do not add the user to the lastlog and
+                                faillog databases
+  -m, --create-home             create the user's home directory
+  -M, --no-create-home          do not create the user's home directory
+  -N, --no-user-group           do not create a group with the same name as
+                                the user
+  -o, --non-unique              allow to create users with duplicate
+                                (non-unique) UID
+  -p, --password PASSWORD       encrypted password of the new account
+  -r, --system                  create a system account
+  -R, --root CHROOT_DIR         directory to chroot into
+  -P, --prefix PREFIX_DIR       prefix directory where are located the /etc/* files
+  -s, --shell SHELL             login shell of the new account
+  -u, --uid UID                 user ID of the new account
+  -U, --user-group              create a group with the same name as the user
+  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mapping
+</code></pre>
+
+<p>Lors ce qu'un utilisateur utilise cette commande, plusieurs actions sont réalisées :
+* Ajoute une nouvelle entrée dans <strong>/etc/passwd</strong> et <strong>/etc/shadow</strong>
+* Ajoute une nouvelle entrée dans <strong>/etc/group</strong> et <strong>/etc/gshadow</strong>
+* Créer un repertoire <strong>home</strong> pour le nouvelle utilisateur
+* Ajoute les droits et permissions au repertoire <strong>home</strong></p>
+<h3 id="utilisation">Utilisation</h3>
+<pre><code>useradd aioli
+</code></pre>
+
+<p>Nous venons de créer l'utilisateur aioli, mais il faut lui configurer un mot de passe.</p>
+<pre><code>passwd aioli
+</code></pre>
+
+<pre><code># passwd aioli
+Changement de mot de passe pour l'utilisateur aioli.
+Nouveau mot de passe : 
+</code></pre>
+
+<h2 id="que-sest-il-passe-0_o">Que s'est-il passé !? 0_o</h2>
+<h3 id="1-nouvelle-entree-dans-etcpasswd">1. Nouvelle entrée dans /etc/passwd</h3>
+<p>Ce fichier est utilisé pour stocker les informations sur les utilisateurs. La commande __useradd_ ajoute une nouvelle ligne à ce fichier avec les informations entrées.</p>
+<pre><code>aioli:x:1001:1001::/home/aioli:/bin/bash
+</code></pre>
+
+<p>Chaque champs est séparé par des <strong>":"</strong></p>
+<pre><code>aioli:x:1001:1001::/home/aioli:/bin/bash
+1    :2: 3  : 4  :5:     6    :    7
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Champs N°</th>
+<th align="center">Nom</th>
+<th align="center">Valeure</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td align="center">nom d'utilisateur</td>
+<td align="center">aioli</td>
+<td align="center">Compris entre 1 et 32 charactères, fournit lors de la création de l'utilisateur, il sert à  son authentification</td>
+</tr>
+<tr>
+<td>2</td>
+<td align="center">mot de passe</td>
+<td align="center">x</td>
+<td align="center">Le charactère <strong>X</strong> indique que le mot de passe est chiffré dans le fichier /etc/shadow. Si on remplace le <strong>x</strong> par <strong>*</strong> l'utilisateur ne pourra plus se connecter. Si on le retire il pourra se connecter sans mot de passe</td>
+</tr>
+<tr>
+<td>3</td>
+<td align="center">ID utilisateur (UID)</td>
+<td align="center">1001</td>
+<td align="center">User Identification Number, tout utilisateur en a un. 0 =&gt; ROOT; 1-99 =&gt; autres utilisateurs prédéfinis; 100-999 =&gt; Utilisateurs systèmes; 1000-XXXX =&gt; Utilisateurs réguliers</td>
+</tr>
+<tr>
+<td>4</td>
+<td align="center">ID groupe (GID)</td>
+<td align="center">1001</td>
+<td align="center">Groupe principale de l'utilisateur. Quand un utilisateur est créer, un groupe en son nom est généréet lui est affecté. Il peut avoir plusieurs groupes.</td>
+</tr>
+<tr>
+<td>5</td>
+<td align="center">Commentaire (optionnel)</td>
+<td align="center"></td>
+<td align="center">Juste du commentaire</td>
+</tr>
+<tr>
+<td>6</td>
+<td align="center">Repertoire <strong>home</strong></td>
+<td align="center">/home/aioli</td>
+<td align="center">Chemin vers le repertoire <strong>home</strong> de l'utilisateur. Si blanc, le repertoire racine <strong>/</strong> est utilisé.</td>
+</tr>
+<tr>
+<td>7</td>
+<td align="center">SHELL utilisateur</td>
+<td align="center">/bin/bash</td>
+<td align="center">Chemin vers le shell utilisé</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-nouvelle-entree-dans-etcshadow">2. Nouvelle entrée dans /etc/shadow</h3>
+<p>Ce fichier sert à la gestion des mot de passes des utilisateurs. Le mot de passe chiffré vu précedement est stocké ici.</p>
+<pre><code>aioli:$6$stHFnKJOnqjUzHlH$K3QnPn0iam.3dlpe6BQpioMJBb4iMpapJzbX0.yYWoEVDCcESsj05hadC1QXgsuM4rnbITEYXyaq8/1Xh9naA0:18490:0:99999:7:::
+</code></pre>
+
+<p>Chaque champs est séparé par des <strong>":"</strong></p>
+<pre><code>aioli:$6$stHFnKJOnqjUzHlH$K3QnPn0iam.3dlpe6BQpioMJBb4iMpapJzbX0.yYWoEVDCcESsj05hadC1QXgsuM4rnbITEYXyaq8/1Xh9naA0:18490:0:99999:7:::
+
+1:2:3:4:5:6:7:8:9
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../regle_parfeu/" class="btn btn-neutral float-right" title="Mise en place de règles firewall">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../apache_TLS_SSL/" class="btn btn-neutral" title="Apache / TLS / SSL"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../apache_TLS_SSL/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../regle_parfeu/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
