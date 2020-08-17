@@ -21,11 +21,16 @@ Il est possible de distinguer deux types d'accès aux équipements Cisco :
 ---
 
 ## 1 Accès out-band :
-Pour définir un mot de passe pour l'accès à la console de manière sécurisé, j'utilise l'algorithme scrypt.
-
-Par exemple avec le mot de passe **test** :
+Pour définir un mot de passe pour l'accès à la console de manière sécurisé, j'utilise force une authentification locale.
 ````text
-SW-1(config)# enable algorithm-type scrypt secret test
+SW-1(config)# line console 0
+SW-1(config-line)# login local
+SW-1(config-line)# exit
+````
+
+Création de l'utilisateur associé :
+````text
+SW-1(config)# username worldskills privilege 1 algorithm-type scrypt secret worldskills
 ````
 
 Le mot de passe est défini en type 9 tandis que le sha-256 est définis en type 8. Donc le scrypt apporte un gain de sécurité.
@@ -38,7 +43,7 @@ SW-1# sh run
 ![img](../images/Cisco/Password-Cisco/enable_password.png)
 <div align="center">***Illustration 2 :*** *Mot de passe enable chiffré.*</div>
 
-Nous pouvons constater que le mot de passe **test** est chiffré et de type 9.
+Nous pouvons constater que le mot de passe **worldskills** est chiffré et de type 9.
 
 ---
 
@@ -75,14 +80,14 @@ SW-1(config-line)# exit
 ---
 
 ### 2.2 Créer un administrateur :
-Création d'un administrateur **admin** avec le mot de passe **test** :
+Création d'un administrateur **worldskills** avec le mot de passe **worldskills** :
 ````text
-SW-1(config)# username admin privilege 15 algorithm-type scrypt secret test
+SW-1(config)# username worldskills privilege 1 algorithm-type scrypt secret worldskills
 ````
 
 Détail des options :
 
-* privilege 15, spécifie que cet utilisateur possède les droits administrateurs sur le switch,
+* privilege 1, spécifie que cet utilisateur possède des droits utilisateurs
 * algorithme-type, permet de spécifier quel sea l'algorithme de chiffrement utilisé pour chiffrer le mot de passe dans la configuration,
 
 Lorsque l'on regarde la configuration, on peut voir les deux mots de passe chiffrés :
@@ -93,7 +98,19 @@ Les deux mots de passe sont de type 9 en scrypt.
 
 ---
 
-## 3 Service de chiffrement des mots de passe :
+## 3 Accès en mode priviliégé :
+Il est possible de rajouter une dernière sécurité, le passage en mode priviliégé.
+Quand l'utilisateur worldskills se connecte en SSH ou en Console il n'est pas dans le mode configuration global.
+Il ne peut pas modifier les paramètres (privilege 1).
+Pour rajouter une couche supplémentaire de sécurité il est possible de définir un mot de passe sur le passe en mode configuration globale :
+````text
+SW-1(config)# enable secret algorithm-type scrypt secret superPassword
+````
+
+![img](../images/Cisco/Password-Cisco/lock.png)
+<div align="center">***Illustration 4 :*** *Schéma des authentifications locales.*</div>
+
+## 4 Service de chiffrement des mots de passe :
 Au sein d'IOS, il existe une fonction qui chiffre les mots de passe qui sont déjà spécifié dans la configuration et les mots de passe qui seront spécifiés dans le futur. Cette fonction s'appele **password-encryption**.
 
 Pour activer cette fonction :
@@ -101,7 +118,9 @@ Pour activer cette fonction :
 SW-1(config)# service password-encryption
 ````
 
-## 4 Conclusion :
+---
+
+## 5 Conclusion :
 Pour sécuriser l'accès à un équipement Cisco, il faut définir des mots de passe sur :
 
 * L'accès à la console,
