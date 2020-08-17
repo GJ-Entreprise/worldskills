@@ -61,13 +61,15 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../CentOs/apache_TLS_SSL/">Apache / TLS / SSL</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/creation_compte_utilisateurs/">Création de compte utilisateur</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/management_utilisateur_%26_groupes/">Management d'utilisateurs et de groupes dans CentOS</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../CentOs/regle_parfeu/">Mise en place de règles firewall</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Cisco</span></p>
                 <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../Alerter%20activit%C3%A9/">Alerter - Pic d'activité :</a>
+                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="../Deployer%20un%20VLAN%20de%20management/">Deployer - VLAN de management :</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../Segmenter%20les%20communications%20et%20les%20filtrer/">Segmenter - les communications :</a>
@@ -92,9 +94,11 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#3-service-de-chiffrement-des-mots-de-passe">3 Service de chiffrement des mots de passe :</a>
+    <li class="toctree-l2"><a class="reference internal" href="#3-acces-en-mode-priviliege">3 Accès en mode priviliégé :</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#4-conclusion">4 Conclusion :</a>
+    <li class="toctree-l2"><a class="reference internal" href="#4-service-de-chiffrement-des-mots-de-passe">4 Service de chiffrement des mots de passe :</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-conclusion">5 Conclusion :</a>
     </li>
     </ul>
                     </li>
@@ -153,9 +157,14 @@
 </ul>
 <hr />
 <h2 id="1-acces-out-band">1 Accès out-band :</h2>
-<p>Pour définir un mot de passe pour l'accès à la console de manière sécurisé, j'utilise l'algorithme scrypt.</p>
-<p>Par exemple avec le mot de passe <strong>test</strong> :</p>
-<pre><code class="text">SW-1(config)# enable algorithm-type scrypt secret test
+<p>Pour définir un mot de passe pour l'accès à la console de manière sécurisé, j'utilise force une authentification locale.</p>
+<pre><code class="text">SW-1(config)# line console 0
+SW-1(config-line)# login local
+SW-1(config-line)# exit
+</code></pre>
+
+<p>Création de l'utilisateur associé :</p>
+<pre><code class="text">SW-1(config)# username worldskills privilege 1 algorithm-type scrypt secret worldskills
 </code></pre>
 
 <p>Le mot de passe est défini en type 9 tandis que le sha-256 est définis en type 8. Donc le scrypt apporte un gain de sécurité.</p>
@@ -165,7 +174,7 @@
 
 <p><img alt="img" src="../../images/Cisco/Password-Cisco/enable_password.png" />
 <div align="center"><strong><em>Illustration 2 :</em></strong> <em>Mot de passe enable chiffré.</em></div></p>
-<p>Nous pouvons constater que le mot de passe <strong>test</strong> est chiffré et de type 9.</p>
+<p>Nous pouvons constater que le mot de passe <strong>worldskills</strong> est chiffré et de type 9.</p>
 <hr />
 <h2 id="2-acces-in-band">2 Accès in-band :</h2>
 <p>Pour avoir un accès in-band, il est nécessaire de définir une  une configuration IP sur le switch.</p>
@@ -196,13 +205,13 @@ SW-1(config-line)# exit
 </ul>
 <hr />
 <h3 id="22-creer-un-administrateur">2.2 Créer un administrateur :</h3>
-<p>Création d'un administrateur <strong>admin</strong> avec le mot de passe <strong>test</strong> :</p>
-<pre><code class="text">SW-1(config)# username admin privilege 15 algorithm-type scrypt secret test
+<p>Création d'un administrateur <strong>worldskills</strong> avec le mot de passe <strong>worldskills</strong> :</p>
+<pre><code class="text">SW-1(config)# username worldskills privilege 1 algorithm-type scrypt secret worldskills
 </code></pre>
 
 <p>Détail des options :</p>
 <ul>
-<li>privilege 15, spécifie que cet utilisateur possède les droits administrateurs sur le switch,</li>
+<li>privilege 1, spécifie que cet utilisateur possède des droits utilisateurs</li>
 <li>algorithme-type, permet de spécifier quel sea l'algorithme de chiffrement utilisé pour chiffrer le mot de passe dans la configuration,</li>
 </ul>
 <p>Lorsque l'on regarde la configuration, on peut voir les deux mots de passe chiffrés :
@@ -210,13 +219,24 @@ SW-1(config-line)# exit
 <div align="center"><strong><em>Illustration 3 :</em></strong> <em>Mots de passe chiffrés.</em></div></p>
 <p>Les deux mots de passe sont de type 9 en scrypt.</p>
 <hr />
-<h2 id="3-service-de-chiffrement-des-mots-de-passe">3 Service de chiffrement des mots de passe :</h2>
+<h2 id="3-acces-en-mode-priviliege">3 Accès en mode priviliégé :</h2>
+<p>Il est possible de rajouter une dernière sécurité, le passage en mode priviliégé.
+Quand l'utilisateur worldskills se connecte en SSH ou en Console il n'est pas dans le mode configuration global.
+Il ne peut pas modifier les paramètres (privilege 1).
+Pour rajouter une couche supplémentaire de sécurité il est possible de définir un mot de passe sur le passe en mode configuration globale :</p>
+<pre><code class="text">SW-1(config)# enable secret algorithm-type scrypt secret superPassword
+</code></pre>
+
+<p><img alt="img" src="../../images/Cisco/Password-Cisco/lock.png" />
+<div align="center"><strong><em>Illustration 4 :</em></strong> <em>Schéma des authentifications locales.</em></div></p>
+<h2 id="4-service-de-chiffrement-des-mots-de-passe">4 Service de chiffrement des mots de passe :</h2>
 <p>Au sein d'IOS, il existe une fonction qui chiffre les mots de passe qui sont déjà spécifié dans la configuration et les mots de passe qui seront spécifiés dans le futur. Cette fonction s'appele <strong>password-encryption</strong>.</p>
 <p>Pour activer cette fonction :</p>
 <pre><code class="text">SW-1(config)# service password-encryption
 </code></pre>
 
-<h2 id="4-conclusion">4 Conclusion :</h2>
+<hr />
+<h2 id="5-conclusion">5 Conclusion :</h2>
 <p>Pour sécuriser l'accès à un équipement Cisco, il faut définir des mots de passe sur :</p>
 <ul>
 <li>L'accès à la console,</li>
