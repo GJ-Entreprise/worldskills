@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Deployer - VLAN de management : - Worldskills - GJ enterprise</title>
+  <title>Alerter - Pic d'activité : - Worldskills - GJ enterprise</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Deployer - VLAN de management :";
-    var mkdocs_page_input_path = "Cisco\\Deployer un VLAN de management.md";
+    var mkdocs_page_name = "Alerter - Pic d'activit\u00e9 :";
+    var mkdocs_page_input_path = "Cisco\\Alerter activit\u00e9.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -68,29 +68,27 @@
                 </ul>
                 <p class="caption"><span class="caption-text">Cisco</span></p>
                 <ul class="current">
-                    <li class="toctree-l1"><a class="reference internal" href="../Alerter%20activit%C3%A9/">Alerter - Pic d'activité :</a>
-                    </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Deployer - VLAN de management :</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Alerter - Pic d'activité :</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#0-le-laboratoire">0 Le laboratoire :</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#1-configuration">1 Configuration :</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#2-verification">2 Vérification :</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#3-renforcement-de-linfrastructure">3 Renforcement de l'infrastructure :</a>
+    <li class="toctree-l2"><a class="reference internal" href="#1-snmp">1 SNMP :</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#31-cdp-et-lldp">3.1 CDP et LLDP :</a>
+    <li class="toctree-l3"><a class="reference internal" href="#11-debian-installe-un-serveur-snmp">1.1 Debian installé un serveur SNMP :</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#32-arp-et-dhcp">3.2 ARP et DHCP :</a>
+        </ul>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#33-dtp">3.3 DTP :</a>
+    <li class="toctree-l2"><a class="reference internal" href="#2-syslog">2 Syslog :</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#21-debian-installer-un-serveur-syslog">2.1 Debian installer un serveur Syslog :</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#34-port-security">3.4 Port Security :</a>
+    <li class="toctree-l3"><a class="reference internal" href="#22-verifier">2.2 Vérifier :</a>
     </li>
         </ul>
     </li>
     </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Deployer%20un%20VLAN%20de%20management/">Deployer - VLAN de management :</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../Segmenter%20les%20communications%20et%20les%20filtrer/">Segmenter - les communications :</a>
                     </li>
@@ -128,7 +126,7 @@
         
       
     
-    <li>Deployer - VLAN de management :</li>
+    <li>Alerter - Pic d'activité :</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -139,139 +137,77 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="deployer-vlan-de-management">Deployer - VLAN de management :</h1>
-<p>Ressources :</p>
-<ul>
-<li><a href="https://reussirsonccna.fr/configurer-interface-vlan-administration-du-switch/">https://reussirsonccna.fr/configurer-interface-vlan-administration-du-switch/</a> </li>
-</ul>
+                <h1 id="alerter-pic-dactivite">Alerter - Pic d'activité :</h1>
+<p>Ressource :</p>
+<p>*</p>
 <h2 id="0-le-laboratoire">0 Le laboratoire :</h2>
-<p><img alt="img" src="../../images/Cisco/VLAN-MANAGEMENT/network.png" />
+<p><img alt="img" src="../images/Cisco/Alerter-ACTIVITER/network.png" />
 <div align="center"><strong><em>Illustration 1 :</em></strong> <em>Le laboratoire.</em></div></p>
-<h2 id="1-configuration">1 Configuration :</h2>
-<p>Un VLAN de management permet de manager un switch via un accès in-band (avec une configuration IP).
-L'accès a cet equipement peut être possible via différents protocoles applicatifs :</p>
-<ul>
-<li>Telnet,</li>
-<li>SSH,</li>
-<li>HTTP,</li>
-</ul>
-<p>Pour pouvoir accéder à ce services, il est nécessaire de définir une SVI (Switch Virtual Interface), avec une configuration IP montée.
-Il est possible que cette configuration IP soit définis par :</p>
-<ul>
-<li>Un serveur DHCP,</li>
-<li>L'admin réseau,</li>
-</ul>
-<p>Les bonnes paratiques de sécurités veille à ce que le VLAN de management soit définis dans un VLAN spécifique.
-Et que ce VLAN spécifique soit uniquement accessible par les administrateurs réseaux. (ACL)</p>
-<p>Configuration sur le switch SW-1, partie système :</p>
+<p>Script de configuartion du laboratoire :</p>
 <pre><code class="text">Switch(config)# hostname SW-1
-
 SW-1(config)# no ip domain-lookup
-SW-1(config)# ip domain-name cisco.com
 
-SW-1(config)# crypto key generate rsa modulus 4096
-SW-1(config)# ip ssh version 2
-
-SW-1(config)# line vty 0 15
-SW-1(config-line)# login local
-SW-1(config-line)# transport input ssh
-SW-1(config-line)# exit
-
-SW-1(config)# line console 0
-SW-1(config-line)# login local
-SW-1(config-line)# exit
-
-SW-1(config)# enable algorithm-type scrypt secret guillaume
-
-SW-1(config)# username admin privilege 7 algorithme-type scrypt secret worldskills
-SW-1(config)# do wr
-</code></pre>
-
-<p>Configuration sur le switch SW-1, partie résau :</p>
-<pre><code class="text">SW-1(config)# vlan 98
+SW-1(config)# vlan 98
 SW-1(config-vlan)# name MANAGEMENT
 SW-1(config-vlan)# no shutdown
 SW-1(config-vlan)# exit
 
 SW-1(config)# interface vlan 98
+SW-1(config-if)# no shutdown
 SW-1(config-if)# ip address 192.168.98.1 255.255.255.0
-SW-1(config-if)# no shutdown
 SW-1(config-if)# exit
 
-SW-1(config)# interface GigabitEthernet 0/0
-SW-1(config-if)# switchport mode access
-SW-1(config-if)# switchport acces vlan 98
-SW-1(config-if)# no shutdown
-SW-1(config-if)# exit
+SW-1(config)#
 </code></pre>
 
-<h2 id="2-verification">2 Vérification :</h2>
-<p>Depuis le poste de l'administrateur je réalise une connxion SSH sur le service SSH du switch correspondant à la SVI configurée :</p>
-<pre><code class="bash">ssh admin@192.168.98.1
-password: worldskills
+<h2 id="1-snmp">1 SNMP :</h2>
+<p>Protocole qui utilise <strong>UDP</strong> sur les ports <strong>161</strong> et <strong>162</strong> :</p>
+<ul>
+<li>Le port 161 est utilisé par un serveur SNMP (debian) pour réaliser des reqêtes SNMP auprès d'un client (switch/routeur),</li>
+<li>Le port 162 est utilisé par le client SNMP (switch/routeur) pour envoyer des informations auprès du serveur SNMP (debian),</li>
+</ul>
+<h3 id="11-debian-installe-un-serveur-snmp">1.1 Debian installé un serveur SNMP :</h3>
+<pre><code class="bash">apt-get install snmp snmpd
+systemctl enable snmpd
+nano /etc/snmp/snmpd.config
+
+    # Replace this line :
+        agentAddress  udp:127.0.0.1:161
+
+    # By this line :
+        agentAddress  udp:161
+
+    # Save and exit
+systemctl restart snmpd
+
+# Check :
+netstat -anu | grep 161
 </code></pre>
 
-<p>Connexion réussie :
-<img alt="img" src="../../images/Cisco/VLAN-MANAGEMENT/connect.png" />
-<div align="center"><strong><em>Illustration 2 :</em></strong> <em>Connexion à SW-1.</em></div></p>
-<p>Seul le poste de l'adminustrateur peut se connecter au SWitch étant donné que c'est le seul qui est placé dans le VLAN 98.
-Dans ce contexte de l'architecture réseau, il n'y a pas de routeur, mais si il y avais un routeur il serait nécessaire d'isoler les deux réseaux (<strong>ACL</strong>) afin que le poste PC-1 ne puisse pas se connecter au switch SW-1.</p>
-<p>Exemple d'acl :</p>
-<pre><code class="text">RT-1(config-nacl-ext)# deny any any 192.168.98.1 22 tcp
+<h2 id="2-syslog">2 Syslog :</h2>
+<p>Protocole qui utilise <strong>UDP</strong> sur le port <strong>514</strong>.</p>
+<h3 id="21-debian-installer-un-serveur-syslog">2.1 Debian installer un serveur Syslog :</h3>
+<pre><code class="bash">apt-get install rsyslog
+systemctl enable rsyslog
+
+# Check :
+netstat -anu | grep 514
 </code></pre>
 
-<p>Cette ACL étendue, empêche la communication de nimorte quel hôte vers la SVI du switch sur le port 22 en utilisant le protocole TCP.</p>
-<h2 id="3-renforcement-de-linfrastructure">3 Renforcement de l'infrastructure :</h2>
-<h3 id="31-cdp-et-lldp">3.1 CDP et LLDP :</h3>
-<p>Désactiver les protocoles de reconnaissance des voisins :</p>
-<pre><code class="text">SW-1(config)# no cdp run
-SW-1(config)# no lldp run
+<p>Configurer l'équipement Cisco :</p>
+<pre><code class="text">SW-1(config)# logging trap debugging
+SW-1(config)# logging facility local4
+SW-1(config)# logging 192.168.98.2
 </code></pre>
 
-<h3 id="32-arp-et-dhcp">3.2 ARP et DHCP :</h3>
-<p>DHCP snooping et DAI :</p>
-<pre><code class="text">SW-1(config)# ip dhcp snooping
-SW-1(config)# ip dhcp snooping vlan 1,98
-SW-1(config)# ip arp inspection vlan 1,98
-
-SW-1(config)# arp access-list VLAN-1
-SW-1(config-nacl)# permit ip host mac host
-SW-1(config-nacl)# exit
-
-SW-1(config)# arp access-list VLAN-98
-SW-1(config-nacl)# permit ip host 192.168.98.2 mac host
-SW-1(config-nacl)# exit
-</code></pre>
-
-<h3 id="33-dtp">3.3 DTP :</h3>
-<p>Désactiver le protocoel DTP :</p>
-<pre><code class="text">SW-1(config)# interface range GigabitEthernet 0/0-3, GigabitEthernet 1/0-3, GigabitEthernet 2/0-3, GigabitEthernet 3/0-3
-SW-1(config-if-range)# switchport mode access
-SW-1(config-if-range)# switchport nonegotiate
-</code></pre>
-
-<h3 id="34-port-security">3.4 Port Security :</h3>
-<p>Activer le DTP sur tous les ports :
-```text
-SW-1(config)# interface range GigabitEthernet 0/0-3, GigabitEthernet 1/0-3, GigabitEthernet 2/0-3, GigabitEthernet 3/0-3
-SW-1(config-if-range)# switchport port-security
-SW-1(config-if-range)# switchport port-security maximum 3
-SW-1(config-if-range)# switchport port-security violation shutdown
-SW-1(config-if-range)# switchport port-security mac-address sticky</p>
-<pre><code>
-Si plus de trois adresses sont référencé dans la table CAM du switch pour un port spécifique, le switch shutdown ce port.
-
-
-### 3.5 Complément :
-Pour conclure, shutdown manuellent (administratively down) tous les autres ports inutilisés par mesure de sécurité :
-````text
-SW-1(config)# interface range GigabitEthernet 0/1-3, GigabitEthernet 1/0-3, GigabitEthernet 2/0-3, GigabitEthernet 3/0-2 
-SW-1(config-if-range)# shutdown
-SW-1(config-if-range)# exit
-
-SW-1(config)# do wr 
-</code></pre>
-
+<p>Explication des commandes :</p>
+<ul>
+<li>1 Active le niveau maximal de verbosité des logs,</li>
+<li>2 Définis le champs facility de syslog (quel est le type de message, voir RFC),</li>
+<li>3 Spécifie l'adresse IP du serveur Syslog,</li>
+</ul>
+<hr />
+<h3 id="22-verifier">2.2 Vérifier :</h3>
 <p>Pour vérifier si la configuration fonctionne, je génère une ligne de log :</p>
 <pre><code class="text">SW-1(config)# interface GigabitEthernet 0/1
 SW-1(config-if)# shutdown
@@ -292,10 +228,10 @@ SW-1(config-if)# shutdown
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Segmenter%20les%20communications%20et%20les%20filtrer/" class="btn btn-neutral float-right" title="Segmenter - les communications :">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../Deployer%20un%20VLAN%20de%20management/" class="btn btn-neutral float-right" title="Deployer - VLAN de management :">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../Alerter%20activit%C3%A9/" class="btn btn-neutral" title="Alerter - Pic d'activité :"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../CentOs/regle_parfeu/" class="btn btn-neutral" title="Mise en place de règles firewall"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -321,10 +257,10 @@ SW-1(config-if)# shutdown
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../Alerter%20activit%C3%A9/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../CentOs/regle_parfeu/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../Segmenter%20les%20communications%20et%20les%20filtrer/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../Deployer%20un%20VLAN%20de%20management/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
