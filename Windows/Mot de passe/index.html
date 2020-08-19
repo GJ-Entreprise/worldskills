@@ -87,11 +87,13 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Mot de passe - robustesse et rotation  :</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#1-la-robustesse">1 La robustesse :</a>
+    <li class="toctree-l2"><a class="reference internal" href="#1-recomandantions">1 Recomandantions :</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#2-la-rotation">2 La rotation :</a>
+    <li class="toctree-l2"><a class="reference internal" href="#2-application">2 Application :</a>
     </li>
     </ul>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../Renforcer%20RDP/">Renforcer le protocole RDP :</a>
                     </li>
                 </ul>
       </div>
@@ -131,19 +133,41 @@
             <div class="section">
               
                 <h1 id="mot-de-passe-robustesse-et-rotation">Mot de passe - robustesse et rotation  :</h1>
-<p>Il est possible de définir ces paramètres via des GPO depuis Windows server sur l'ensemble d'un domaine.</p>
+<h2 id="1-recomandantions">1 Recomandantions :</h2>
+<p>Il est possible de définir ces paramètres via des GPO depuis Windows server sur l'ensemble d'un domaine.
+Pour définir la robustesse et la rotation des mots de passe, je me suis appuyé sur les données de l'ANSSI qui préconise :</p>
+<ul>
+<li>12 caractères,</li>
+<li>composées de chiffre, de lettre, de majuscule, et de carctères spéciaux,</li>
+<li>Une durée de rotation de 90 Jours,</li>
+</ul>
 <p>Ressources :</p>
 <ul>
 <li><a href="https://www.supinfo.com/articles/single/2744-gpo-strategie-mot-passe-avec-active-directory">https://www.supinfo.com/articles/single/2744-gpo-strategie-mot-passe-avec-active-directory</a></li>
 </ul>
-<h2 id="1-la-robustesse">1 La robustesse :</h2>
-<h2 id="2-la-rotation">2 La rotation :</h2>
+<h2 id="2-application">2 Application :</h2>
+<p>Création de la GPO <strong>SECURE-PASSWORD</strong> par défaut à la racine du domaine.</p>
+<p>Voici le chemin des paramètres de sécurités :
+<strong>Configuration Ordinateur</strong> -&gt; <strong>Stratégies</strong> -&gt; <strong>Paramètres Windows</strong> -&gt; <strong>Paramètres de sécurité</strong> -&gt; <strong>Statégie de compte</strong> -&gt; <strong>Stratégie de mot de passe</strong>.</p>
+<p><img alt="img" src="../../images/Windows/Password/GPO.png" />
+<div align="center">
+    <i><b>Illustration 1 :</b> Création d'une GPO.</i>
+</div></p>
+<p>Les paramètres définis sont les suivants :</p>
+<ul>
+<li>5 mot de passe conservé dans l'historique,</li>
+<li>90 jours de conservation des mots de passe,</li>
+<li>Le mot de passe doit respecter les éxigences de complexité,</li>
+<li>Le mot de passe doit être composés de 12 carctères au minimum,</li>
+</ul>
               
             </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Renforcer%20RDP/" class="btn btn-neutral float-right" title="Renforcer le protocole RDP :">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../../Cisco/S%C3%A9curiser%20les%20mots%20de%20passe/" class="btn btn-neutral" title="Sécuriser - Les mots de passe sur Cisco :"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -174,6 +198,8 @@
       
         <span><a href="../../Cisco/S%C3%A9curiser%20les%20mots%20de%20passe/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
+      
+        <span style="margin-left: 15px"><a href="../Renforcer%20RDP/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
