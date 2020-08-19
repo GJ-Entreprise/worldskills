@@ -6,7 +6,7 @@ Ressource :
 
 ## 0 Le laboratoire :
 
-![img](../images/Cisco/Alerter-ACTIVITER/network.png)
+![img](../images/Cisco/Alerter-ACTIVITER/plan.png)
 <div align="center">***Illustration 1 :*** *Le laboratoire.*</div>
 
 Script de configuartion du laboratoire :
@@ -94,7 +94,7 @@ tail -f /var/log/syslog
 ````
 
 Retour du log  :
-![img](../images/Cisco/VLAN-MANAGEMENT/log.png)
+![img](../images/Cisco/Alerter-ACTIVITER/log.png)
 <div align="center">***Illustration 3 :*** *Syslog.*</div>
 
 Nous pouvons constater que le client et le service Syslog sont fonctionnels.

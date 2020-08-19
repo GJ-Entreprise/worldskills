@@ -271,20 +271,6 @@ SW-1(config-if-range)# exit
 
 SW-1(config)# do wr 
 </code></pre>
-
-<p>Pour vérifier si la configuration fonctionne, je génère une ligne de log :</p>
-<pre><code class="text">SW-1(config)# interface GigabitEthernet 0/1
-SW-1(config-if)# shutdown
-</code></pre>
-
-<p>En parrallèle sur le serveur syslog je lance cette commande :</p>
-<pre><code class="bash">tail -f /var/log/syslog
-</code></pre>
-
-<p>Retour du log  :
-<img alt="img" src="../images/Cisco/VLAN-MANAGEMENT/log.png" />
-<div align="center"><strong><em>Illustration 3 :</em></strong> <em>Syslog.</em></div></p>
-<p>Nous pouvons constater que le client et le service Syslog sont fonctionnels.</p>
               
             </div>
           </div>
