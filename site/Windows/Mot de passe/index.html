@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Apache / TLS / SSL - Worldskills - GJ enterprise</title>
+  <title>Mot de passe - robustesse et rotation  : - Worldskills - GJ enterprise</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Apache / TLS / SSL";
-    var mkdocs_page_input_path = "CentOs\\apache_TLS_SSL.md";
+    var mkdocs_page_name = "Mot de passe - robustesse et rotation  :";
+    var mkdocs_page_input_path = "Windows\\Mot de passe.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -56,38 +56,14 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">CentOs</span></p>
-                <ul class="current">
-                    <li class="toctree-l1"><a class="reference internal" href="../Installer_apache_httpd/">Installation d'un serveur Aapche HTTPD</a>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/Installer_apache_httpd/">Installation d'un serveur Aapche HTTPD</a>
                     </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Apache / TLS / SSL</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#ssl">SSL</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#ssl-a-ete-remplace-par-tls">SSL a été remplacé par TLS</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#tls">TLS</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#pour-quelle-utilite">Pour quelle utilité ?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#tls-requirements">TLS requirements</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#eviter-les-mitm">Eviter les MITM</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#pki">PKI</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#tls_1">TLS</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#apache-httpd-serveur">Apache HTTPD serveur</a>
-    </li>
-    </ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/apache_TLS_SSL/">Apache / TLS / SSL</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../management_utilisateur_%26_groupes/">Management d'utilisateurs et de groupes dans CentOS</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/management_utilisateur_%26_groupes/">Management d'utilisateurs et de groupes dans CentOS</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../regle_parfeu/">Mise en place de règles firewall</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/regle_parfeu/">Mise en place de règles firewall</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Cisco</span></p>
@@ -108,8 +84,14 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Windows</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../Windows/Mot%20de%20passe/">Mot de passe - robustesse et rotation  :</a>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Mot de passe - robustesse et rotation  :</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-la-robustesse">1 La robustesse :</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-la-rotation">2 La rotation :</a>
+    </li>
+    </ul>
                     </li>
                 </ul>
       </div>
@@ -133,11 +115,11 @@
     
       
         
-          <li>CentOs &raquo;</li>
+          <li>Windows &raquo;</li>
         
       
     
-    <li>Apache / TLS / SSL</li>
+    <li>Mot de passe - robustesse et rotation  :</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -148,41 +130,14 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="apache-tls-ssl">Apache / TLS / SSL</h1>
-<h2 id="ssl">SSL</h2>
+                <h1 id="mot-de-passe-robustesse-et-rotation">Mot de passe - robustesse et rotation  :</h1>
+<p>Il est possible de définir ces paramètres via des GPO depuis Windows server sur l'ensemble d'un domaine.</p>
+<p>Ressources :</p>
 <ul>
-<li><strong>Secure Socket Layer</strong> est un protocol utilisé pour sécurisé les traffics sur internet.</li>
-<li>Utilise une pair de clé privée/publique.</li>
-<li>Dernière version SSLV3
-<strong>Ce protocol est déprécié, il ne doit plus être utilisé !</strong></li>
+<li><a href="https://www.supinfo.com/articles/single/2744-gpo-strategie-mot-passe-avec-active-directory">https://www.supinfo.com/articles/single/2744-gpo-strategie-mot-passe-avec-active-directory</a></li>
 </ul>
-<h3 id="ssl-a-ete-remplace-par-tls">SSL a été remplacé par TLS</h3>
-<h2 id="tls">TLS</h2>
-<ul>
-<li><strong>Transport Layer Security</strong> </li>
-<li>Dernière version stable : 1.2</li>
-<li>La version 1.3 arrive</li>
-</ul>
-<h2 id="pour-quelle-utilite">Pour quelle utilité ?</h2>
-<ul>
-<li><strong>SSL et TLS</strong> Ont pour but de sécurisé le traffic internet.</li>
-<li>Toutes les données qui transient lors d'une requête web basique passent en clair par tous les intermédiaires entre le client et le serveur (les switchs, routeurs, etc).</li>
-<li>Il faut donc chiffrer ces données =&gt; <strong>SSL / TLS</strong></li>
-</ul>
-<h2 id="tls-requirements">TLS requirements</h2>
-<ul>
-<li>Chiffrer les données échangées</li>
-<li>Authentifier au moins un interlocuteur (client/serveur) =&gt; assurer l'intégrité des données =&gt; Eviter les MITMs</li>
-</ul>
-<h2 id="eviter-les-mitm">Eviter les MITM</h2>
-<h3 id="pki">PKI</h3>
-<p><strong>Public Key Infrastructure</strong> : L'utilisation de clé publiques, certificats pour authentifier les intelrocuteurs.</p>
-<h3 id="tls_1">TLS</h3>
-<ul>
-<li>Toujours utilisé la dernière version du protocol TLS, une ancienne version expose les données à des failles de sécurité.</li>
-</ul>
-<h2 id="apache-httpd-serveur">Apache HTTPD serveur</h2>
-<p>Nous allons voir les fondamentaux pour sécurisé un serveur web Apache.</p>
+<h2 id="1-la-robustesse">1 La robustesse :</h2>
+<h2 id="2-la-rotation">2 La rotation :</h2>
               
             </div>
           </div>
@@ -190,10 +145,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../management_utilisateur_%26_groupes/" class="btn btn-neutral float-right" title="Management d'utilisateurs et de groupes dans CentOS">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../Installer_apache_httpd/" class="btn btn-neutral" title="Installation d'un serveur Aapche HTTPD"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../Cisco/S%C3%A9curiser%20les%20mots%20de%20passe/" class="btn btn-neutral" title="Sécuriser - Les mots de passe sur Cisco :"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -219,10 +172,8 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../Installer_apache_httpd/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../Cisco/S%C3%A9curiser%20les%20mots%20de%20passe/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../management_utilisateur_%26_groupes/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
