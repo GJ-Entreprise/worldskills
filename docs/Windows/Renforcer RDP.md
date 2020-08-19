@@ -29,6 +29,7 @@ Pour le définir sur la valeur :
 **Ne pas connecter si l'authentification échoue**.
 
 Aperçu :
+
 ![img](../images/Windows/RDP/GPO-1.png)
 <div align="center">
 	<i><b>Illustration 1 :</b> Création d'une GPO pour l'authentification Kerberos.</i>
@@ -46,6 +47,7 @@ Modifier le paramètre :
 **Requérir l'authentification utilisateur pour les connexions à distanceà l'aide de l'authetification au niveau du réseau.**
 
 Aperçu :
+
 ![img](../images/Windows/RDP/GPO-2.png)
 <div align="center">
 	<i><b>Illustration 2 :</b> Création d'une GPO pour le NLA.</i>
