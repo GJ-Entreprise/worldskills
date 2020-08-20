@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Management d'utilisateurs et de groupes dans CentOS - Worldskills - GJ enterprise</title>
+  <title>Management utilisateur & groupes - Worldskills - GJ enterprise</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Management d'utilisateurs et de groupes dans CentOS";
+    var mkdocs_page_name = "Management utilisateur & groupes";
     var mkdocs_page_input_path = "CentOs\\management_utilisateur_&_groupes.md";
     var mkdocs_page_url = null;
   </script>
@@ -61,24 +61,8 @@
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../apache_TLS_SSL/">Apache / TLS / SSL</a>
                     </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Management d'utilisateurs et de groupes dans CentOS</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Management utilisateur & groupes</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#types-dutilisateurs">Types d'utilisateurs</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#creer-un-utilisateur">Créer un utilisateur</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#utilisation">Utilisation</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#que-sest-il-passe-0_o">Que s'est-il passé !? 0_o</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#1-nouvelle-entree-dans-etcpasswd">1. Nouvelle entrée dans /etc/passwd</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2-nouvelle-entree-dans-etcshadow">2. Nouvelle entrée dans /etc/shadow</a>
-    </li>
-        </ul>
-    </li>
     </ul>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../regle_parfeu/">Mise en place de règles firewall</a>
@@ -103,6 +87,8 @@
                 </ul>
                 <p class="caption"><span class="caption-text">Windows</span></p>
                 <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Windows/Activer%20le%20chiffrement%20des%20donn%C3%A9es/">Activer le chiffrement des données :</a>
+                    </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../Windows/Mot%20de%20passe/">Mot de passe - robustesse et rotation  :</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../../Windows/Renforcer%20RDP/">Renforcer le protocole RDP :</a>
@@ -133,7 +119,7 @@
         
       
     
-    <li>Management d'utilisateurs et de groupes dans CentOS</li>
+    <li>Management utilisateur & groupes</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -144,12 +130,21 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="management-dutilisateurs-et-de-groupes-dans-centos">Management d'utilisateurs et de groupes dans CentOS</h1>
+                <h5 id="source-httpssystemzonenetuser-management-in-linux-redhat-centos">source : https://systemzone.net/user-management-in-linux-redhat-centos/</h5>
+<h1 id="management-dutilisateurs-et-de-groupes-dans-centos">Management d'utilisateurs et de groupes dans CentOS</h1>
 <h2 id="types-dutilisateurs">Types d'utilisateurs</h2>
-<p>Il existe 3 types d'utilisateurs : 
-* <strong>Super utilisateur</strong> : C'est le big boss, il a les pleins pouvoirs sur l'ensemble du système. Créer lors de l'installation du système.
-* <strong>Utilisateur système</strong> : Utilisateurs créer par le système pour le système. Ex : bin, games, ftp, name, mail, daemon, apache etc. C'est utilisateurs de peuvent pas se loger au système car par défaut leur "login shell" est sur  "nologin".
-* <strong>Utilisateur régulier</strong> : Créer par le super utilisateur, l'utilisateur régulier a des droits limités, accordés par le super, pour utiliser le système. L'utilisateur régulier peut être :  ftp user, a samba user or a mail user par exemple.</p>
+<p>Il existe 3 types d'utilisateurs : </p>
+<ul>
+<li>
+<p><strong>Super utilisateur</strong> : C'est le big boss, il a les pleins pouvoirs sur l'ensemble du système. Créer lors de l'installation du système.</p>
+</li>
+<li>
+<p><strong>Utilisateur système</strong> : Utilisateurs créer par le système pour le système. Ex : bin, games, ftp, name, mail, daemon, apache etc. C'est utilisateurs de peuvent pas se loger au système car par défaut leur "login shell" est sur  "nologin".</p>
+</li>
+<li>
+<p><strong>Utilisateur régulier</strong> : Créer par le super utilisateur, l'utilisateur régulier a des droits limités, accordés par le super, pour utiliser le système. L'utilisateur régulier peut être :  ftp user, a samba user or a mail user par exemple.</p>
+</li>
+</ul>
 <p><img alt="" src="../../images/management_utilisateur_%26_groupes/list_users.png" /></p>
 <h2 id="creer-un-utilisateur">Créer un utilisateur</h2>
 <p>L'ajout d'utilisateur se fait via la commande <strong>useradd</strong>.</p>
@@ -190,11 +185,21 @@ Options:
   -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mapping
 </code></pre>
 
-<p>Lors ce qu'un utilisateur utilise cette commande, plusieurs actions sont réalisées :
-* Ajoute une nouvelle entrée dans <strong>/etc/passwd</strong> et <strong>/etc/shadow</strong>
-* Ajoute une nouvelle entrée dans <strong>/etc/group</strong> et <strong>/etc/gshadow</strong>
-* Créer un repertoire <strong>home</strong> pour le nouvelle utilisateur
-* Ajoute les droits et permissions au repertoire <strong>home</strong></p>
+<p>Lors ce qu'un utilisateur utilise cette commande, plusieurs actions sont réalisées :</p>
+<ul>
+<li>
+<p>Ajoute une nouvelle entrée dans <strong>/etc/passwd</strong> et <strong>/etc/shadow</strong></p>
+</li>
+<li>
+<p>Ajoute une nouvelle entrée dans <strong>/etc/group</strong> et <strong>/etc/gshadow</strong></p>
+</li>
+<li>
+<p>Créer un repertoire <strong>home</strong> pour le nouvelle utilisateur</p>
+</li>
+<li>
+<p>Ajoute les droits et permissions au repertoire <strong>home</strong></p>
+</li>
+</ul>
 <h3 id="utilisation">Utilisation</h3>
 <pre><code>useradd aioli
 </code></pre>
@@ -210,7 +215,7 @@ Nouveau mot de passe :
 
 <h2 id="que-sest-il-passe-0_o">Que s'est-il passé !? 0_o</h2>
 <h3 id="1-nouvelle-entree-dans-etcpasswd">1. Nouvelle entrée dans /etc/passwd</h3>
-<p>Ce fichier est utilisé pour stocker les informations sur les utilisateurs. La commande __useradd_ ajoute une nouvelle ligne à ce fichier avec les informations entrées.</p>
+<p>Ce fichier est utilisé pour stocker les informations sur les utilisateurs. La commande <strong>useradd</strong> ajoute une nouvelle ligne à ce fichier avec les informations entrées.</p>
 <pre><code>aioli:x:1001:1001::/home/aioli:/bin/bash
 </code></pre>
 
@@ -275,13 +280,393 @@ Nouveau mot de passe :
 </table>
 <h3 id="2-nouvelle-entree-dans-etcshadow">2. Nouvelle entrée dans /etc/shadow</h3>
 <p>Ce fichier sert à la gestion des mot de passes des utilisateurs. Le mot de passe chiffré vu précedement est stocké ici.</p>
-<pre><code>aioli:$6$stHFnKJOnqjUzHlH$K3QnPn0iam.3dlpe6BQpioMJBb4iMpapJzbX0.yYWoEVDCcESsj05hadC1QXgsuM4rnbITEYXyaq8/1Xh9naA0:18490:0:99999:7:::
+<p>Juste après l'execution de la commande <code>useradd aioli</code>, la ligne créer est comme tel : </p>
+<pre><code>aioli:!!:18490:0:99999:7:::
 </code></pre>
 
+<p>L'utilisateur est en mode <strong>Lock</strong> jusqu'à l'execution de la commande <code>passwd aioli</code> qui va initialiser son mot de passe.</p>
 <p>Chaque champs est séparé par des <strong>":"</strong></p>
 <pre><code>aioli:$6$stHFnKJOnqjUzHlH$K3QnPn0iam.3dlpe6BQpioMJBb4iMpapJzbX0.yYWoEVDCcESsj05hadC1QXgsuM4rnbITEYXyaq8/1Xh9naA0:18490:0:99999:7:::
 
 1:2:3:4:5:6:7:8:9
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Champs N°</th>
+<th align="center">Nom</th>
+<th align="center">Valeur</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td align="center">nom d'utilisateur</td>
+<td align="center">aioli</td>
+<td align="center">Compris entre 1 et 32 charactères, fournit lors de la création de l'utilisateur, il sert à  son authentification</td>
+</tr>
+<tr>
+<td>2</td>
+<td align="center">mot de passe</td>
+<td align="center">$6$stHFnKJOnqjUzHlH$K3QnPn0iam.3dlpe6BQpioMJBb4iMpapJzbX0.yYWoEVDCcESsj05hadC1QXgsuM4rnbITEYXyaq8/1Xh9naA0</td>
+<td align="center">mot de passe chiffré SHA-512, avant initialisation avec la commande <strong>passwd</strong> ce champ était à <strong>!!</strong> =&gt; aucun mot de passe =&gt; utilisateur bloqué</td>
+</tr>
+<tr>
+<td>3</td>
+<td align="center">age du mot de passe</td>
+<td align="center">18490</td>
+<td align="center">jours depuis le dernier changement de mot de passe, si valeure à 0, l'utilisateur doit changer son mot de passe lors de la prochaine connection</td>
+</tr>
+<tr>
+<td>4</td>
+<td align="center">Minimum</td>
+<td align="center">0</td>
+<td align="center">Nombre de jour minimum entre deux changements de mot de passe</td>
+</tr>
+<tr>
+<td>5</td>
+<td align="center">Maximum</td>
+<td align="center">99999</td>
+<td align="center">Nombre de jour maximum d'un mot de passe</td>
+</tr>
+<tr>
+<td>6</td>
+<td align="center">Warn</td>
+<td align="center">7</td>
+<td align="center">Alerte l'utilisateur X jours avant l'expiration de son mot de passe</td>
+</tr>
+<tr>
+<td>7</td>
+<td align="center">Innactif</td>
+<td align="center"></td>
+<td align="center">Nombre de jours avant désactivation du compte si mot de passe expiré. Seulement un super utilisateur peut ré-activer le compte</td>
+</tr>
+<tr>
+<td>8</td>
+<td align="center">restriction urgence</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>9</td>
+<td align="center">future use</td>
+<td align="center"></td>
+<td align="center">pour des fonctionnalités futurs</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-nouvelle-entree-dans-etcgroup">3. Nouvelle entrée dans /etc/group</h3>
+<p>A chaque fois qu'un nouvel utilisateur est créé via la commande <strong>useradd</strong>, un groupe privé à son nom l'est aussi.
+L'entrée dans le fichier <strong>/etc/group</strong> se présente comme suit :</p>
+<pre><code>aioli:x:1002:
+  1  :2:  3 : 4
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Champs N°</th>
+<th align="center">Nom</th>
+<th align="center">Valeur</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td align="center">Nom du groupe</td>
+<td align="center">aioli</td>
+<td align="center">nom du groupe privé de l'utilisateur</td>
+</tr>
+<tr>
+<td>2</td>
+<td align="center">Mot de passe du groupe</td>
+<td align="center">Le mot de passe peut être assigné via la commande <strong>gpasswd</strong>. Le <strong>"x"</strong> indique que le mot de passe est stocké dans le fichier <strong>/etc/gshadow</strong>.</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>3</td>
+<td align="center">GID</td>
+<td align="center">1002</td>
+<td align="center">Identifiant du groupe</td>
+</tr>
+<tr>
+<td>4</td>
+<td align="center">Membre(s)</td>
+<td align="center"></td>
+<td align="center">Liste des membres du groupes (excepté l'utilisateur)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-nouvelle-entree-dans-etcgshadow">4. Nouvelle entrée dans /etc/gshadow</h3>
+<pre><code>systemzone:!::
+      1   :2:3:4
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Champs N°</th>
+<th align="center">Nom</th>
+<th align="center">Valeur</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td align="center">Nom du groupe</td>
+<td align="center">aioli</td>
+<td align="center">nom du groupe privé de l'utilisateur</td>
+</tr>
+<tr>
+<td>2</td>
+<td align="center">Mot de passe du groupe</td>
+<td align="center">Le mot de passe peut être assigné via la commande <strong>gpasswd</strong>. Le <strong>"!"</strong> indique qu'aucun mot de passe n'est défini. Si ce fichier est supprimer, le mot passe chiffré est déplacé dans <strong>/etc/group</strong></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td>3</td>
+<td align="center">Administrateur</td>
+<td align="center"></td>
+<td align="center">Liste des administrateurs du groupe, par default c'est vide =&gt; seul l'utilisateur avec le même nom est administrateur</td>
+</tr>
+<tr>
+<td>4</td>
+<td align="center">Membre(s)</td>
+<td align="center"></td>
+<td align="center">Liste des membres du groupes (excepté l'utilisateur)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-creation-du-repertoire-home">5. Création du repertoire HOME</h3>
+<p>Lors de la création d'un utilisateur, son espace personnel est créé dans le répertoire home comme suit : <strong>/etc/home/aioli/</strong>.
+Ce chemin par défaut peut-être modifié en éditant le fichier <strong>/etc/default/useradd</strong>.</p>
+<h2 id="etclogindefs-etcdefaultuseradd">/etc/login.defs &amp; /etc/default/useradd</h2>
+<h3 id="etclogindefs">/etc/login.defs</h3>
+<p>Ce fichier contient tout un tas d'informations par default sur les utilisateurs. Utiliser notament lors de la création d'utilisateurs.</p>
+<table>
+<thead>
+<tr>
+<th>Nom parametre</th>
+<th align="center">Valeur par defaut</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MAIL_DIR</td>
+<td align="center">Nom du groupe</td>
+<td align="center">aioli</td>
+</tr>
+<tr>
+<td>MAIL_DIR</td>
+<td align="center">/var/spool/mail</td>
+<td align="center">This is the directory path where user’s mail will be stored.</td>
+</tr>
+<tr>
+<td>PASS_MAX_DAYS</td>
+<td align="center">99999</td>
+<td align="center">Maximum number of days for password validity.</td>
+</tr>
+<tr>
+<td>PASS_MIN_DAYS</td>
+<td align="center">0</td>
+<td align="center">Minimum number of days allowed between password changes.</td>
+</tr>
+<tr>
+<td>PASS_MIN_LEN</td>
+<td align="center">5</td>
+<td align="center">Minimum character length for a password.</td>
+</tr>
+<tr>
+<td>PASS_WARN_AGE</td>
+<td align="center">7</td>
+<td align="center">How many days the password expiration message will be shown before expired.</td>
+</tr>
+<tr>
+<td>UID_MIN</td>
+<td align="center">1000</td>
+<td align="center">Minimum number for the automatic user ID selection.</td>
+</tr>
+<tr>
+<td>UID_MAX</td>
+<td align="center">60000</td>
+<td align="center">Maximum number for the automatic user ID selection.</td>
+</tr>
+<tr>
+<td>SYS_UID_MIN</td>
+<td align="center">201</td>
+<td align="center">Minimum automatic UID for the system users.</td>
+</tr>
+<tr>
+<td>SYS_UID_MAX</td>
+<td align="center">999</td>
+<td align="center">Maximum automatic UID for the system users.</td>
+</tr>
+<tr>
+<td>GID_MIN</td>
+<td align="center">1000</td>
+<td align="center">It is the minimum numeric value for automatic group ID selection.</td>
+</tr>
+<tr>
+<td>GID_MAX</td>
+<td align="center">60000</td>
+<td align="center">The maximum numeric value for automatic group ID selection.</td>
+</tr>
+<tr>
+<td>SYS_GID_MIN</td>
+<td align="center">201</td>
+<td align="center">Minimum GID for the system accounts.</td>
+</tr>
+<tr>
+<td>SYS_GID_MAX</td>
+<td align="center">999</td>
+<td align="center">Maximum GID for the system accounts.</td>
+</tr>
+<tr>
+<td>CREATE_HOME</td>
+<td align="center">yes</td>
+<td align="center">This value tells useradd command whether it should create home directory for the user.</td>
+</tr>
+<tr>
+<td>ENCRYPT_METHOD</td>
+<td align="center">SHA512</td>
+<td align="center">Password encryption method for any user.</td>
+</tr>
+<tr>
+<td>USERGROUPS_ENAB</td>
+<td align="center">yes</td>
+<td align="center">This enables userdel to remove user groups if no members exist.</td>
+</tr>
+<tr>
+<td>UMASK</td>
+<td align="center">077</td>
+<td align="center">Default umask that is permission mask for the new users. If not specified, the permission mask will be initialized to 022.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="etcdefaultuseradd">/etc/default/useradd</h3>
+<p>Ce fichier contient les valeurs par defaut utilisées lors de la création d'un nouvel utilisateur.</p>
+<pre><code># useradd defaults fileGROUP=100
+
+HOME=/home
+
+INACTIVE=-1
+
+EXPIRE=
+
+SHELL=/bin/bash
+
+SKEL=/etc/skel
+
+CREATE_MAIL_SPOOL=yes
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Nom parametre</th>
+<th align="center">Valeur par defaut</th>
+<th align="center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GROUP</td>
+<td align="center">100</td>
+<td align="center">Maximum number of groups for which a user can be member of.</td>
+</tr>
+<tr>
+<td>HOME</td>
+<td align="center">/home</td>
+<td align="center">Default directory path where home directory of any user will be created.</td>
+</tr>
+<tr>
+<td>INACTIVE</td>
+<td align="center">-1</td>
+<td align="center">After account creation how many days the account remain inactive. Default value ‘-1’ indicates account is never inactive.</td>
+</tr>
+<tr>
+<td>EXPIRE</td>
+<td align="center">Account</td>
+<td align="center">expiration date and it should be YYYY-MM-DD format.</td>
+</tr>
+<tr>
+<td>SHELL</td>
+<td align="center">/bin/bash</td>
+<td align="center">Default login shell for new user.</td>
+</tr>
+<tr>
+<td>SKEL</td>
+<td align="center">/etc/skel</td>
+<td align="center">The files that are kept in this directory will be copied to the user’s home directory at the time of user creation.</td>
+</tr>
+<tr>
+<td>CREATE_MAIL_SPOOL</td>
+<td align="center">yes</td>
+<td align="center">This option ensures that every new user will have a mail directory followed by username in /var/mail directory where user’s mail will be stored.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="repertoire-skel">Répertoire SKEL</h4>
+<p>Skel pour skeleton (squelette), dans ce repertoire ce trouve l'état par défaut lors de la création du répertoire <strong>HOME</strong>.
+C'est un dossier qui servira de modèle, un copier coller dans dans le nouveau repertoire.</p>
+<ul>
+<li>.bash_logout</li>
+<li>.bash_profile</li>
+<li>.bashrc</li>
+</ul>
+<h2 id="exemples">Exemples</h2>
+<h3 id="creer-un-utilisateur-avec-un-repertoire-home-personalise">Créer un utilisateur avec un repertoire home personalisé</h3>
+<pre><code>useradd -d /var/ftp systemzone
+</code></pre>
+
+<h3 id="creer-un-utilisateur-sans-repertoire-home">Créer un utilisateur sans repertoire home</h3>
+<pre><code>useradd -M systemzone
+</code></pre>
+
+<h3 id="creer-un-utilisateur-avec-un-uid-personnalise">Créer un utilisateur avec un UID personnalisé</h3>
+<pre><code>useradd -u 1050 systemzone
+</code></pre>
+
+<h3 id="creer-un-utilisateur-avec-un-uid-gid-personnalise">Créer un utilisateur avec un UID &amp; GID personnalisé</h3>
+<pre><code>useradd -u 1050 -g 1050 systemzone
+</code></pre>
+
+<h3 id="ajouter-plusieurs-utilisateurs-a-un-groupe">Ajouter plusieurs utilisateurs à un groupe</h3>
+<pre><code>useradd -G admins,developers systemzone
+</code></pre>
+
+<h3 id="creer-un-utilisateur-sans-groupe">Créer un utilisateur sans groupe</h3>
+<pre><code>useradd -N systemzone
+</code></pre>
+
+<h3 id="creer-un-utilisateur-avec-date-dexpiration">Créer un utilisateur avec date d'expiration</h3>
+<pre><code>useradd -e 2020-09-29 systemzone
+</code></pre>
+
+<ul>
+<li>Possible de voir l'age d'un utilisateur  : </li>
+</ul>
+<pre><code>chage -l systemzone
+</code></pre>
+
+<pre><code>Last password change                                    : Sep 26, 2017
+
+Password expires                                        : never
+
+Password inactive                                       : never
+
+Account expires                                         : Sep 29, 2017
+
+Minimum number of days between password change          : 0
+
+Maximum number of days between password change          : 99999
+
+Number of days of warning before password expires       : 7
 </code></pre>
               
             </div>
