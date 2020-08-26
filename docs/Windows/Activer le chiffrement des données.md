@@ -12,7 +12,9 @@ L'objectif est de sauvegarder les clés de récupérations des lecteurs des post
 Installation de la console pour visualier les clés de chiffrements bitlocker depuis Active Directory :
 ````powershell
 Install-WindowsFeature RSAT-Feature-Tools-BitLocker-BdeAducExt
-`````
+````
+
+---
 
 ### 1.2 GPO :
 #### 1.2.1 Définir l'algorithme de chiffrement :
