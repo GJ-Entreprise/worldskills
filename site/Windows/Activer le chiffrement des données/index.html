@@ -87,6 +87,12 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">Activer le chiffrement des données :</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-active-directory">1 Active Directory :</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#11-console">1.1 Console :</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="../Mot%20de%20passe/">Mot de passe - robustesse et rotation  :</a>
@@ -131,6 +137,86 @@
             <div class="section">
               
                 <h1 id="activer-le-chiffrement-des-donnees">Activer le chiffrement des données :</h1>
+<p>Ressource :</p>
+<ul>
+<li><a href="https://theitbros.com/config-active-directory-store-bitlocker-recovery-keys/">https://theitbros.com/config-active-directory-store-bitlocker-recovery-keys/</a></li>
+</ul>
+<p>Création de la GPO <strong>SECURE-DISK</strong> par défaut à la racine du domaine.
+L'objectif est de sauvegarder les clés de récupérations des lecteurs des postes du SI sur Active Directory.</p>
+<h2 id="1-active-directory">1 Active Directory :</h2>
+<h3 id="11-console">1.1 Console :</h3>
+<p>Installation de la console pour visualier les clés de chiffrements bitlocker depuis Active Directory :</p>
+<pre><code class="powershell">Install-WindowsFeature RSAT-Feature-Tools-BitLocker-BdeAducExt
+`````
+
+### 1.2 GPO :
+#### 1.2.1 Définir l'algorithme de chiffrement :
+Voici le chemin du paramètre de sécurité :
+**Configuration Ordinateur** -&gt; **Stratégies** -&gt; **Modèles d’administration** -&gt; **Composants Windows** -&gt; **Chiffrement de lecteur BitLocker** 
+
+Modifier le paramètre :
+**Choisir la méthode et la puissance de chiffrement des lecteurs (Windows 10 [Version 1511] et ultérieur)**.
+
+Pour le définir comme ceci :
+![img](../images/Windows/Bitlocker/GPO-0.png)
+
+---
+
+#### 1.2.2 Définir les lecteurs chiffrés :
+Voici le chemin du paramètre de sécurité :
+**Configuration Ordinateur** -&gt; **Stratégies** -&gt; **Modèles d’administration** -&gt; **Composants Windows** -&gt; **Chiffrement de lecteur BitLocker** -&gt; **Lecteurs du système d'exploitation**.
+
+Modifier le paramètre :
+**Sélectionner la méthode de récupération des lecteurs amovibles protégés par BitLocker**.
+
+Pour le définir comme ceci :
+![img](../images/Windows/Bitlocker/GPO-1.png)
+
+Ce paramètre permet de sauvegarder dans Active Directory uniquement pour le lecteur ou l'OS est installé (par défaut C:) :
+
+* Les mots de passe de récupération,
+* Les packages de clés,
+
+Mais il est possible de sauvegarder **Les mots de passe de récupération** et **Les packages de clés** des lecteurs amovibles et fixes via le chemins :
+
+* **Configuration Ordinateur** -&gt; **Stratégies** -&gt; **Modèles d’administration** -&gt; **Composants Windows** -&gt; **Chiffrement de lecteur BitLocker** -&gt; **Lecteurs de données fixes**,
+
+* **Configuration Ordinateur** -&gt; **Stratégies** -&gt; **Modèles d’administration** -&gt; **Composants Windows** -&gt; **Chiffrement de lecteur BitLocker** -&gt; **Lecteurs de données amovibles**,
+
+---
+
+#### 1.2.3 Restreindre le dévérouillage pas clé USB au démarrage :
+Voici le chemin du paramètre de sécurité :
+**Configuration Ordinateur** -&gt; **Stratégies** -&gt; **Modèles d’administration** -&gt; **Composants Windows** -&gt; **Chiffrement de lecteur BitLocker** -&gt; **Lecteurs du système d'exploitation**
+
+Modifier le paramètre :
+**Exiger une authentification supplémentaire au démarrage**.
+
+Pour le définir comme ceci :
+![img](../images/Windows/Bitlocker/GPO-2.png)
+
+---
+
+## 2 Configuration sur les postes :
+Sur les postes forcer la mise à jour des startégies de groupes :
+````batch
+gpupdate /force
+</code></pre>
+
+<p>Insérer une clé USB dans le client.</p>
+<p>Puis suivre cette procédure :
+<img alt="img" src="../../images/Windows/Bitlocker/bit.png" />
+<img alt="img" src="../../images/Windows/Bitlocker/bit1.png" />
+<img alt="img" src="../../images/Windows/Bitlocker/bit2.png" />
+<img alt="img" src="../../images/Windows/Bitlocker/bit3.png" />
+<img alt="img" src="../../images/Windows/Bitlocker/bit4.png" />
+<img alt="img" src="../../images/Windows/Bitlocker/bit5.png" />
+<img alt="img" src="../../images/Windows/Bitlocker/bit6.png" />
+<img alt="img" src="../../images/Windows/Bitlocker/bit7.png" />
+<img alt="img" src="../../images/Windows/Bitlocker/bit8.png" /></p>
+<p>Dans la console de l'Active Directory <strong>Utilisateur et Ordinateur</strong>, il est possible de voir dans l'onglet <strong>Récupération Bitlocker</strong> la clé de récupération remontée par l'agent :
+<img alt="img" src="../../images/Windows/Bitlocker/bit9.png" /></p>
+<hr />
               
             </div>
           </div>
