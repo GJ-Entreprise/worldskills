@@ -52,7 +52,7 @@ Mais il est possible de sauvegarder **Les mots de passe de récupération** et *
 
 ---
 
-#### 1.2.3 Restreindre le dévérouillage pas clé USB au démarrage :
+#### 1.2.3 Restreindre le dévérouillage par clé USB au démarrage :
 Voici le chemin du paramètre de sécurité :
 **Configuration Ordinateur** -> **Stratégies** -> **Modèles d’administration** -> **Composants Windows** -> **Chiffrement de lecteur BitLocker** -> **Lecteurs du système d'exploitation**
 
