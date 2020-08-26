@@ -14,6 +14,9 @@ Installation de la console pour visualier les clés de chiffrements bitlocker de
 Install-WindowsFeature RSAT-Feature-Tools-BitLocker-BdeAducExt
 ````
 
+Ou par le gestionaire de serveur dans l'ajout de fonctionalitées :
+![img](../images/Windows/Bitlocker/console.png)
+
 ---
 
 ### 1.2 GPO :
