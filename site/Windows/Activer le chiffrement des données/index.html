@@ -91,7 +91,19 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#11-console">1.1 Console :</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#12-gpo">1.2 GPO :</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#121-definir-lalgorithme-de-chiffrement">1.2.1 Définir l'algorithme de chiffrement :</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#122-definir-les-lecteurs-chiffres">1.2.2 Définir les lecteurs chiffrés :</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#123-restreindre-le-deverouillage-pas-cle-usb-au-demarrage">1.2.3 Restreindre le dévérouillage pas clé USB au démarrage :</a>
+    </li>
         </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-configuration-sur-les-postes">2 Configuration sur les postes :</a>
     </li>
     </ul>
                     </li>
@@ -147,60 +159,51 @@ L'objectif est de sauvegarder les clés de récupérations des lecteurs des post
 <h3 id="11-console">1.1 Console :</h3>
 <p>Installation de la console pour visualier les clés de chiffrements bitlocker depuis Active Directory :</p>
 <pre><code class="powershell">Install-WindowsFeature RSAT-Feature-Tools-BitLocker-BdeAducExt
-`````
+</code></pre>
 
-### 1.2 GPO :
-#### 1.2.1 Définir l'algorithme de chiffrement :
-Voici le chemin du paramètre de sécurité :
-**Configuration Ordinateur** -&gt; **Stratégies** -&gt; **Modèles d’administration** -&gt; **Composants Windows** -&gt; **Chiffrement de lecteur BitLocker** 
-
-Modifier le paramètre :
-**Choisir la méthode et la puissance de chiffrement des lecteurs (Windows 10 [Version 1511] et ultérieur)**.
-
-Pour le définir comme ceci :
-![img](../images/Windows/Bitlocker/GPO-0.png)
-
----
-
-#### 1.2.2 Définir les lecteurs chiffrés :
-Voici le chemin du paramètre de sécurité :
-**Configuration Ordinateur** -&gt; **Stratégies** -&gt; **Modèles d’administration** -&gt; **Composants Windows** -&gt; **Chiffrement de lecteur BitLocker** -&gt; **Lecteurs du système d'exploitation**.
-
-Modifier le paramètre :
-**Sélectionner la méthode de récupération des lecteurs amovibles protégés par BitLocker**.
-
-Pour le définir comme ceci :
-![img](../images/Windows/Bitlocker/GPO-1.png)
-
-Ce paramètre permet de sauvegarder dans Active Directory uniquement pour le lecteur ou l'OS est installé (par défaut C:) :
-
-* Les mots de passe de récupération,
-* Les packages de clés,
-
-Mais il est possible de sauvegarder **Les mots de passe de récupération** et **Les packages de clés** des lecteurs amovibles et fixes via le chemins :
-
-* **Configuration Ordinateur** -&gt; **Stratégies** -&gt; **Modèles d’administration** -&gt; **Composants Windows** -&gt; **Chiffrement de lecteur BitLocker** -&gt; **Lecteurs de données fixes**,
-
-* **Configuration Ordinateur** -&gt; **Stratégies** -&gt; **Modèles d’administration** -&gt; **Composants Windows** -&gt; **Chiffrement de lecteur BitLocker** -&gt; **Lecteurs de données amovibles**,
-
----
-
-#### 1.2.3 Restreindre le dévérouillage pas clé USB au démarrage :
-Voici le chemin du paramètre de sécurité :
-**Configuration Ordinateur** -&gt; **Stratégies** -&gt; **Modèles d’administration** -&gt; **Composants Windows** -&gt; **Chiffrement de lecteur BitLocker** -&gt; **Lecteurs du système d'exploitation**
-
-Modifier le paramètre :
-**Exiger une authentification supplémentaire au démarrage**.
-
-Pour le définir comme ceci :
-![img](../images/Windows/Bitlocker/GPO-2.png)
-
----
-
-## 2 Configuration sur les postes :
-Sur les postes forcer la mise à jour des startégies de groupes :
-````batch
-gpupdate /force
+<hr />
+<h3 id="12-gpo">1.2 GPO :</h3>
+<h4 id="121-definir-lalgorithme-de-chiffrement">1.2.1 Définir l'algorithme de chiffrement :</h4>
+<p>Voici le chemin du paramètre de sécurité :
+<strong>Configuration Ordinateur</strong> -&gt; <strong>Stratégies</strong> -&gt; <strong>Modèles d’administration</strong> -&gt; <strong>Composants Windows</strong> -&gt; <strong>Chiffrement de lecteur BitLocker</strong> </p>
+<p>Modifier le paramètre :
+<strong>Choisir la méthode et la puissance de chiffrement des lecteurs (Windows 10 [Version 1511] et ultérieur)</strong>.</p>
+<p>Pour le définir comme ceci :
+<img alt="img" src="../../images/Windows/Bitlocker/GPO-0.png" /></p>
+<hr />
+<h4 id="122-definir-les-lecteurs-chiffres">1.2.2 Définir les lecteurs chiffrés :</h4>
+<p>Voici le chemin du paramètre de sécurité :
+<strong>Configuration Ordinateur</strong> -&gt; <strong>Stratégies</strong> -&gt; <strong>Modèles d’administration</strong> -&gt; <strong>Composants Windows</strong> -&gt; <strong>Chiffrement de lecteur BitLocker</strong> -&gt; <strong>Lecteurs du système d'exploitation</strong>.</p>
+<p>Modifier le paramètre :
+<strong>Sélectionner la méthode de récupération des lecteurs amovibles protégés par BitLocker</strong>.</p>
+<p>Pour le définir comme ceci :
+<img alt="img" src="../../images/Windows/Bitlocker/GPO-1.png" /></p>
+<p>Ce paramètre permet de sauvegarder dans Active Directory uniquement pour le lecteur ou l'OS est installé (par défaut C:) :</p>
+<ul>
+<li>Les mots de passe de récupération,</li>
+<li>Les packages de clés,</li>
+</ul>
+<p>Mais il est possible de sauvegarder <strong>Les mots de passe de récupération</strong> et <strong>Les packages de clés</strong> des lecteurs amovibles et fixes via le chemins :</p>
+<ul>
+<li>
+<p><strong>Configuration Ordinateur</strong> -&gt; <strong>Stratégies</strong> -&gt; <strong>Modèles d’administration</strong> -&gt; <strong>Composants Windows</strong> -&gt; <strong>Chiffrement de lecteur BitLocker</strong> -&gt; <strong>Lecteurs de données fixes</strong>,</p>
+</li>
+<li>
+<p><strong>Configuration Ordinateur</strong> -&gt; <strong>Stratégies</strong> -&gt; <strong>Modèles d’administration</strong> -&gt; <strong>Composants Windows</strong> -&gt; <strong>Chiffrement de lecteur BitLocker</strong> -&gt; <strong>Lecteurs de données amovibles</strong>,</p>
+</li>
+</ul>
+<hr />
+<h4 id="123-restreindre-le-deverouillage-pas-cle-usb-au-demarrage">1.2.3 Restreindre le dévérouillage pas clé USB au démarrage :</h4>
+<p>Voici le chemin du paramètre de sécurité :
+<strong>Configuration Ordinateur</strong> -&gt; <strong>Stratégies</strong> -&gt; <strong>Modèles d’administration</strong> -&gt; <strong>Composants Windows</strong> -&gt; <strong>Chiffrement de lecteur BitLocker</strong> -&gt; <strong>Lecteurs du système d'exploitation</strong></p>
+<p>Modifier le paramètre :
+<strong>Exiger une authentification supplémentaire au démarrage</strong>.</p>
+<p>Pour le définir comme ceci :
+<img alt="img" src="../../images/Windows/Bitlocker/GPO-2.png" /></p>
+<hr />
+<h2 id="2-configuration-sur-les-postes">2 Configuration sur les postes :</h2>
+<p>Sur les postes forcer la mise à jour des startégies de groupes :</p>
+<pre><code class="batch">gpupdate /force
 </code></pre>
 
 <p>Insérer une clé USB dans le client.</p>
