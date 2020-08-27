@@ -588,7 +588,6 @@ SW-2(config-if)# exit
 SW-2(config)# do wr
 ````
 
-Il m'ést malheurement impossible de mettre en place les PVLAN car il nécessite du matériel physique.
-IL est impossible de les émuler avec GNS.
-
-* [https://gns3vault.com/switching/private-vlan](https://gns3vault.com/switching/private-vlan)
+La création de PLVAN dans GNS est impossible, (rf. [https://gns3vault.com/switching/private-vlan](https://gns3vault.com/switching/private-vlan)). 
+Pour la mise en place des PVLAN il est nécessaire de diposer de switch physiques.
+Attention tous les modèles et les versions de switch Cisco ne prennent pas en charge les PVLAN.
