@@ -52,7 +52,7 @@ SW-1(config-if)# exit
 SW-1(config)# interface GigabitEthernet3/0
 SW-1(config-if)# switchport trunk encapsulation dot1q
 SW-1(config-if)# switchport mode trunk
-SW-1(config-if)# switchport trunk allowed vlan all
+SW-1(config-if)# switchport trunk allowed vlan 10
 SW-1(config-if)# switchport trunk native vlan 1
 SW-1(config-if)# no shutdown
 SW-1(config-if)# exit
@@ -86,7 +86,7 @@ SW-2(config-if)# exit
 SW-2(config)# interface GigabitEthernet3/0
 SW-2(config-if)# switchport trunk encapsulation dot1q
 SW-2(config-if)# switchport mode trunk
-SW-2(config-if)# switchport trunk allowed vlan all
+SW-2(config-if)# switchport trunk allowed vlan 10
 SW-2(config-if)# switchport trunk native vlan 1
 SW-2(config-if)# no shutdown
 SW-2(config-if)# exit
