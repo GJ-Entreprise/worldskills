@@ -39,5 +39,6 @@ Mais il est nécessaire de rajouter le nom d'utilisateur, il est possible d'util
 \\IFM.IF.lan\Profils\%username%
 ````
 
-Pour configurer un profil itinérant, il faut se rendre dans la console **Utilisateurs et ordinateurs**, onglet **profil**  :
+Pour configurer un profil itinérant, il faut se rendre dans la console **Utilisateurs et ordinateurs**, onglet **profil** :
+
 ![img](../images/Windows/Itinerants/user.png)
