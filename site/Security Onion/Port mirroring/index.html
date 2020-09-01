@@ -93,8 +93,6 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#12-mise-en-oeuvre">1.2 Mise en oeuvre :</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#13-recopier-les-protocoles-couche-2">1.3 Recopier les protocoles couche 2 :</a>
-    </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#2-rspan">2 RSPAN :</a>
@@ -102,8 +100,6 @@
     <li class="toctree-l3"><a class="reference internal" href="#21-le-laboratoire">2.1 Le laboratoire :</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#22-mise-en-oeuvre">2.2 Mise en oeuvre :</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#23-recopier-les-protocoles-couche-2">2.3 Recopier les protocoles couche 2 :</a>
     </li>
         </ul>
     </li>
@@ -167,7 +163,7 @@ On distingue deux type de port mirroring :</p>
 <p>Lors de l'utilisation d'un NSM obtenir tous les échanges réseaux d'un SI est gain considérable d'information pour la détection d'intrusion.</p>
 <p>Ressource :</p>
 <ul>
-<li><a href="https://blog.ine.com/utilizing-span-and-rspan">https://blog.ine.com/utilizing-span-and-rspan</a></li>
+<li><a href="https://cisco.goffinet.org/ccna/filtrage/csco-switchport-analyzer-span/">https://cisco.goffinet.org/ccna/filtrage/csco-switchport-analyzer-span/</a></li>
 </ul>
 <hr />
 <h2 id="1-span">1 SPAN :</h2>
@@ -176,7 +172,7 @@ On distingue deux type de port mirroring :</p>
 <h3 id="11-le-laboratoire">1.1 Le laboratoire :</h3>
 <p><img alt="img" src="../../images/SO/Port-mirroring/lab-1.png" />
 <div align="center">
-    <i><b>Illustration 1 :</b> Laboratoire 1</i>
+    <i><b>Illustration 1 :</b> Laboratoire 1.</i>
 </div></p>
 <p>Script de configuration initial de SW-1 :</p>
 <pre><code class="text">Switch# configuration terminal
@@ -186,8 +182,18 @@ SW-1(config)# do wr mem
 
 <hr />
 <h3 id="12-mise-en-oeuvre">1.2 Mise en oeuvre :</h3>
-<hr />
-<h3 id="13-recopier-les-protocoles-couche-2">1.3 Recopier les protocoles couche 2 :</h3>
+<p>Malheuresement le SPAN et le RSPAN n'est pas implémenté dans mes images IOS dans GNS : <a href="https://learningnetwork.cisco.com/s/article/iosvl2-more-info-updated-10-2-15-x">https://learningnetwork.cisco.com/s/article/iosvl2-more-info-updated-10-2-15-x</a>.</p>
+<p>Mais pour réaliser du SPAN c'est très simple :</p>
+<ul>
+<li>Interface GigabitEthernet 0/0 = interface source,</li>
+<li>Interface GigabitEthernet 0/1 = interface destination,</li>
+</ul>
+<p>Sur le switch :</p>
+<pre><code class="text">SW-1(config)# monitor session 1source interface GigabitEthernet 0/0 
+SW-1(config)# monitor session 1source destination GigabitEthernet 0/1 encapsulation replicate
+</code></pre>
+
+<p>Note, l'option <strong>encapsulation replicate</strong> dans la seconde commande permet d'inclure les protocoles CDP, DTP, STP, VTP...</p>
 <hr />
 <h2 id="2-rspan">2 RSPAN :</h2>
 <p>Le trafic d'un ou des ports est redirigé sur une lisason trun d'un autre switch. Le port de l'autre switch récupère tous le traffic pour le redirigé vers le port de mirroring.</p>
@@ -200,15 +206,55 @@ SW-1(config)# do wr mem
 <p>Script de configuration initial de SW-2 :</p>
 <pre><code class="text">Switch# configuration terminal
 Switch(config)# hostname SW-2
-SW-1(config)# do wr mem
+SW-2(config)# do wr mem
 </code></pre>
 
 <hr />
 <h3 id="21-le-laboratoire">2.1 Le laboratoire :</h3>
+<p><img alt="img" src="../../images/SO/Port-mirroring/lab-2.png" />
+<div align="center">
+    <i><b>Illustration 2 :</b> Laboratoire 2.</i>
+</div></p>
 <hr />
 <h3 id="22-mise-en-oeuvre">2.2 Mise en oeuvre :</h3>
-<hr />
-<h3 id="23-recopier-les-protocoles-couche-2">2.3 Recopier les protocoles couche 2 :</h3>
+<p>Malheuresement le SPAN et le RSPAN n'est pas implémenté dans mes images IOS dans GNS : <a href="https://learningnetwork.cisco.com/s/article/iosvl2-more-info-updated-10-2-15-x">https://learningnetwork.cisco.com/s/article/iosvl2-more-info-updated-10-2-15-x</a>.</p>
+<p>Mais pour réaliser du SPAN :
+Sur SW-1 :</p>
+<ul>
+<li>Interface GigabitEthernet 0/0 = interface source,</li>
+<li>VLAN 199 = interface destination,</li>
+</ul>
+<p>Sur SW-2 :
+* VLAN 199 = interface source,
+* Interface GigabitEthernet 0/0 = interface destination,</p>
+<p>Le VLAN 199 transite via le le trunk entre SW-1 et SW-2 sur GigabitEthernet0/0.</p>
+<p>Sur le switch SW-1 :</p>
+<pre><code class="text">SW-1(config)# vlan 199
+SW-1(config-vlan)# name SPAN
+SW-1(config-vlan)# remote span
+SW-1(config-vlan)# exit
+SW-1(config)# monitor session 1 source interface GigabitEthernet0/0 
+SW-1(config)# monitor session 1 destination remote vlan 199 encapsulation replicate
+SW-1(config)# interface GigabitEthernet3/3
+SW-1(config-if)# switchport trunk encapsulation dot1q
+SW-1(config-if)# switchport mode trunk
+SW-1(config-if)# switchport trunk allowed vlan 199
+</code></pre>
+
+<p>Sur le switch SW-2 :</p>
+<pre><code class="text">SW-2(config)# vlan 199
+SW-2(config-vlan)# name SPAN
+SW-2(config-vlan)# remote span
+SW-2(config-vlan)# exit
+SW-2(config)# monitor session 2 source remote vlan 199
+SW-2(config)# monitor session 2 destination interface GigabitEthernet 0/0 encapsulation replicate
+SW-2(config)# interface GigabitEthernet3/3
+SW-2(config-if)# switchport trunk encapsulation dot1q
+SW-2(config-if)# switchport mode trunk
+SW-2(config-if)# switchport trunk allowed vlan 199
+</code></pre>
+
+<p>Note, l'option <strong>encapsulation replicate</strong> dans la seconde commande permet d'inclure les protocoles CDP, DTP, STP, VTP...</p>
 <hr />
               
             </div>
