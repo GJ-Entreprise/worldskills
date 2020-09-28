@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Renforcer le protocole RDP : - Worldskills - GJ enterprise</title>
+  <title>EXERCICE 1 – HARDENING LINUX - REMOTE LOGGING - Worldskills - GJ enterprise</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Renforcer le protocole RDP :";
-    var mkdocs_page_input_path = "Windows - AD$/Renforcer RDP.md";
+    var mkdocs_page_name = "EXERCICE 1 \u2013 HARDENING LINUX - REMOTE LOGGING";
+    var mkdocs_page_input_path = "Exercices_finale/exercice_1.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -84,8 +84,52 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Exercices finale</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../Exercices_finale/exercice_1/">EXERCICE 1 – HARDENING LINUX - REMOTE LOGGING</a>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">EXERCICE 1 – HARDENING LINUX - REMOTE LOGGING</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#prerequis-distribution-centos">Prérequis : Distribution CentOS</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#tuto-httpswwwgolinuxcloudcomsecure-remote-logging-rsyslog-tls-certificate">Tuto : https://www.golinuxcloud.com/secure-remote-logging-rsyslog-tls-certificate/</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#mots-cle-pouvant-etre-utiles-certtool-rsyslog-elinks-chronyd-delai-de-realisation-attendu-finales-nationales-1h15">Mots clé pouvant être utiles : certtool, rsyslog, elinks, chronyd Délai de réalisation attendu finales nationales : 1h15</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#delai-de-realisation-attendu-finales-internationales-45-mins">Délai de réalisation attendu finales internationales : 45 mins</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#definition-des-mots-cles">Definition des mots clés</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#certtool-gnutls-certificate-tool">certtool - GnuTLS certificate tool</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#httpselectronprotoncomcerttool-command-examples">https://electronproton.com/certtool-command-examples/</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rsyslog">rsyslog</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#httpswwwlinuxtricksfrwikirsyslog-centralisation-des-logs-sous-linux">https://www.linuxtricks.fr/wiki/rsyslog-centralisation-des-logs-sous-linux</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#elinks-navigateur-en-ligne-de-commande">elinks - navigateur en ligne de commande</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#chronyd-serveur-de-temps-ntp">chronyd - Serveur de temps NTP</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#httpswwwdsfcnetinfrastructurereseauchronyd-le-nouveau-serveur-de-temps-ntp-sous-linux">https://www.dsfc.net/infrastructure/reseau/chronyd-le-nouveau-serveur-de-temps-ntp-sous-linux/</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ressources">Ressources</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#procedure">Procedure</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#configuration-du-serveur-rsyslog">Configuration du serveur Rsyslog</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Pentest</span></p>
@@ -109,22 +153,14 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Windows   AD$</span></p>
-                <ul class="current">
-                    <li class="toctree-l1"><a class="reference internal" href="../Activer%20le%20chiffrement%20des%20donn%C3%A9es/">Activer le chiffrement des données :</a>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Windows%20-%20AD%24/Activer%20le%20chiffrement%20des%20donn%C3%A9es/">Activer le chiffrement des données :</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../Mot%20de%20passe/">Mot de passe - robustesse et rotation  :</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Windows%20-%20AD%24/Mot%20de%20passe/">Mot de passe - robustesse et rotation  :</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../Profils%20itin%C3%A9rants/">Profils itinérants :</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Windows%20-%20AD%24/Profils%20itin%C3%A9rants/">Profils itinérants :</a>
                     </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Renforcer le protocole RDP :</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#1-pourquoi">1 Pourquoi :</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#2-forcer-lauthentification-kerberos">2 Forcer l'authentification Kerberos :</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#3-forcer-lactivation-du-nla">3 Forcer l'activation du NLA :</a>
-    </li>
-    </ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Windows%20-%20AD%24/Renforcer%20RDP/">Renforcer le protocole RDP :</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Security onion</span></p>
@@ -153,11 +189,11 @@
     
       
         
-          <li>Windows   AD$ &raquo;</li>
+          <li>Exercices finale &raquo;</li>
         
       
     
-    <li>Renforcer le protocole RDP :</li>
+    <li>EXERCICE 1 – HARDENING LINUX - REMOTE LOGGING</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -168,44 +204,36 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="renforcer-le-protocole-rdp">Renforcer le protocole RDP :</h1>
-<h2 id="1-pourquoi">1 Pourquoi :</h2>
-<p>Il est trivial de mener des attaques MITM sur le protocole RDP.
-Voir l'outil SETH :</p>
+                <h1 id="exercice-1-hardening-linux-remote-logging">EXERCICE 1 – HARDENING LINUX - REMOTE LOGGING</h1>
+<h2 id="prerequis-distribution-centos">Prérequis : Distribution CentOS</h2>
+<h3 id="tuto-httpswwwgolinuxcloudcomsecure-remote-logging-rsyslog-tls-certificate">Tuto : https://www.golinuxcloud.com/secure-remote-logging-rsyslog-tls-certificate/</h3>
+<p>Configurer un serveur CentOS (s1) pour qu’il envoie ses logs à distance sur un second serveur (s2), en sécurisant les communications au moyen d’un certificat. Les messages en provenance de s1 doivent être placés dans un dossier tel que /var/log/s1.log</p>
+<h3 id="mots-cle-pouvant-etre-utiles-certtool-rsyslog-elinks-chronyd-delai-de-realisation-attendu-finales-nationales-1h15">Mots clé pouvant être utiles : certtool, rsyslog, elinks, chronyd Délai de réalisation attendu finales nationales : 1h15</h3>
+<h3 id="delai-de-realisation-attendu-finales-internationales-45-mins">Délai de réalisation attendu finales internationales : 45 mins</h3>
+<h2 id="definition-des-mots-cles">Definition des mots clés</h2>
+<h3 id="certtool-gnutls-certificate-tool">certtool - GnuTLS certificate tool</h3>
+<h5 id="httpselectronprotoncomcerttool-command-examples">https://electronproton.com/certtool-command-examples/</h5>
+<h3 id="rsyslog">rsyslog</h3>
+<h5 id="httpswwwlinuxtricksfrwikirsyslog-centralisation-des-logs-sous-linux">https://www.linuxtricks.fr/wiki/rsyslog-centralisation-des-logs-sous-linux</h5>
+<h3 id="elinks-navigateur-en-ligne-de-commande">elinks - navigateur en ligne de commande</h3>
+<h3 id="chronyd-serveur-de-temps-ntp">chronyd - Serveur de temps NTP</h3>
+<h5 id="httpswwwdsfcnetinfrastructurereseauchronyd-le-nouveau-serveur-de-temps-ntp-sous-linux">https://www.dsfc.net/infrastructure/reseau/chronyd-le-nouveau-serveur-de-temps-ntp-sous-linux/</h5>
+<h2 id="ressources">Ressources</h2>
 <ul>
-<li><a href="https://github.com/SySS-Research/Seth">https://github.com/SySS-Research/Seth</a></li>
+<li>Centos 8 client</li>
+<li>Centos 8 serveur</li>
 </ul>
-<p>Pour renforcer le protocole RDP il est possible :</p>
-<ul>
-<li>De forcer lauthentification du serveur par Kerberos,</li>
-<li>Forcer l'utilisation du NLA,</li>
-</ul>
-<p>Création de la GPO <strong>SECURE-RDP</strong> par défaut à la racine du domaine.</p>
-<hr />
-<h2 id="2-forcer-lauthentification-kerberos">2 Forcer l'authentification Kerberos :</h2>
-<p>Voici le chemin du paramètre de sécurité :
-<strong>Configuration Ordinateur</strong> -&gt; <strong>Stratégies</strong> -&gt; <strong>Modèles d’administration</strong> -&gt; <strong>Composants Windows</strong> -&gt; <strong>Services Bureau à distance</strong> -&gt; <strong>Client Connexion Bureau à distance</strong></p>
-<p>Modifier le paramètre :
-<strong>Configurer l'authentification du serveur pour le client</strong>.</p>
-<p>Pour le définir sur la valeur : 
-<strong>Ne pas connecter si l'authentification échoue</strong>.</p>
-<p>Aperçu :</p>
-<p><img alt="img" src="../../images/Windows/RDP/GPO-1.png" />
-<div align="center">
-    <i><b>Illustration 1 :</b> Création d'une GPO pour l'authentification Kerberos.</i>
-</div></p>
-<hr />
-<h2 id="3-forcer-lactivation-du-nla">3 Forcer l'activation du NLA :</h2>
-<p>Le NLA est un mécanisme qui authentifie le cleint par le réseau. Sans lui l'initiation d'une connexion RDP consomme des ressources sur le serveur, ce qui peut mener à un DoS.</p>
-<p>Voici le chemin des paramètres de sécurités :
-<strong>Configuration Ordinateur</strong> -&gt; <strong>Stratégies</strong> -&gt; <strong>Modèles d’administration</strong> -&gt; <strong>Composants Windows</strong> -&gt; <strong>Services Bureau à distance</strong> -&gt;  <strong>Hôte de la session Bureau à distance</strong> -&gt; <strong>Sécurité</strong></p>
-<p>Modifier le paramètre :
-<strong>Requérir l'authentification utilisateur pour les connexions à distanceà l'aide de l'authetification au niveau du réseau.</strong></p>
-<p>Aperçu :</p>
-<p><img alt="img" src="../../images/Windows/RDP/GPO-2.png" />
-<div align="center">
-    <i><b>Illustration 2 :</b> Création d'une GPO pour le NLA.</i>
-</div></p>
+<h2 id="procedure">Procedure</h2>
+<h3 id="configuration-du-serveur-rsyslog">Configuration du serveur Rsyslog</h3>
+<p>1) Installation de Chrony, le serveur NTP</p>
+<pre><code>sudo yum update &amp;&amp; sudo yum install -y chrony
+</code></pre>
+
+<pre><code>sudo systemctl status chronyd
+sudo systemctl enable chronyd
+</code></pre>
+
+<p>2) </p>
               
             </div>
           </div>
@@ -213,10 +241,10 @@ Voir l'outil SETH :</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../security_onion/Installler_security_onion/" class="btn btn-neutral float-right" title="Installler security onion">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../Pentest/mono_utilisateur_centos/" class="btn btn-neutral float-right" title="Devenir root en utilisant le mono-utilisateur - CentOS">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../Profils%20itin%C3%A9rants/" class="btn btn-neutral" title="Profils itinérants :"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../Cisco/S%C3%A9curiser%20les%20mots%20de%20passe/" class="btn btn-neutral" title="Sécuriser - Les mots de passe sur Cisco :"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -242,10 +270,10 @@ Voir l'outil SETH :</p>
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../Profils%20itin%C3%A9rants/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../Cisco/S%C3%A9curiser%20les%20mots%20de%20passe/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../security_onion/Installler_security_onion/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../Pentest/mono_utilisateur_centos/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
